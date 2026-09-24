@@ -232,16 +232,16 @@ Actual application implementation status should be updated below as development 
 
 ```text
 Phase:
-[UPDATE THIS]
+Phase 2 — Landing Page Foundation
 
 Current Task:
-[UPDATE THIS]
+TASK 2.1 — Create Landing Route
 
 Last Completed Task:
-[UPDATE THIS]
+PHASE 1 — Global Design System (TASK 1.1 to 1.5 & Data Layer)
 
 Next Task:
-[UPDATE THIS]
+TASK 2.1 — Create Landing Route (Page shell & layout structure)
 ```
 
 ---
@@ -251,10 +251,11 @@ Next Task:
 Maintain a checklist.
 
 ```text
-[ ] Project foundation
-[ ] Global design tokens
-[ ] Typography
-[ ] Global components
+[✓] Project foundation (Phase 0)
+[✓] Global design tokens (Phase 1)
+[✓] Typography (Phase 1)
+[✓] Global components (Phase 1)
+[✓] Data layer & contracts (Ghats, Temples, Posters, Food, Story, Navigation)
 
 [ ] Infinite Door
 [ ] Ganga landing hero
