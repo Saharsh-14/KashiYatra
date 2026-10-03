@@ -1,136 +1,286 @@
-:root {
-  /* ==========================================================================
-     1. COLOR PALETTE (Base Tokens)
-     ========================================================================== */
-  --palette-ink: #10100E;
-  --palette-charcoal: #191816;
-  --palette-ivory: #E8E1D3;
-  --palette-sand: #CFC4B1;
-  --palette-brass: #B59A63;
-  --palette-ganga-mist: #AEB8B3;
-  --palette-terracotta: #985F49;
+/* =============================================================================
+   KASHI — DESIGN TOKENS
+   Single source of truth for every reusable visual value (design.md §3, §81).
 
-  /* ==========================================================================
-     2. SEMANTIC COLOR TOKENS
-     ========================================================================== */
+   Hierarchy (design.md §4):
+     Primitive tokens  →  Semantic tokens  →  Component tokens  →  Components
+
+   Components must never hardcode a raw value. Change a token here and the whole
+   application inherits the change (design.md §100).
+   ============================================================================= */
+
+:root {
+  /* ===========================================================================
+     1. COLOR — PRIMITIVES (design.md §6)
+     =========================================================================== */
+  --palette-ink: #10100e; /* Kashi Ink        — primary dark ground        */
+  --palette-charcoal: #191816; /* Deep Charcoal    — secondary dark surfaces    */
+  --palette-ivory: #e8e1d3; /* Aged Ivory       — primary text, poster paper */
+  --palette-sand: #cfc4b1; /* Sand             — secondary text, borders    */
+  --palette-brass: #b59a63; /* Banaras Brass    — accent, never dominant     */
+  --palette-ganga-mist: #aeb8b3; /* Ganga Mist       — cool atmospheric accent   */
+  --palette-terracotta: #985f49; /* Burnt Terracotta — editorial accent           */
+
+  /* ===========================================================================
+     2. COLOR — SEMANTIC (design.md §7)
+     Components consume these, not the palette, unless a specific chapter
+     (posters) needs a raw palette colour.
+     =========================================================================== */
   --color-background-primary: var(--palette-ink);
   --color-background-secondary: var(--palette-charcoal);
 
-  --color-surface: #211F1B;
-  --color-surface-elevated: #28251F;
+  --color-surface: #211f1b;
+  --color-surface-elevated: #28251f;
 
   --color-text-primary: var(--palette-ivory);
   --color-text-secondary: var(--palette-sand);
-  --color-text-muted: #8E887D;
+  --color-text-muted: #8e887d;
 
   --color-accent: var(--palette-brass);
   --color-accent-secondary: var(--palette-terracotta);
 
-  --color-border: rgba(232, 225, 211, 0.18);
-  --color-border-strong: rgba(232, 225, 211, 0.34);
+  --color-border: rgb(232 225 211 / 0.18);
+  --color-border-strong: rgb(232 225 211 / 0.34);
 
-  --color-overlay: rgba(16, 16, 14, 0.72);
-  --color-overlay-light: rgba(16, 16, 14, 0.4);
-  --color-overlay-heavy: rgba(16, 16, 14, 0.88);
+  --color-overlay: rgb(16 16 14 / 0.72);
 
-  --color-error: #A85D55;
-  --color-success: #77866B;
+  --color-error: #a85d55;
+  --color-success: #77866b;
 
-  /* Light Surface Tokens */
-  --color-light-background: #E8E1D3;
-  --color-light-surface: #F0EADF;
+  /* ===========================================================================
+     3. COLOR — LIGHT EDITORIAL SURFACES (design.md §8)
+     Used by poster / editorial moments. Still unmistakably KASHI.
+     =========================================================================== */
+  --color-light-background: #e8e1d3;
+  --color-light-surface: #f0eadf;
   --color-light-text-primary: #171613;
-  --color-light-text-secondary: #4B463D;
-  --color-light-border: rgba(16, 16, 14, 0.18);
+  --color-light-text-secondary: #4b463d;
+  --color-light-border: rgb(16 16 14 / 0.18);
 
-  /* Focus Indicator */
-  --focus-ring: 0 0 0 2px var(--color-accent);
+  /* Brass is an accent for dark ground. At #B59A63 on ivory it measures about
+     2:1 — unreadable as text (rules.md §60). This is the same hue taken dark
+     enough to pass on the light band (~5.5:1), so an index label or a section
+     eyebrow can stay an accent without becoming illegible. */
+  --color-light-accent: #6e5326;
 
-  /* ==========================================================================
-     3. TYPOGRAPHY TOKENS
-     ========================================================================== */
-  --font-display: "Caesura", "Cinzel", "Playfair Display", Georgia, serif;
-  --font-editorial: "Peristiva", "Newsreader", "Lora", "EB Garamond", serif;
+  /* ===========================================================================
+     4. COLOR — IMAGE OVERLAYS (design.md §44)
+     Use the minimum overlay necessary for legibility.
+     =========================================================================== */
+  --image-overlay-light: rgb(16 16 14 / 0.16);
+  --image-overlay-medium: rgb(16 16 14 / 0.38);
+  --image-overlay-heavy: rgb(16 16 14 / 0.68);
+
+  /* ===========================================================================
+     5. COLOR — MODAL / DETAIL OVERLAY (design.md §56)
+     =========================================================================== */
+  --overlay-background: rgb(16 16 14 / 0.88);
+  --overlay-blur: 8px;
+
+  /* ===========================================================================
+     6. BACKGROUND ALIASES (design.md §68)
+     =========================================================================== */
+  --background-primary: var(--color-background-primary);
+  --background-secondary: var(--color-background-secondary);
+
+  /* ===========================================================================
+     7. TYPOGRAPHY — FAMILIES (design.md §11, §13)
+     Exactly two primary typefaces. Never introduce a third.
+
+     The webfont files are declared in `styles/fonts.css`. Until the licensed
+     binaries are placed in `public/fonts/`, the stack intentionally resolves to
+     a generic serif rather than pulling in a substitute webfont.
+     =========================================================================== */
+  --font-display: "Caesura", ui-serif, Georgia, "Times New Roman", serif;
+  --font-editorial: "Peristiva", ui-serif, Georgia, "Times New Roman", serif;
 
   --font-heading: var(--font-display);
   --font-body: var(--font-editorial);
   --font-ui: var(--font-editorial);
 
-  /* Exact fluid type scale per design.md */
-  --font-size-heading: clamp(3.2rem, 7vw, 7rem);
-  --font-size-subheading: clamp(1.4rem, 2.5vw, 2.5rem);
-  --font-size-body: clamp(0.95rem, 1vw, 1.05rem);
-  --font-size-ui: 0.75rem;
+  --font-weight-display: 700;
+  --font-weight-editorial: 400;
 
-  --line-height-heading: 1.05;
-  --line-height-subheading: 1.25;
-  --line-height-body: 1.65;
+  /* ===========================================================================
+     8. TYPOGRAPHY — SCALE (design.md §15, §16, §17, §18)
+     Three content sizes plus one utility size. Responsive scaling lives inside
+     the token, so components never branch on breakpoints for type.
+     =========================================================================== */
+  --font-size-heading: clamp(3.5rem, 7vw, 7rem);
+  --font-size-subheading: clamp(1.5rem, 2.5vw, 2.5rem);
+  --font-size-body: clamp(0.95rem, 1vw, 1rem);
+  --font-size-ui: 0.72rem;
 
-  --letter-spacing-heading: -0.02em;
-  --letter-spacing-subheading: -0.01em;
-  --letter-spacing-body: 0.01em;
-  --letter-spacing-caps: 0.15em;
+  /* ===========================================================================
+     9. TYPOGRAPHY — LINE HEIGHT (design.md §21)
+     =========================================================================== */
+  --leading-heading: 0.92;
+  --leading-subheading: 1.05;
+  --leading-body: 1.55;
+  --leading-ui: 1.2;
 
-  /* ==========================================================================
-     4. SPACING TOKENS
-     ========================================================================== */
-  --space-1: 0.25rem;
-  --space-2: 0.5rem;
-  --space-3: 0.75rem;
-  --space-4: 1rem;
-  --space-5: 1.25rem;
-  --space-6: 1.5rem;
-  --space-8: 2rem;
-  --space-10: 2.5rem;
-  --space-12: 3rem;
-  --space-16: 4rem;
-  --space-20: 5rem;
-  --space-24: 6rem;
-  --space-32: 8rem;
-  --space-40: 10rem;
+  /* ===========================================================================
+     10. TYPOGRAPHY — TRACKING (design.md §20)
+     =========================================================================== */
+  --tracking-heading: 0.015em;
+  --tracking-subheading: 0.01em;
+  --tracking-body: 0em;
+  --tracking-ui: 0.12em;
 
-  /* ==========================================================================
-     5. LAYOUT & CONTAINERS
-     ========================================================================== */
-  --container-max: 1440px;
-  --container-wide: 1680px;
-  --page-gutter: clamp(1.5rem, 5vw, 5rem);
+  /* ===========================================================================
+     11. TYPOGRAPHY — MEASURE (design.md §24)
+     Long-form text must never span the full viewport.
+     =========================================================================== */
+  --measure-body: 38rem;
+  --measure-wide: 52rem;
+
+  /* ===========================================================================
+     12. SPACING (design.md §25) — 4px base unit
+     =========================================================================== */
+  --space-1: 0.25rem; /*  4px */
+  --space-2: 0.5rem; /*  8px */
+  --space-3: 0.75rem; /* 12px */
+  --space-4: 1rem; /* 16px */
+  --space-5: 1.25rem; /* 20px */
+  --space-6: 1.5rem; /* 24px */
+  --space-8: 2rem; /* 32px */
+  --space-10: 2.5rem; /* 40px */
+  --space-12: 3rem; /* 48px */
+  --space-16: 4rem; /* 64px */
+  --space-20: 5rem; /* 80px */
+  --space-24: 6rem; /* 96px */
+  --space-32: 8rem; /* 128px */
+  --space-40: 10rem; /* 160px */
+
+  /* ===========================================================================
+     13. SECTION RHYTHM (design.md §26)
+     =========================================================================== */
+  --section-padding-y: clamp(5rem, 12vw, 12rem);
+  --section-padding-y-compact: clamp(3rem, 7vw, 6rem);
+
+  /* ===========================================================================
+     14. PAGE GUTTERS (design.md §27)
+     =========================================================================== */
+  --page-gutter: clamp(2rem, 5vw, 6rem);
   --page-gutter-mobile: 1.25rem;
 
-  /* Breakpoints */
-  --breakpoint-mobile: 640px;
-  --breakpoint-tablet: 768px;
-  --breakpoint-desktop: 1024px;
-  --breakpoint-wide: 1440px;
+  /* ===========================================================================
+     15. CONTAINERS (design.md §28)
+     =========================================================================== */
+  --container-max: 1440px;
+  --container-wide: 1680px;
 
-  /* ==========================================================================
-     6. RADIUS TOKENS
-     ========================================================================== */
+  /* ===========================================================================
+     16. GRID (design.md §29)
+     12 columns on desktop, 4 on mobile. The column counts are written directly
+     in `styles/utilities.css` — `repeat()` needs a literal integer.
+     =========================================================================== */
+  --grid-gap: clamp(1rem, 2vw, 2rem);
+
+  /* ===========================================================================
+     17. RADIUS (design.md §30) — KASHI is not a rounded UI.
+     =========================================================================== */
   --radius-sm: 2px;
   --radius-md: 4px;
   --radius-lg: 8px;
   --radius-pill: 999px;
 
-  /* ==========================================================================
-     7. SHADOW & GLOW TOKENS
-     ========================================================================== */
-  --shadow-subtle: 0 4px 20px rgba(0, 0, 0, 0.25);
-  --shadow-card: 0 12px 32px rgba(0, 0, 0, 0.45);
-  --shadow-elevated: 0 24px 60px rgba(0, 0, 0, 0.65);
-  --glow-brass: 0 0 24px rgba(181, 154, 99, 0.35);
+  /* ===========================================================================
+     18. SHADOWS (design.md §31)
+     Depth should come from imagery, lighting, layering and contrast first.
+     =========================================================================== */
+  --shadow-soft: 0 12px 40px rgb(0 0 0 / 0.18);
+  --shadow-deep: 0 24px 80px rgb(0 0 0 / 0.32);
 
-  /* ==========================================================================
-     8. MOTION & TIMING TOKENS
-     ========================================================================== */
-  --transition-fast: 180ms cubic-bezier(0.25, 1, 0.5, 1);
-  --transition-normal: 400ms cubic-bezier(0.25, 1, 0.5, 1);
-  --transition-slow: 800ms cubic-bezier(0.16, 1, 0.3, 1);
-  --transition-cinematic: 1200ms cubic-bezier(0.16, 1, 0.3, 1);
-  --living-image-duration: 16s;
+  /* ===========================================================================
+     19. BORDERS (design.md §32)
+     =========================================================================== */
+  --border-thin: 1px solid var(--color-border);
+  --border-strong: 1px solid var(--color-border-strong);
+  /* Frames sitting on the light band — the ivory-alpha borders above are
+     invisible against ivory paper. */
+  --border-light: 1px solid var(--color-light-border);
 
-  /* ==========================================================================
-     9. LAYERING (Z-INDEX) TOKENS
-     ========================================================================== */
+  /* ===========================================================================
+     20. FOCUS (design.md §76)
+     =========================================================================== */
+  --focus-ring: 0 0 0 2px var(--color-accent);
+  --focus-ring-offset: 2px;
+
+  /* ===========================================================================
+     21. BUTTONS (design.md §36)
+     =========================================================================== */
+  --button-height-sm: 2.25rem;
+  --button-height-md: 2.75rem;
+  --button-height-lg: 3.25rem;
+  --button-padding-x: 1.25rem;
+
+  /* ===========================================================================
+     22. POSTERS (design.md §52, §54)
+     =========================================================================== */
+  --poster-border: 1px solid rgb(16 16 14 / 0.28);
+  --poster-grid-gap: clamp(1rem, 2.5vw, 2.5rem);
+
+  /* ===========================================================================
+     23. LIVING PHOTOGRAPH (design.md §43)
+     Configurable, so one `LivingImage` primitive serves every chapter.
+     =========================================================================== */
+  --living-image-scale: 1.04;
+  --living-image-duration: 12s;
+  --living-image-drift: 1.5%;
+
+  /* ===========================================================================
+     24. MOTION — DURATION (design.md §40)
+     `--duration-*` is the canonical name; `--transition-*` is retained as the
+     documented alias from design.md §81.
+     =========================================================================== */
+  --duration-fast: 180ms;
+  --duration-normal: 400ms;
+  --duration-slow: 800ms;
+  --duration-cinematic: 1200ms;
+
+  --transition-fast: var(--duration-fast);
+  --transition-normal: var(--duration-normal);
+  --transition-slow: var(--duration-slow);
+  --transition-cinematic: var(--duration-cinematic);
+
+  /* Duration used when `prefers-reduced-motion` is set: a short opacity-only
+     fade. Deliberately NOT zeroed by the block below, and deliberately not one
+     of the tokens above — design.md §77 collapses movement to nothing, while
+     rules.md §39 requires the same experience presented more calmly rather
+     than content snapping into place. 200ms, opacity only, no transform. */
+  --duration-reduced-motion: 200ms;
+
+  /* ===========================================================================
+     25. MOTION — EASING (design.md §41)
+     =========================================================================== */
+  --ease-standard: cubic-bezier(0.2, 0.65, 0.3, 1);
+  --ease-smooth: cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* ===========================================================================
+     26. MOTION — INTENSITY (design.md §78)
+     0 = reduced · 0.5 = subtle · 1 = standard
+     =========================================================================== */
+  --motion-intensity: 1;
+
+  /* ===========================================================================
+     27. OPACITY (design.md §79)
+     =========================================================================== */
+  --opacity-subtle: 0.45;
+  --opacity-muted: 0.65;
+  --opacity-medium: 0.8;
+  --opacity-strong: 0.92;
+
+  /* ===========================================================================
+     28. BLUR (design.md §80)
+     =========================================================================== */
+  --blur-sm: 4px;
+  --blur-md: 8px;
+  --blur-lg: 16px;
+
+  /* ===========================================================================
+     29. LAYERING (design.md §69)
+     =========================================================================== */
   --z-base: 0;
   --z-content: 10;
   --z-overlay: 20;
@@ -138,15 +288,33 @@
   --z-modal: 40;
   --z-transition: 50;
   --z-loader: 60;
+
+  /* ===========================================================================
+     30. BREAKPOINTS (design.md §70)
+     Mirrored in `lib/constants.ts` for JavaScript-side media queries.
+     =========================================================================== */
+  --breakpoint-mobile: 640px;
+  --breakpoint-tablet: 768px;
+  --breakpoint-desktop: 1024px;
+  --breakpoint-wide: 1440px;
 }
 
-/* Reduced Motion Override */
+/* =============================================================================
+   REDUCED MOTION (design.md §77, rules.md §39)
+
+   Collapsing the duration tokens is enough to calm every CSS transition in the
+   application. GSAP / 3D systems must additionally consult `useReducedMotion`
+   or `lib/animation.ts` — a CSS token cannot reach them.
+   ============================================================================= */
 @media (prefers-reduced-motion: reduce) {
   :root {
-    --transition-fast: 0ms;
-    --transition-normal: 0ms;
-    --transition-slow: 0ms;
-    --transition-cinematic: 0ms;
+    --duration-fast: 0ms;
+    --duration-normal: 0ms;
+    --duration-slow: 0ms;
+    --duration-cinematic: 0ms;
+
     --living-image-duration: 0ms;
+
+    --motion-intensity: 0;
   }
 }

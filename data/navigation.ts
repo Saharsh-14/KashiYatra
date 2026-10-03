@@ -1,53 +1,76 @@
-import { NavChapter } from "@/types/navigation";
+import { ROUTES } from "@/lib/routes";
+import type { Chapter } from "@/types/navigation";
 
-export const NAVIGATION_CHAPTERS: NavChapter[] = [
-  {
-    id: "landing",
-    number: "00",
-    title: "The Threshold",
-    subtitle: "Entry into Eternity",
-    route: "/",
-  },
+/**
+ * The journey, in the approved order (memory.md §8).
+ *
+ * "The Infinite Door" is not listed: it is the opening the visitor passes
+ * through, not a chapter they choose.
+ *
+ * PRODUCT CHANGE — 2026-09-24 (recorded in docs/memory.md §37):
+ * Steps to Eternity, Story of Kashi and The Spirit of Kashi were moved from
+ * dedicated routes onto the landing page itself. They are now sections, and
+ * their `href` is an in-page anchor. Where Gods Reside, Kashi Unfolded and
+ * Kashi Rasoi remain their own routes.
+ *
+ * Section anchors must match the ids declared in `features/landing/constants.ts`.
+ *
+ * Titles and ordering are locked (rules.md §4). The supporting lines are the
+ * only editable part, and they must stay atmospheric — no historical or
+ * cultural claims, and no tagline may open with "Where…" (rules.md §15, §16).
+ */
+export const chapters: readonly Chapter[] = [
   {
     id: "ghats",
-    number: "01",
+    index: 1,
     title: "Steps to Eternity",
-    subtitle: "The Sacred Ghats",
-    route: "/ghats",
+    summary:
+      "Eight ways of meeting the river, and the life arranged on every one of them.",
+    href: "#steps-to-eternity",
+    kind: "section",
   },
   {
     id: "story",
-    number: "02",
-    title: "The Eternal City",
-    subtitle: "History, Myth & Ganga",
-    route: "/story",
+    index: 2,
+    title: "Story of Kashi",
+    summary:
+      "Four chapters on what is told and what is recorded, kept apart rather than blended.",
+    href: "#story-of-kashi",
+    kind: "section",
   },
   {
     id: "temples",
-    number: "03",
+    index: 3,
     title: "Where Gods Reside",
-    subtitle: "Sacred Shrines & Stone",
-    route: "/temples",
+    summary:
+      "The shrines at the centre of the lanes, and the traffic of daily life around them.",
+    href: ROUTES.temples,
+    kind: "route",
   },
   {
     id: "unfolded",
-    number: "04",
+    index: 4,
     title: "Kashi Unfolded",
-    subtitle: "Retro Editorial Posters",
-    route: "/unfolded",
+    summary:
+      "Nine printed impressions — the city as a set of posters rather than a list of sights.",
+    href: ROUTES.unfolded,
+    kind: "route",
   },
   {
     id: "rasoi",
-    number: "05",
+    index: 5,
     title: "Kashi Rasoi",
-    subtitle: "Sacred Flavors",
-    route: "/rasoi",
+    summary:
+      "What the lanes taste like, and why the food here belongs to the place it is made in.",
+    href: ROUTES.rasoi,
+    kind: "route",
   },
   {
     id: "spirit",
-    number: "06",
-    title: "The Living Spirit",
-    subtitle: "Aarti, Silence & Reflection",
-    route: "/spirit",
+    index: 6,
+    title: "The Spirit of Kashi",
+    summary: "What is left when the visiting is over, and the river is still there.",
+    href: "#spirit-of-kashi",
+    kind: "section",
   },
 ];

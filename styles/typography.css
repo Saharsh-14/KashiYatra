@@ -1,0 +1,122 @@
+/* =============================================================================
+   KASHI — GLOBAL TYPOGRAPHY HIERARCHY
+   Task 1.2 · design.md §11–§24, §47, §48
+
+   Exactly four type roles exist:
+     .type-heading      Caesura Bold    hero titles, chapter titles
+     .type-subheading   Peristiva       supporting editorial voice
+     .type-body         Peristiva       reading content
+     .type-ui           Peristiva       labels, navigation, metadata, indexes
+
+   Every value resolves to a token. Nothing here is hardcoded, so the whole
+   hierarchy re-scales by editing `styles/tokens.css` alone.
+   ============================================================================= */
+
+/* -----------------------------------------------------------------------------
+   Content hierarchy
+   -------------------------------------------------------------------------- */
+
+.type-heading {
+  font-family: var(--font-heading);
+  font-size: var(--font-size-heading);
+  font-weight: var(--font-weight-display);
+  line-height: var(--leading-heading);
+  letter-spacing: var(--tracking-heading);
+  /* Original casing is preferred for major headings (design.md §22). Letter
+     forms are architectural enough without forcing uppercase globally. */
+  text-wrap: balance;
+}
+
+.type-subheading {
+  font-family: var(--font-editorial);
+  font-size: var(--font-size-subheading);
+  font-weight: var(--font-weight-editorial);
+  line-height: var(--leading-subheading);
+  letter-spacing: var(--tracking-subheading);
+  text-wrap: balance;
+}
+
+.type-body {
+  font-family: var(--font-body);
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-editorial);
+  line-height: var(--leading-body);
+  letter-spacing: var(--tracking-body);
+  text-wrap: pretty;
+}
+
+/* Utility size — navigation, labels, indexes, metadata, captions.
+   Never used for reading content (design.md §18). */
+.type-ui {
+  font-family: var(--font-ui);
+  font-size: var(--font-size-ui);
+  font-weight: var(--font-weight-editorial);
+  line-height: var(--leading-ui);
+  letter-spacing: var(--tracking-ui);
+}
+
+/* -----------------------------------------------------------------------------
+   Editorial helpers
+   -------------------------------------------------------------------------- */
+
+/* Long-form copy is held to a comfortable measure (design.md §24). */
+.type-measure {
+  max-width: var(--measure-body);
+}
+
+.type-measure-wide {
+  max-width: var(--measure-wide);
+}
+
+/* Index numerals — small, aligned, subtle (design.md §48). */
+.type-index {
+  font-family: var(--font-ui);
+  font-size: var(--font-size-ui);
+  line-height: var(--leading-ui);
+  letter-spacing: var(--tracking-ui);
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum" 1;
+}
+
+/* Section labels — `01 / STEPS TO ETERNITY` (design.md §47). */
+.type-label {
+  font-family: var(--font-ui);
+  font-size: var(--font-size-ui);
+  line-height: var(--leading-ui);
+  letter-spacing: var(--tracking-ui);
+  text-transform: uppercase;
+}
+
+/* -----------------------------------------------------------------------------
+   Tone — colour is a separate axis from size so the hierarchy stays stable.
+   -------------------------------------------------------------------------- */
+
+.type-tone-primary {
+  color: var(--color-text-primary);
+}
+
+.type-tone-secondary {
+  color: var(--color-text-secondary);
+}
+
+.type-tone-muted {
+  color: var(--color-text-muted);
+}
+
+.type-tone-accent {
+  color: var(--color-accent);
+}
+
+/* Light editorial surfaces (posters, printed-paper moments). */
+.type-tone-light-primary {
+  color: var(--color-light-text-primary);
+}
+
+.type-tone-light-secondary {
+  color: var(--color-light-text-secondary);
+}
+
+/* Brass on ivory is unreadable; this is the light-band accent. */
+.type-tone-light-accent {
+  color: var(--color-light-accent);
+}

@@ -1,33 +1,116 @@
-@import url("https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,400&display=swap");
+/* =============================================================================
+   KASHI — GLOBAL STYLESHEET
+   Only global concerns live here: token imports, reset, base typography,
+   accessibility defaults (architecture.md §57).
+   Component styling belongs with the component.
+   ============================================================================= */
+
 @import "../styles/fonts.css";
 @import "../styles/tokens.css";
+@import "../styles/typography.css";
+@import "../styles/utilities.css";
+@import "../styles/animations.css";
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Base Reset & Foundations */
+/* =============================================================================
+   BASE
+   ============================================================================= */
+
 html {
   background-color: var(--color-background-primary);
   color: var(--color-text-primary);
   font-family: var(--font-body);
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  /* The experience is dark-first; tell the UA so form controls, scrollbars and
+     the mobile address bar adopt the correct treatment. */
+  color-scheme: dark;
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
 }
 
 body {
   margin: 0;
-  padding: 0;
-  overflow-x: hidden;
-  min-height: 100vh;
+  min-height: 100svh;
   background-color: var(--color-background-primary);
   color: var(--color-text-primary);
+  /* Cinematic type benefits from consistent rasterisation across browsers. */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
 
-/* Custom Scrollbar */
+/* Imagery is the emotional layer — it should never overflow its composition. */
+img,
+video,
+canvas {
+  display: block;
+  max-width: 100%;
+}
+
+/* =============================================================================
+   SMOOTH SCROLL (Lenis)
+
+   This is the stylesheet Lenis requires, written out here rather than imported
+   from `lenis/dist/lenis.css` so the rules are visible and can be audited. It
+   is the vendor-documented set — do not remove a rule without checking why
+   Lenis needs it.
+   ============================================================================= */
+
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-smooth iframe {
+  pointer-events: none;
+}
+
+/* =============================================================================
+   ACCESSIBILITY DEFAULTS (design.md §76, rules.md §59)
+   A visible focus indicator is never removed — only restyled to the accent.
+   ============================================================================= */
+
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: var(--focus-ring-offset);
+}
+
+/* =============================================================================
+   SELECTION — quiet, on-brand.
+   ============================================================================= */
+
+::selection {
+  background-color: var(--color-accent);
+  color: var(--palette-ink);
+}
+
+/* =============================================================================
+   SCROLLBAR — minimal; it should not compete with the content.
+   ============================================================================= */
+
 ::-webkit-scrollbar {
   width: 6px;
+  height: 6px;
 }
 
 ::-webkit-scrollbar-track {
@@ -35,49 +118,127 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(232, 225, 211, 0.2);
+  background: var(--color-border-strong);
   border-radius: var(--radius-pill);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--palette-brass);
+  background: var(--color-accent);
 }
 
-/* Typography Utility Classes */
-.font-display {
-  font-family: var(--font-display);
+/* =============================================================================
+   MODAL SCROLLBAR — clearly visible, elegant gold accent, cross-browser
+   ============================================================================= */
+
+.modal-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(200, 165, 92, 0.5) rgba(255, 255, 255, 0.03);
+  -webkit-overflow-scrolling: touch;
+  touch-action: pan-y;
 }
 
-.font-editorial {
-  font-family: var(--font-editorial);
+.modal-scrollbar::-webkit-scrollbar {
+  width: 8px;
 }
 
-.heading-hero {
-  font-family: var(--font-display);
-  font-size: var(--font-size-heading);
-  line-height: var(--line-height-heading);
-  letter-spacing: var(--letter-spacing-heading);
-  font-weight: 700;
-  text-transform: uppercase;
+.modal-scrollbar::-webkit-scrollbar-track {
+  background: rgba(12, 10, 8, 0.6);
+  border-radius: 9999px;
+  margin: 8px 0;
 }
 
-.heading-sub {
-  font-family: var(--font-display);
-  font-size: var(--font-size-subheading);
-  line-height: var(--line-height-subheading);
-  letter-spacing: var(--letter-spacing-subheading);
+.modal-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(200, 165, 92, 0.45);
+  border-radius: 9999px;
+  border: 2px solid rgba(12, 10, 8, 0.6);
+  background-clip: padding-box;
 }
 
-.text-body {
-  font-family: var(--font-editorial);
-  font-size: var(--font-size-body);
-  line-height: var(--line-height-body);
-  color: var(--color-text-secondary);
+.modal-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(200, 165, 92, 0.8);
 }
 
-.label-ui {
-  font-family: var(--font-display);
-  font-size: var(--font-size-ui);
-  letter-spacing: var(--letter-spacing-caps);
-  text-transform: uppercase;
+.modal-scrollbar::-webkit-scrollbar-thumb:active {
+  background: rgba(245, 158, 11, 1);
 }
+
+/* =============================================================================
+   ARCHIVAL PARCHMENT MODAL SCROLLBAR — Kashi Unfolded Detail Experience
+   ============================================================================= */
+
+.archival-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(139, 37, 21, 0.45) rgba(82, 58, 40, 0.08);
+  -webkit-overflow-scrolling: touch;
+  touch-action: pan-y;
+}
+
+.archival-scrollbar::-webkit-scrollbar {
+  width: 7px;
+}
+
+.archival-scrollbar::-webkit-scrollbar-track {
+  background: rgba(82, 58, 40, 0.06);
+  border-radius: 9999px;
+  margin: 6px 0;
+}
+
+.archival-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(139, 37, 21, 0.4);
+  border-radius: 9999px;
+  border: 1.5px solid rgba(247, 243, 233, 0.9);
+  background-clip: padding-box;
+}
+
+.archival-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(139, 37, 21, 0.75);
+}
+
+.archival-scrollbar::-webkit-scrollbar-thumb:active {
+  background: rgba(139, 37, 21, 0.95);
+}
+
+@keyframes privacyOverlayIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes privacyModalIn {
+  from {
+    opacity: 0;
+    transform: scale(0.96) translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* =============================================================================
+   KASHI UNFOLDED VIEWPORT SCALING
+   ============================================================================= */
+
+.unfolded-page {
+  width: 100vw;
+  height: 100dvh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #e5d7c2;
+}
+
+.unfolded-artwork {
+  width: min(100vw, calc(100dvh * 16 / 9));
+  height: min(100dvh, calc(100vw * 9 / 16));
+  aspect-ratio: 16 / 9;
+  object-fit: contain;
+  object-position: center;
+  display: block;
+}
+
+

@@ -1,0 +1,578 @@
+/* =============================================================================
+   LANDING — feature styles
+
+   Only behaviour Tailwind cannot express lives here: keyframes, pseudo-elements
+   and pointer-gated interaction. Everything else is token-backed utilities.
+   ============================================================================= */
+
+/* -----------------------------------------------------------------------------
+   PAGE PRELOADER (TASK 3)
+
+   design.md §96: the loader belongs to the KASHI identity — ink ground, one
+   hairline, restrained type. No spinner.
+
+   `kashi-preloader-failsafe` is the last line of defence: it is scheduled far
+   out and hides the panel with `forwards`, so even if JavaScript stops entirely
+   the page becomes visible rather than staying sealed behind an opaque panel.
+   It is overridden by the exit animation whenever the normal path runs.
+   -------------------------------------------------------------------------- */
+
+.preloader {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-loader);
+  display: grid;
+  place-items: center;
+  background-color: var(--palette-ink);
+  animation: kashi-preloader-failsafe 600ms var(--ease-standard) 8600ms
+    forwards;
+}
+
+.preloader[data-state="exiting"] {
+  animation: kashi-preloader-exit var(--preloader-exit, 700ms) var(--ease-smooth)
+    forwards;
+}
+
+.preloaderInner {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+  width: min(22rem, 70vw);
+}
+
+.preloaderTrack {
+  position: relative;
+  height: 1px;
+  overflow: hidden;
+  background-color: var(--color-border);
+}
+
+.preloaderFill {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background-color: var(--color-accent);
+  transform-origin: left center;
+  /* Scale, not width — this updates on every progress tick and must never
+     trigger layout. */
+  transition-property: transform;
+  transition-duration: var(--duration-normal);
+  transition-timing-function: var(--ease-standard);
+}
+
+.preloaderMeta {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-4);
+}
+
+.preloaderSkip {
+  color: var(--color-text-muted);
+  transition-property: color;
+  transition-duration: var(--duration-fast);
+  transition-timing-function: var(--ease-standard);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .preloaderSkip:hover {
+    color: var(--color-text-primary);
+  }
+}
+
+@keyframes kashi-preloader-exit {
+  to {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+@keyframes kashi-preloader-failsafe {
+  to {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .preloader {
+    display: none;
+  }
+
+  .preloaderFill {
+    transition-property: none;
+  }
+}
+
+/* -----------------------------------------------------------------------------
+   SCROLL CUE
+
+   Communicates that the page continues. Not decoration — without it a
+   full-viewport hero gives no signal that there is more below.
+   -------------------------------------------------------------------------- */
+
+.cue {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
+  color: var(--color-text-secondary);
+  transition-property: color;
+  transition-duration: var(--duration-fast);
+  transition-timing-function: var(--ease-standard);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .cue:hover {
+    color: var(--color-text-primary);
+  }
+}
+
+.cueLine {
+  position: relative;
+  width: 1px;
+  height: 3rem;
+  overflow: hidden;
+  background-color: var(--color-border);
+}
+
+/* A short highlight travelling down the rule — a direction, not a flourish. */
+.cueLine::after {
+  content: "";
+  position: absolute;
+  inset-inline: 0;
+  top: 0;
+  height: 40%;
+  background-color: var(--color-accent);
+  animation: kashi-cue-travel 2.4s var(--ease-standard) infinite;
+}
+
+@keyframes kashi-cue-travel {
+  0% {
+    transform: translate3d(0, -100%, 0);
+  }
+  60%,
+  100% {
+    transform: translate3d(0, 250%, 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cueLine::after {
+    animation: none;
+    transform: translate3d(0, 30%, 0);
+  }
+}
+
+/* -----------------------------------------------------------------------------
+   CHAPTER ENTRY — one row of the journey index
+
+   Restrained by requirement (task.md TASK 4.6): the index comes forward, a
+   hairline draws across, the arrow leans. Nothing moves further than 8px and
+   nothing happens at all without a fine pointer.
+   -------------------------------------------------------------------------- */
+
+.entry {
+  position: relative;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: baseline;
+  gap: var(--space-4);
+  padding-block: var(--space-8);
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Hairline that separates rows and doubles as the hover indicator. */
+.entryRule {
+  position: absolute;
+  inset-inline: 0;
+  bottom: 0;
+  height: 1px;
+  background-color: var(--color-border);
+}
+
+.entryRule::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-color: var(--color-accent);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition-property: transform;
+  transition-duration: var(--duration-normal);
+  transition-timing-function: var(--ease-standard);
+}
+
+.entryTitle,
+.entryArrow {
+  transition-property: transform, color;
+  transition-duration: var(--duration-normal);
+  transition-timing-function: var(--ease-standard);
+}
+
+.entryArrow {
+  align-self: center;
+  color: var(--color-text-muted);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .entry:hover .entryRule::after {
+    transform: scaleX(1);
+  }
+
+  .entry:hover .entryTitle {
+    transform: translate3d(8px, 0, 0);
+  }
+
+  .entry:hover .entryArrow {
+    transform: translate3d(4px, 0, 0);
+    color: var(--color-accent);
+  }
+}
+
+/* Keyboard parity — a keyboard user gets the same signal a pointer user does. */
+.entry:focus-visible .entryRule::after {
+  transform: scaleX(1);
+}
+
+.entry:focus-visible .entryTitle {
+  transform: translate3d(8px, 0, 0);
+}
+
+/* A chapter whose transition is pending. */
+.entry[data-pending="true"] .entryRule::after {
+  transform: scaleX(1);
+}
+
+.entry[data-pending="true"] .entryTitle {
+  color: var(--color-accent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .entryTitle,
+  .entryArrow {
+    transition-property: color;
+  }
+
+  .entry:hover .entryTitle,
+  .entry:focus-visible .entryTitle,
+  .entry:hover .entryArrow {
+    transform: none;
+  }
+}
+
+/* A chapter that lives on this page rather than at its own route. */
+
+/* -----------------------------------------------------------------------------
+   SECTION RAIL — where am I on this page
+
+   Six hairlines on the right edge. It exists so a keyboard user can tell which
+   part of the landing owns the screen (rules.md §59), which is also why it is a
+   real navigation with real anchors rather than decoration.
+   -------------------------------------------------------------------------- */
+
+/* The rail floats over both bands, so its colours are component-scoped tokens
+   (design.md §82) rather than fixed values — brass on ivory is ~2:1 and would
+   disappear. The component sets `data-band` from the active section. */
+.rail {
+  --rail-fg: var(--color-text-muted);
+  --rail-hover: var(--color-text-primary);
+  --rail-active: var(--color-accent);
+
+  position: fixed;
+  top: 50%;
+  right: var(--page-gutter-mobile);
+  z-index: var(--z-navigation);
+  display: none;
+  flex-direction: column;
+  gap: var(--space-3);
+  transform: translateY(-50%);
+  color: var(--rail-fg);
+  /* Held back until the preloader has released the page. */
+  opacity: 0;
+  transition-property: opacity, color;
+  transition-duration: var(--duration-slow);
+  transition-timing-function: var(--ease-standard);
+}
+
+.rail[data-band="light"] {
+  --rail-fg: var(--color-light-text-secondary);
+  --rail-hover: var(--color-light-text-primary);
+  --rail-active: var(--color-light-accent);
+}
+
+.rail[data-visible="true"] {
+  opacity: 1;
+}
+
+@media (min-width: 1024px) {
+  .rail {
+    display: flex;
+    right: var(--page-gutter);
+  }
+}
+
+.railItem {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--space-3);
+  /* 44px practical target without a 44px visual footprint (design.md §74). */
+  min-height: 44px;
+  color: inherit;
+  transition-property: color;
+  transition-duration: var(--duration-fast);
+  transition-timing-function: var(--ease-standard);
+}
+
+.railMark {
+  display: block;
+  width: 1.5rem;
+  height: 1px;
+  background-color: currentColor;
+  opacity: var(--opacity-subtle);
+  transition-property: opacity, transform;
+  transition-duration: var(--duration-normal);
+  transition-timing-function: var(--ease-standard);
+  transform-origin: right center;
+}
+
+/* Only the active label is shown — the rail stays quiet until it is needed. */
+.railLabel {
+  opacity: 0;
+  transition-property: opacity;
+  transition-duration: var(--duration-normal);
+  transition-timing-function: var(--ease-standard);
+}
+
+.railItem[aria-current="true"] {
+  color: var(--rail-active);
+}
+
+.railItem[aria-current="true"] .railMark {
+  opacity: 1;
+  transform: scaleX(1.6);
+}
+
+.railItem[aria-current="true"] .railLabel {
+  opacity: 1;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .railItem:hover {
+    color: var(--rail-hover);
+  }
+
+  .railItem:hover .railMark,
+  .railItem:hover .railLabel {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .railMark {
+    transition-property: opacity;
+  }
+
+  .railItem[aria-current="true"] .railMark {
+    transform: none;
+  }
+}
+
+/* -----------------------------------------------------------------------------
+   HERO CONTENT DELAY
+   -------------------------------------------------------------------------- */
+
+.heroContent {
+  --reveal-base-delay: 500ms;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .heroContent {
+    --reveal-base-delay: 0ms;
+  }
+}
+
+/* -----------------------------------------------------------------------------
+   IMAGE PLATE — the shared frame for ghat and spirit photography
+
+   One frame, used on the light band. The photograph is the subject; the frame
+   only holds it. Hover movement is a single 1.03 scale, gated to a fine pointer
+   and dropped entirely under reduced motion — the rule in design.md §43 that
+   the image must still read as a photograph.
+   -------------------------------------------------------------------------- */
+
+.plateFrame {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 16 / 10;
+  border-radius: var(--radius-sm);
+  background-color: transparent;
+  /* The light-band border token — an ivory-alpha hairline would be invisible
+     against ivory paper. */
+  border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.plateImage {
+  object-fit: cover;
+  transition-property: transform;
+  transition-duration: var(--duration-slow);
+  transition-timing-function: var(--ease-smooth);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .plate:hover .plateImage {
+    transform: scale(1.03);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .plateImage {
+    transition-property: none;
+  }
+}
+
+.plateCaption {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  margin-top: var(--space-5);
+}
+
+/* -----------------------------------------------------------------------------
+   STORY — alternating chapter rows
+
+   The image and the text swap sides down the page so the eye is never asked to
+   resolve the same composition four times (design.md §89 — asymmetry is allowed
+   when it is controlled).
+   -------------------------------------------------------------------------- */
+
+.chapter {
+  display: grid;
+  gap: var(--grid-gap);
+  align-items: center;
+}
+
+@media (min-width: 1024px) {
+  .chapter {
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+  }
+
+  /* The mirrored chapter. The column template is flipped as well as the order,
+     so the photograph keeps the same width on both sides — swapping only the
+     order would leave the image in the narrow track on alternate rows. */
+  .chapter[data-flipped="true"] {
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  }
+
+  .chapter[data-flipped="true"] .chapterMedia {
+    order: 2;
+  }
+
+  .chapter[data-flipped="true"] .chapterBody {
+    order: 1;
+  }
+}
+
+.chapterMedia {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 16 / 9;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  background-color: transparent;
+}
+
+.chapterBody {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+/* "Tradition" / "Recorded" — prd.md CF-04 requires the two to be visibly
+   distinguished rather than blended into one authoritative voice. */
+.chapterBasis {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.chapterBasisRule {
+  display: block;
+  width: 1.5rem;
+  height: 1px;
+  background-color: var(--color-accent);
+}
+
+/* The close of the story — the approved Hindi statement. */
+.statement {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  text-wrap: balance;
+}
+
+/* -----------------------------------------------------------------------------
+   STEPS TO ETERNITY — LIVING PHOTOGRAPH & HERO EFFECTS
+   -------------------------------------------------------------------------- */
+
+.livingPhotoWrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  will-change: transform;
+}
+
+.livingPhotoBreathing {
+  animation: livingPhotoBreath 22s ease-in-out infinite alternate;
+  will-change: transform;
+}
+
+@keyframes livingPhotoBreath {
+  0% {
+    transform: scale(1.0) translate3d(0, 0, 0);
+  }
+  50% {
+    transform: scale(1.025) translate3d(-0.35%, 0.25%, 0);
+  }
+  100% {
+    transform: scale(1.012) translate3d(0.25%, -0.2%, 0);
+  }
+}
+
+.riverAtmosphereSheen {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(circle at 50% 65%, rgba(220, 200, 160, 0.09) 0%, transparent 65%);
+  animation: riverAtmosphereFlow 16s ease-in-out infinite alternate;
+  mix-blend-mode: soft-light;
+}
+
+@keyframes riverAtmosphereFlow {
+  0% {
+    opacity: 0.2;
+    transform: translate3d(-1%, 0, 0);
+  }
+  50% {
+    opacity: 0.42;
+    transform: translate3d(1.2%, -0.6%, 0);
+  }
+  100% {
+    opacity: 0.2;
+    transform: translate3d(-1%, 0, 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .livingPhotoBreathing {
+    animation: none;
+    transform: none;
+  }
+  .riverAtmosphereSheen {
+    animation: none;
+    opacity: 0.2;
+  }
+}
+

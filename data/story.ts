@@ -1,36 +1,72 @@
-import { StoryChapter } from "@/types/content";
+import type { StoryChapter } from "@/types/content";
 
-export const STORY_CHAPTERS: StoryChapter[] = [
+/**
+ * Story of Kashi — four chapters.
+ *
+ * prd.md CF-04 requires the chapter set to stay short and cinematic, and
+ * requires inherited tradition to be distinguishable from documented history.
+ * Both are structural here: each chapter declares whether it rests on
+ * `tradition` or on `record`, and the UI states that rather than blending the
+ * two into one authoritative voice.
+ *
+ * rules.md §16 is the constraint that matters most in this file: do not
+ * fabricate historical or cultural claims. The prose below therefore describes
+ * what is told and what is documented, and stops short of asserting either.
+ *
+ * Chapter four is the emotional close and carries the approved Shiva statement
+ * (memory.md §16, TASK 8.5).
+ */
+export const storyChapters: readonly StoryChapter[] = [
   {
-    id: "cosmic-origin",
-    title: "Cosmic Origin & The Pillar of Light",
-    period: "Primordial Time / Mythological Dawn",
-    excerpt: "Before the cosmos took physical form, Lord Shiva manifested as a boundless Jyotirlinga—a cosmic column of luminous golden light that pierced through the heavens and depths of existence.",
-    narrative: "In Hindu cosmology, Kashi is not situated upon the earthly crust, but rests upon the three prongs of Lord Shiva's trident (Trishula). When the universe undergoes dissolution (Pralaya), Kashi alone remains unshaken, held aloft in the cosmic void. It is called Anandavana, the Forest of Bliss, where Shiva and Parvati first walked in sacred delight.",
+    id: "origins",
+    index: 1,
+    title: "Origins",
+    narrative:
+      "Before it was written about, it was already old. The earliest records are not the beginning of the city — they are the moment it began to be described.",
     image: "/images/story/origin.jpg",
+    imageAlt: "Old riverside architecture at Kashi, seen across the water.",
+    basis: "tradition",
   },
   {
-    id: "descent-of-ganga",
-    title: "The Descent of Ma Ganga",
-    period: "Vedic & Epic Antiquity",
-    excerpt: "To liberate the ashes of King Sagara's sixty thousand sons, sage Bhagiratha performed severe austerities, entreating the celestial river Ganga to descend from heaven to cleanse the mortal realm.",
-    narrative: "Knowing that Ganga's torrential heavenly descent would shatter the Earth, Lord Shiva untied his matted locks (Jata) and trapped the mighty river within his hair, gently releasing her into seven tranquil streams. As she reached Kashi, she turned northwards (Uttara-vahini), pausing her rush to embrace the feet of Lord Vishwanath before flowing onward to the sea.",
+    id: "shiva-and-the-river",
+    index: 2,
+    title: "Shiva and the River",
+    narrative:
+      "Here the two are not separate stories. The river comes down and the city gathers where it does, and the telling of how that happened belongs to faith rather than to chronology.",
     image: "/images/story/ganga.jpg",
+    imageAlt: "The Ganga flowing past the ghats of Kashi.",
+    basis: "tradition",
   },
   {
-    id: "buddha-sarnath",
-    title: "First Turning of the Wheel of Dharma",
-    period: "528 BCE",
-    excerpt: "Just ten kilometers north of the city center, in the Deer Park of Sarnath, Gautama Buddha delivered his first sermon after attaining enlightenment under the Bodhi tree in Gaya.",
-    narrative: "Here the Buddha set into motion the Dharmachakra—the Wheel of the Law—teaching the Four Noble Truths and the Noble Eightfold Path to his first five disciples. Sarnath established Varanasi not merely as a center of Shaivite theology, but as the intellectual and spiritual sanctuary where Jain Tirthankaras, Buddhist monks, and Upanishadic rishis debated the mysteries of existence.",
+    id: "sarnath",
+    index: 3,
+    title: "Sarnath",
+    narrative:
+      "A short distance north, the first sermon is recorded. It is one of the few parts of this landscape that history can date rather than inherit.",
     image: "/images/story/buddha.jpg",
+    imageAlt: "The stupa and monastic remains at Sarnath.",
+    basis: "record",
   },
   {
-    id: "living-pulse",
-    title: "The Living Continuity of Kashi",
-    period: "Medieval Renascence to Modernity",
-    excerpt: "Through countless centuries of invasions, reconstructions, poetic revivals, and modern transitions, Kashi's inner essence has remained unbroken.",
-    narrative: "From Kabir weaving mystic couplets beside the river, to Tulsidas composing the Ramcharitmanas on Assi Ghat, to Bismillah Khan playing his shehnai at Mangala Gauri temple at sunrise, Varanasi breathes through art, music, philosophy, and devotion. Today, modern infrastructure and high-speed transit meet centuries-old boat songs and evening aartis in an enduring tapestry of human spirit.",
+    id: "the-city-now",
+    index: 4,
+    title: "The City Now",
+    narrative:
+      "Kashi is not preserved. It is lived in — continuously, by people who treat its oldest structures as ordinary parts of a working day.",
     image: "/images/story/contemporary.jpg",
+    imageAlt: "Present-day life along the ghats and lanes of Kashi.",
+    basis: "record",
   },
 ];
+
+/**
+ * The approved Hindi statement (memory.md §16, TASK 8.5).
+ *
+ * LOCKED. It is a major editorial moment at the close of the story and must not
+ * be reworded, translated away or replaced.
+ */
+export const shivaStatement = [
+  "जहाँ कण-कण में शिव का वास है,",
+  "और हर घाट पर महादेव का अहसास है,",
+  "वो हमारी नगरी काशी है।",
+] as const;

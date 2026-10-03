@@ -1,27 +1,44 @@
 import React from "react";
 import { cn } from "@/lib/utils";
+import { toneClass, type TypographyTone } from "./tone";
 
-interface TextProps extends React.HTMLAttributes<HTMLParagraphElement> {
-  variant?: "body" | "lead" | "caption" | "quote";
-  as?: React.ElementType;
+type TextElement = "p" | "span" | "div" | "figcaption" | "blockquote" | "li";
+
+export interface TextProps extends React.HTMLAttributes<HTMLElement> {
+  as?: TextElement;
+  /**
+   * `body` is the only reading size. `ui` is the utility size for metadata —
+   * never for content anyone has to actually read (design.md §18).
+   */
+  size?: "body" | "ui";
+  tone?: TypographyTone;
+  /** Constrain to the editorial measure so long copy stays readable (§24). */
+  measure?: false | "body" | "wide";
 }
 
+/**
+ * Body copy — Peristiva (design.md §17, §23).
+ */
 export function Text({
-  children,
-  className,
-  variant = "body",
   as: Component = "p",
+  size = "body",
+  tone = "secondary",
+  measure = "body",
+  className,
+  children,
   ...props
 }: TextProps) {
-  const variantClasses = {
-    body: "text-body text-palette-sand/85 font-normal",
-    lead: "font-editorial text-xl md:text-2xl text-palette-sand font-light leading-relaxed",
-    caption: "font-editorial text-xs italic text-palette-sand/65 tracking-wide",
-    quote: "font-editorial text-lg md:text-xl italic text-palette-ivory/90 border-l-2 border-brand-accent/50 pl-4 my-4",
-  };
-
   return (
-    <Component className={cn(variantClasses[variant], className)} {...props}>
+    <Component
+      className={cn(
+        size === "body" ? "type-body" : "type-ui",
+        toneClass(tone),
+        measure === "body" && "u-measure",
+        measure === "wide" && "u-measure-wide",
+        className,
+      )}
+      {...props}
+    >
       {children}
     </Component>
   );

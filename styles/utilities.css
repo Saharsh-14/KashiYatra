@@ -1,0 +1,195 @@
+/* =============================================================================
+   KASHI — LAYOUT & GLOBAL UTILITIES
+   Task 1.3 · design.md §25–§29, §69, §74, §76
+
+   Pages compose from these primitives instead of re-inventing container widths,
+   gutters and section rhythm in every file.
+   ============================================================================= */
+
+/* -----------------------------------------------------------------------------
+   Container — the single source of horizontal structure (design.md §28)
+
+   Padding is applied on the container, never on `<body>`, so full-bleed
+   imagery can still escape the gutter when a chapter needs it.
+   -------------------------------------------------------------------------- */
+
+.u-container {
+  width: 100%;
+  max-width: var(--container-max);
+  margin-inline: auto;
+  padding-inline: var(--page-gutter-mobile);
+}
+
+@media (min-width: 768px) {
+  .u-container {
+    padding-inline: var(--page-gutter);
+  }
+}
+
+/* Wider cinematic container for image-led compositions. */
+.u-container-wide {
+  max-width: var(--container-wide);
+}
+
+/* Narrower container for text-led editorial blocks. */
+.u-container-narrow {
+  max-width: var(--measure-wide);
+}
+
+/* Full-bleed — escapes the container, keeps the gutter as a safety inset. */
+.u-container-full {
+  max-width: none;
+}
+
+/* -----------------------------------------------------------------------------
+   Page gutter — standalone, when content sits outside a container.
+   -------------------------------------------------------------------------- */
+
+.u-gutter {
+  padding-inline: var(--page-gutter-mobile);
+}
+
+@media (min-width: 768px) {
+  .u-gutter {
+    padding-inline: var(--page-gutter);
+  }
+}
+
+/* -----------------------------------------------------------------------------
+   Section rhythm (design.md §26)
+   -------------------------------------------------------------------------- */
+
+.u-section {
+  position: relative;
+  padding-block: var(--section-padding-y);
+}
+
+.u-section-compact {
+  position: relative;
+  padding-block: var(--section-padding-y-compact);
+}
+
+.u-section-flush {
+  position: relative;
+  padding-block: 0;
+}
+
+/* -----------------------------------------------------------------------------
+   Editorial measure (design.md §24)
+   -------------------------------------------------------------------------- */
+
+.u-measure {
+  max-width: var(--measure-body);
+}
+
+.u-measure-wide {
+  max-width: var(--measure-wide);
+}
+
+/* -----------------------------------------------------------------------------
+   Grid (design.md §29)
+   12 columns on desktop, 4 on mobile. Applied only where structure helps —
+   not every section is forced into a grid.
+
+   Column counts are literal integers because `repeat()` requires one; the counts
+   are the approved grid and are not expected to vary per chapter.
+   -------------------------------------------------------------------------- */
+
+.u-grid {
+  display: grid;
+  gap: var(--grid-gap);
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+@media (min-width: 1024px) {
+  .u-grid {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+  }
+}
+
+/* Interior grid — for unequal editorial compositions (e.g. 60 / 40). */
+.u-grid-split {
+  display: grid;
+  gap: var(--grid-gap);
+  grid-template-columns: minmax(0, 1fr);
+}
+
+@media (min-width: 1024px) {
+  .u-grid-split {
+    grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+    align-items: center;
+  }
+
+  /* Reversed split — used by the alternating temple layout (design.md §57). */
+  .u-grid-split-reverse {
+    grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
+  }
+}
+
+/* -----------------------------------------------------------------------------
+   Accessibility utilities (design.md §74, §76; rules.md §56)
+   -------------------------------------------------------------------------- */
+
+.u-visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Minimum practical touch target for interactive controls (design.md §74). */
+.u-touch-target {
+  min-width: 44px;
+  min-height: 44px;
+}
+
+/* Skip link (rules.md §59).
+   Off-screen until focused, then a fully visible high-contrast control. It is
+   never *hidden* — a focus indicator that cannot be seen is not a focus
+   indicator. `:focus` rather than `:focus-visible`, because a skip link is
+   routinely focused programmatically and `:focus-visible` does not fire
+   reliably for that. */
+.u-skip-link {
+  position: absolute;
+  top: var(--space-4);
+  left: var(--space-4);
+  z-index: var(--z-loader);
+  padding: var(--space-3) var(--space-5);
+  background-color: var(--color-accent);
+  color: var(--palette-ink);
+  transform: translateY(-250%);
+  transition-property: transform;
+  transition-duration: var(--duration-fast);
+  transition-timing-function: var(--ease-standard);
+}
+
+.u-skip-link:focus {
+  transform: translateY(0);
+}
+
+/* The focus indicator is token-driven and must never be removed — only
+   restyled. Applied globally so keyboard users always know where they are. */
+.u-focus-ring:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+  border-radius: var(--radius-sm);
+}
+
+/* -----------------------------------------------------------------------------
+   Full-viewport section — the cinematic default for hero-scale chapters.
+   Uses `svh` so mobile browser chrome cannot clip the composition.
+   -------------------------------------------------------------------------- */
+
+.u-viewport {
+  min-height: 100svh;
+}
+
+.u-viewport-safe {
+  min-height: 100svh;
+  padding-block: var(--section-padding-y-compact);
+}

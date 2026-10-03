@@ -1,21 +1,18 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useMediaQuery } from "./useMediaQuery";
 
+/**
+ * The user's reduced-motion preference (design.md §77, rules.md §39).
+ *
+ * CSS covers declarative transitions through the token overrides in
+ * `styles/tokens.css`. This hook exists for the motion CSS cannot reach:
+ * GSAP timelines, scroll choreography and Three.js camera work, all of which
+ * must check it explicitly rather than assume.
+ *
+ * Reduced motion means fewer and gentler animations — never a missing
+ * experience. Content, navigation and hierarchy stay identical.
+ */
 export function useReducedMotion(): boolean {
-  const [prefersReduced, setPrefersReduced] = useState(false);
-
-  useEffect(() => {
-    const media = window.matchMedia("(prefers-reduced-motion: reduce)");
-    setPrefersReduced(media.matches);
-
-    const listener = (event: MediaQueryListEvent) => {
-      setPrefersReduced(event.matches);
-    };
-
-    media.addEventListener("change", listener);
-    return () => media.removeEventListener("change", listener);
-  }, []);
-
-  return prefersReduced;
+  return useMediaQuery("(prefers-reduced-motion: reduce)");
 }

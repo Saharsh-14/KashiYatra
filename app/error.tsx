@@ -1,39 +1,45 @@
 "use client";
 
-import { useEffect } from "react";
+import { Container } from "@/components/layout";
+import { Heading, Text } from "@/components/typography";
+import { Button } from "@/components/ui";
 
-export default function Error({
+/**
+ * Route-level error boundary (task.md TASK 18.1, TASK 18.2).
+ *
+ * design.md §97: error states keep the visual language rather than falling back
+ * to a browser default. The copy says what happened without exposing a stack
+ * trace, and the one action offered is recovery — `reset()` re-renders the
+ * segment, so a transient failure does not force a full reload.
+ *
+ * The details are logged rather than rendered (rules.md §50 — do not hide
+ * errors, but do not show them to the visitor either).
+ */
+export default function RouteError({
   error,
   reset,
 }: {
   error: Error & { digest?: string };
   reset: () => void;
 }) {
-  useEffect(() => {
-    console.error("Kashi Application Error:", error);
-  }, [error]);
-
   return (
-    <main className="min-h-screen flex flex-col items-center justify-center bg-palette-ink text-palette-ivory px-6 text-center">
-      <div className="max-w-md space-y-6">
-        <span className="font-display text-xs tracking-[0.3em] uppercase text-palette-terracotta">
-          Temporal Anomaly
-        </span>
-        <h1 className="font-display text-4xl md:text-5xl font-bold tracking-tight text-palette-ivory">
-          A Moment of Disruption
-        </h1>
-        <p className="font-editorial text-base text-palette-sand italic">
-          An unexpected occurrence has taken place in the digital continuum.
-        </p>
-        <div className="pt-4 flex justify-center gap-4">
-          <button
-            onClick={() => reset()}
-            className="px-6 py-2.5 border border-brand-accent/50 font-display text-xs tracking-[0.2em] uppercase text-brand-accent hover:bg-brand-accent hover:text-palette-ink transition-colors duration-300"
-          >
-            Attempt Recovery
-          </button>
+    <main id="main" className="flex min-h-svh items-center">
+      <Container size="narrow">
+        <div className="flex flex-col gap-6">
+          <p className="type-label type-tone-accent">Error</p>
+
+          <Heading as="h1">Kashi is momentarily out of reach.</Heading>
+
+          <Text as="p" tone="secondary" measure={false}>
+            Something went wrong on this page. It is not you, and the city is
+            still there.
+          </Text>
+
+          <div className="flex flex-wrap items-center gap-4">
+            <Button onClick={reset}>Try again</Button>
+          </div>
         </div>
-      </div>
+      </Container>
     </main>
   );
 }

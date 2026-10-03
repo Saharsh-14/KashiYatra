@@ -1,17 +1,10 @@
-import { type ClassValue, clsx } from "clsx";
+import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
 
 /**
- * Merges class names safely with Tailwind CSS
+ * Merge conditional class names and resolve Tailwind conflicts so a caller's
+ * `className` always wins over a component's own defaults.
  */
-export function cn(...inputs: ClassValue[]) {
+export function cn(...inputs: ClassValue[]): string {
   return twMerge(clsx(inputs));
-}
-
-/**
- * Formats numbers into roman numerals or padded numbers for Kashi chapters
- */
-export function formatChapterNumber(num: number): string {
-  const roman = ["I", "II", "III", "IV", "V", "VI", "VII", "VIII"];
-  return roman[num - 1] || String(num).padStart(2, "0");
 }

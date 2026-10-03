@@ -1,26 +1,42 @@
 import React from "react";
 import { cn } from "@/lib/utils";
+import { toneClass, type TypographyTone } from "@/components/typography/tone";
 
-interface IndexLabelProps extends React.HTMLAttributes<HTMLSpanElement> {
-  number: string | number;
-  label?: string;
+export interface IndexLabelProps
+  extends Omit<React.HTMLAttributes<HTMLSpanElement>, "color"> {
+  /** 1-based editorial index — rendered as `01`. */
+  index: number;
+  /** Zero-padding width. Two digits covers every chapter in the project. */
+  pad?: number;
+  /**
+   * Accent by default. Pass `light-accent` when the index sits on the light
+   * band — brass on ivory is roughly 2:1 and would be unreadable there.
+   */
+  tone?: TypographyTone;
 }
 
-export function IndexLabel({ number, label, className, ...props }: IndexLabelProps) {
-  const formattedNumber = typeof number === "number" ? String(number).padStart(2, "0") : number;
+/**
+ * Editorial index (design.md §48).
+ *
+ * Small, aligned and subtle. Tabular figures keep indexes in a column from
+ * shifting as the numbers change, which is what makes an editorial list read as
+ * deliberate rather than incidental.
+ */
+export function IndexLabel({
+  index,
+  pad = 2,
+  tone = "accent",
+  className,
+  ...props
+}: IndexLabelProps) {
+  const value = String(index).padStart(pad, "0");
 
   return (
-    <div
-      className={cn("inline-flex items-center gap-3 font-display uppercase tracking-[0.25em]", className)}
+    <span
+      className={cn("type-index inline-block", toneClass(tone), className)}
       {...props}
     >
-      <span className="text-xs text-brand-accent font-semibold">{formattedNumber}</span>
-      {label && (
-        <>
-          <span className="w-4 h-[1px] bg-brand-accent/40" />
-          <span className="text-[11px] text-palette-sand/80">{label}</span>
-        </>
-      )}
-    </div>
+      {value}
+    </span>
   );
 }

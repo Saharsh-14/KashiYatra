@@ -1,34 +1,67 @@
 import React from "react";
-import Link, { LinkProps } from "next/link";
+import Link from "next/link";
 import { cn } from "@/lib/utils";
+import { toneClass, type TypographyTone } from "@/components/typography/tone";
+import styles from "./TextLink.module.css";
 
-interface TextLinkProps extends LinkProps {
-  children: React.ReactNode;
-  className?: string;
-  variant?: "brass" | "sand" | "ivory";
+export interface TextLinkProps
+  extends Omit<React.AnchorHTMLAttributes<HTMLAnchorElement>, "color"> {
+  href: string;
+  /**
+   * `hover` — the underline appears on hover/focus. Right for navigation
+   *           where the affordance is clear from context.
+   * `always` — the underline is permanent. Required for inline links inside
+   *           running copy, and for any link on a touch device where hover
+   *           does not exist (rules.md §37).
+   */
+  underline?: "hover" | "always";
+  tone?: TypographyTone;
+  size?: "body" | "ui";
 }
 
+function isExternal(href: string): boolean {
+  return /^[a-z][a-z0-9+.-]*:/i.test(href) || href.startsWith("//");
+}
+
+/**
+ * TextLink (design.md §47; rules.md §58).
+ *
+ * Navigation renders an anchor — never a clickable `<div>` — so middle-click,
+ * new tab, and browser history behave normally (rules.md §27, §29).
+ */
 export function TextLink({
-  children,
+  href,
+  underline = "hover",
+  tone = "primary",
+  size = "ui",
   className,
-  variant = "brass",
+  children,
   ...props
 }: TextLinkProps) {
-  const variantClasses = {
-    brass: "text-brand-accent hover:text-palette-ivory decoration-brand-accent/40",
-    sand: "text-palette-sand hover:text-palette-ivory decoration-palette-sand/40",
-    ivory: "text-palette-ivory hover:text-brand-accent decoration-palette-ivory/40",
-  };
+  const classes = cn(
+    styles.link,
+    underline === "always" && styles.alwaysUnderlined,
+    size === "ui" ? "type-ui" : "type-body",
+    toneClass(tone),
+    className,
+  );
+
+  if (isExternal(href)) {
+    return (
+      <a
+        href={href}
+        className={classes}
+        rel="noreferrer noopener"
+        target="_blank"
+        {...props}
+      >
+        {children}
+      </a>
+    );
+  }
 
   return (
-    <Link
-      className={cn(
-        "inline-flex items-center gap-1 font-display text-xs tracking-[0.2em] uppercase underline underline-offset-4 transition-colors duration-200",
-        variantClasses[variant],
-        className
-      )}
-      {...props}
-    >
+    <Link href={href} className={classes} {...props}>
       {children}
     </Link>
   );

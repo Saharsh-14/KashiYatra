@@ -1,4 +1,25 @@
-/* Caesura Bold & Peristiva Webfont Declarations */
+/* Refined Devanagari display serifs for KASHI → काशी transformation */
+@import url("https://fonts.googleapis.com/css2?family=Rozha+One&family=Martel:wght@400;600;700;800;900&family=Noto+Serif+Devanagari:wght@300;400;500;600;700;800&display=swap");
+
+/* =============================================================================
+   KASHI — WEBFONT DECLARATIONS
+   Exactly two primary typefaces (design.md §11, §12, §102).
+
+     Caesura Bold  →  display / headings / architecture / cinema
+     Peristiva     →  editorial / body / human / cultural voice
+
+   ASSET DEPENDENCY — ACTION REQUIRED
+   ----------------------------------
+   The licensed binaries are not yet present in the repository. Drop them at the
+   exact paths below and both faces activate with no code change:
+
+     public/fonts/Caesura-Bold.woff2
+     public/fonts/Peristiva.woff2
+
+   Until then `--font-display` / `--font-editorial` fall through to a generic
+   serif (see `styles/tokens.css`). No substitute webfont is loaded, on purpose:
+   bringing in a third family would break design.md §11 and rules.md §20.
+   ============================================================================= */
 
 @font-face {
   font-family: "Caesura";

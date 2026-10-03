@@ -1,17 +1,31 @@
+import { Container } from "@/components/layout";
+
+/**
+ * Route loading state (architecture.md §47, design.md §96).
+ *
+ * The loader belongs to the KASHI identity: dark ground, one hairline, no
+ * spinner and no "Loading…" — the same language as the landing's preloader, at
+ * a smaller scale, because this one is only covering a route change.
+ *
+ * It is a server component with no state, so it costs nothing while it is
+ * showing and cannot itself fail.
+ */
 export default function Loading() {
   return (
-    <div className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-palette-ink text-palette-ivory">
-      <div className="flex flex-col items-center gap-6">
-        <span className="font-display text-sm tracking-[0.3em] uppercase text-brand-accent animate-pulse">
-          KASHI
-        </span>
-        <div className="w-24 h-[1px] bg-palette-ivory/20 overflow-hidden relative">
-          <div className="absolute inset-0 bg-brand-accent/80 animate-[shimmer_1.8s_infinite] -translate-x-full" />
+    <div
+      role="status"
+      aria-label="Loading"
+      className="flex min-h-svh items-center justify-center bg-background-primary"
+    >
+      <Container size="narrow">
+        <div className="flex flex-col gap-6">
+          <p className="type-label type-tone-accent">Kashi</p>
+          <span
+            aria-hidden="true"
+            className="block h-px w-full max-w-measure bg-edge"
+          />
         </div>
-        <p className="font-editorial text-xs italic text-palette-sand/70 tracking-wider">
-          A City Beyond Time
-        </p>
-      </div>
+      </Container>
     </div>
   );
 }

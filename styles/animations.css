@@ -1,0 +1,273 @@
+/* =============================================================================
+   KASHI — SHARED MOTION SYSTEM
+   Task 1.5 · design.md §40, §41, §77, §78, §93
+
+   Motion values live in `styles/tokens.css`. This file composes them into the
+   handful of patterns the chapters actually reuse, so no component invents its
+   own curve, duration or keyframe.
+
+   Build rules applied here:
+     · Only `transform`, `opacity` and `clip-path` are animated. Compositor-only.
+     · Entrances start at scale(0.96) + opacity 0 — never `scale(0)`
+       (nothing real appears out of nothing).
+     · Reveals are CSS animations, not JS, so they stay smooth while the page
+       is still loading imagery.
+     · `prefers-reduced-motion` ships in this file, not as a follow-up: the
+       reveals keep their opacity fade and lose their movement.
+     · Hover motion is gated behind a fine pointer, because touch fires false
+       hovers on tap.
+   ============================================================================= */
+
+/* =============================================================================
+   1. REVEAL PATTERNS
+   Purpose: preventing a jarring change — content that would otherwise teleport
+   into place arrives instead, and hierarchy reads before the copy does.
+
+   Pacing note: these are chapter-level, first-impression moments, so they use
+   `--duration-slow` (800ms) and `--ease-smooth`. The sub-300ms interaction
+   budget applies to controls (§2 below), not to editorial entrances.
+   ============================================================================= */
+
+@keyframes kashi-reveal-rise {
+  from {
+    opacity: 0;
+    transform: translate3d(0, var(--reveal-shift, 1.5rem), 0);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes kashi-reveal-fade {
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* An image uncovering itself — a printed page being revealed. */
+@keyframes kashi-reveal-uncover {
+  from {
+    opacity: 0;
+    clip-path: inset(0 0 100% 0);
+  }
+
+  to {
+    opacity: 1;
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+.reveal-rise,
+.reveal-fade,
+.reveal-uncover {
+  animation-duration: var(--duration-slow);
+  animation-timing-function: var(--ease-smooth);
+  animation-fill-mode: both;
+  /* `--reveal-base-delay` lets a whole group wait for an entrance to finish
+     before it begins staggering. It is inherited, so setting it once on a
+     wrapper is enough. */
+  animation-delay: calc(var(--reveal-base-delay, 0ms) + var(--reveal-delay, 0ms));
+  will-change: transform, opacity;
+}
+
+.reveal-rise {
+  animation-name: kashi-reveal-rise;
+}
+
+.reveal-fade {
+  animation-name: kashi-reveal-fade;
+}
+
+.reveal-uncover {
+  animation-name: kashi-reveal-uncover;
+}
+
+/* Stagger — 60ms per step keeps a group reading as a sequence rather than as
+   one block, without the last item feeling late. */
+.reveal-step-1 {
+  --reveal-delay: 60ms;
+}
+
+.reveal-step-2 {
+  --reveal-delay: 120ms;
+}
+
+.reveal-step-3 {
+  --reveal-delay: 180ms;
+}
+
+.reveal-step-4 {
+  --reveal-delay: 240ms;
+}
+
+.reveal-step-5 {
+  --reveal-delay: 300ms;
+}
+
+.reveal-step-6 {
+  --reveal-delay: 360ms;
+}
+
+.reveal-step-7 {
+  --reveal-delay: 420ms;
+}
+
+.reveal-step-8 {
+  --reveal-delay: 480ms;
+}
+
+/* =============================================================================
+   2. INTERACTION TRANSITIONS
+   Purpose: feedback. Properties are named explicitly — `transition: all`
+   animates things nobody intended and is never used in this codebase.
+   ============================================================================= */
+
+.u-transition-colors {
+  transition-property: color, background-color, border-color, opacity;
+  transition-duration: var(--duration-fast);
+  transition-timing-function: var(--ease-standard);
+}
+
+.u-transition-transform {
+  transition-property: transform;
+  transition-duration: var(--duration-fast);
+  transition-timing-function: var(--ease-standard);
+}
+
+.u-transition-surface {
+  transition-property: background-color, border-color, box-shadow, transform;
+  transition-duration: var(--duration-normal);
+  transition-timing-function: var(--ease-standard);
+}
+
+/* =============================================================================
+   3. HOVER MOTION — desktop pointers only (rules.md §37)
+   ============================================================================= */
+
+@media (hover: hover) and (pointer: fine) {
+  .u-hover-lift {
+    transition-property: transform;
+    transition-duration: var(--duration-normal);
+    transition-timing-function: var(--ease-standard);
+  }
+
+  .u-hover-lift:hover {
+    transform: translate3d(0, -4px, 0);
+  }
+}
+
+/* =============================================================================
+   4. REDUCED MOTION (design.md §77, rules.md §39)
+
+   Fewer and gentler — not zero. The fade survives because it aids
+   comprehension; the movement, scale and uncovering do not.
+   ============================================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .reveal-rise,
+  .reveal-fade,
+  .reveal-uncover {
+    animation-name: kashi-reveal-fade;
+    animation-duration: var(--duration-reduced-motion);
+  }
+
+  /* Swap every entrance for a plain opacity fade: no translate, no scale, no
+     uncovering — but the content still arrives rather than snapping in. */
+  @keyframes kashi-reveal-fade {
+    from {
+      opacity: 0;
+    }
+
+    to {
+      opacity: 1;
+    }
+  }
+
+  .u-hover-lift:hover {
+    transform: none;
+  }
+
+  .u-transition-transform,
+  .u-transition-surface {
+    transition-property: background-color, border-color, opacity;
+  }
+}
+
+/* =============================================================================
+   5. SPIRIT OF KASHI — CLEAN REVEAL (Shloka & Nagari)
+   Purpose: Clean, crisp typography reveal without glow or shadows.
+   Hardware-accelerated transform, opacity, and clip wipe.
+   ============================================================================= */
+
+@keyframes spirit-shloka-reveal {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 10px, 0) scale(0.97);
+    clip-path: inset(0 100% 0 0);
+  }
+  35% {
+    opacity: 0.75;
+    clip-path: inset(0 40% 0 0);
+  }
+  75% {
+    opacity: 0.95;
+    clip-path: inset(0 0% 0 0);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+    clip-path: inset(0 0% 0 0);
+  }
+}
+
+@keyframes spirit-shloka-float {
+  0%, 100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(0, -4px, 0);
+  }
+}
+
+/* Left Top: Sacred Shloka */
+.spirit-shloka-revealed {
+  animation: spirit-shloka-reveal 1.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  will-change: transform, opacity, clip-path;
+}
+
+.spirit-shloka-floating {
+  animation: spirit-shloka-float 6.5s ease-in-out infinite;
+  will-change: transform;
+}
+
+/* Right Top: Shiv Ki Nagari (subtly staggered for rhythmic balance) */
+.spirit-nagari-revealed {
+  animation: spirit-shloka-reveal 1.5s cubic-bezier(0.16, 1, 0.3, 1) 0.2s forwards;
+  will-change: transform, opacity, clip-path;
+}
+
+.spirit-nagari-floating {
+  animation: spirit-shloka-float 6.5s ease-in-out -3.25s infinite;
+  will-change: transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .spirit-shloka-revealed,
+  .spirit-nagari-revealed {
+    animation: kashi-reveal-fade var(--duration-reduced-motion) ease-out forwards;
+    clip-path: none !important;
+  }
+  .spirit-shloka-floating,
+  .spirit-nagari-floating {
+    animation: none !important;
+  }
+}

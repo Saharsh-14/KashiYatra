@@ -1,0 +1,59 @@
+/* TextLink — the underline is drawn with a pseudo-element so it can grow from
+   the left on a transform, rather than animating `text-decoration` or a
+   border width (both of which trigger layout). */
+
+.link {
+  position: relative;
+  display: inline-block;
+  text-decoration: none;
+}
+
+.link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 100%;
+  height: 1px;
+  background-color: currentColor;
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition-property: transform;
+  transition-duration: var(--duration-normal);
+  transition-timing-function: var(--ease-standard);
+}
+
+/* Persistent underline variant — used for inline links inside running copy,
+   where the affordance must be visible without a pointer. */
+.alwaysUnderlined::after {
+  transform: scaleX(1);
+  opacity: var(--opacity-subtle);
+}
+
+/* Motion only on devices that actually hover. */
+@media (hover: hover) and (pointer: fine) {
+  .link:hover::after {
+    transform: scaleX(1);
+  }
+}
+
+/* Keyboard users get the same affordance as pointer users. */
+.link:focus-visible::after {
+  transform: scaleX(1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .link::after {
+    transition-property: opacity;
+  }
+
+  .link::after {
+    transform: scaleX(1);
+    opacity: 0;
+  }
+
+  .link:hover::after,
+  .link:focus-visible::after {
+    opacity: var(--opacity-subtle);
+  }
+}

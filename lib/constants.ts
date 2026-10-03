@@ -1,70 +1,37 @@
 /**
- * Master project constants for KASHI — A City Beyond Time
+ * Application-wide constants.
+ *
+ * Mirrored from `styles/tokens.css` where a value is needed in JavaScript —
+ * CSS custom properties are not readable from a media query string.
  */
 
 export const SITE_METADATA = {
+  name: "KASHI",
   title: "KASHI — A City Beyond Time",
   description:
-    "An immersive digital cultural experience and interactive exhibition exploring the spirit, mythology, architecture, ghats, and living pulse of Varanasi.",
-  url: "https://kashiyatra.in",
-  author: "Kashi Yatra Heritage",
+    "An immersive digital experience of Kashi — the ghats, the Ganga, the temples, the streets and the stories of Varanasi.",
+  locale: "en_US",
 } as const;
 
-export const CHAPTERS = [
-  {
-    id: "landing",
-    number: "00",
-    title: "The Threshold",
-    subtitle: "Entry into Eternity",
-    route: "/",
-  },
-  {
-    id: "ghats",
-    number: "01",
-    title: "Steps to Eternity",
-    subtitle: "The Ghats of Kashi",
-    route: "/ghats",
-  },
-  {
-    id: "story",
-    number: "02",
-    title: "The Eternal City",
-    subtitle: "History, Myth & Ganga",
-    route: "/story",
-  },
-  {
-    id: "temples",
-    number: "03",
-    title: "Where Gods Reside",
-    subtitle: "Sacred Shrines & Living Stone",
-    route: "/temples",
-  },
-  {
-    id: "unfolded",
-    number: "04",
-    title: "Kashi Unfolded",
-    subtitle: "Retro Editorial Posters",
-    route: "/unfolded",
-  },
-  {
-    id: "rasoi",
-    number: "05",
-    title: "Kashi Rasoi",
-    subtitle: "Sacred Flavors of the Alleys",
-    route: "/rasoi",
-  },
-  {
-    id: "spirit",
-    number: "06",
-    title: "The Living Spirit",
-    subtitle: "Aarti, Silence & Reflection",
-    route: "/spirit",
-  },
-] as const;
-
+/**
+ * Breakpoints (design.md §70).
+ * Keep in sync with the `screens` block in `tailwind.config.ts` and with the
+ * `--breakpoint-*` tokens in `styles/tokens.css`.
+ */
 export const BREAKPOINTS = {
   mobile: 640,
   tablet: 768,
   desktop: 1024,
   wide: 1440,
 } as const;
+
+export type Breakpoint = keyof typeof BREAKPOINTS;
+
+/** Minimum practical touch target (design.md §74). */
+export const TOUCH_TARGET_MIN = 44;
+
+/**
+ * Reveal stagger step, in milliseconds.
+ * Matches the `.reveal-step-*` utilities in `styles/animations.css`.
+ */
+export const REVEAL_STAGGER_MS = 60;

@@ -1,28 +1,25 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { isTouchDevice, isWebGLAvailable } from "@/lib/performance";
+import { BREAKPOINTS } from "@/lib/constants";
+import { useMediaQuery } from "./useMediaQuery";
 
-export interface DeviceInfo {
-  isTouch: boolean;
-  hasWebGL: boolean;
-  isMounted: boolean;
-}
+export type DeviceClass = "mobile" | "tablet" | "desktop" | "wide";
 
-export function useDevice(): DeviceInfo {
-  const [device, setDevice] = useState<DeviceInfo>({
-    isTouch: false,
-    hasWebGL: true,
-    isMounted: false,
-  });
+/**
+ * Coarse device class, derived from the shared breakpoints.
+ *
+ * Deliberately NOT a substitute for responsive CSS (architecture.md §45) — it
+ * exists only to choose between materially different behaviour: lower 3D
+ * quality, a shorter transition, an interaction that has no pointer equivalent.
+ * Layout must still be handled by CSS.
+ */
+export function useDevice(): DeviceClass {
+  const isWide = useMediaQuery(`(min-width: ${BREAKPOINTS.wide}px)`);
+  const isDesktop = useMediaQuery(`(min-width: ${BREAKPOINTS.desktop}px)`);
+  const isTablet = useMediaQuery(`(min-width: ${BREAKPOINTS.tablet}px)`);
 
-  useEffect(() => {
-    setDevice({
-      isTouch: isTouchDevice(),
-      hasWebGL: isWebGLAvailable(),
-      isMounted: true,
-    });
-  }, []);
-
-  return device;
+  if (isWide) return "wide";
+  if (isDesktop) return "desktop";
+  if (isTablet) return "tablet";
+  return "mobile";
 }

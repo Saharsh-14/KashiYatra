@@ -1,85 +1,119 @@
-import gsap from "gsap";
-import { prefersReducedMotion } from "./accessibility";
-
 /**
- * Central animation curves and timing constants
+ * MOTION SYSTEM — Task 1.5
+ *
+ * `styles/tokens.css` owns every motion value. CSS can read those tokens
+ * directly; JavaScript (GSAP, Three.js, pointer-driven motion) cannot read a
+ * `cubic-bezier()` back out of a custom property reliably across browsers, so
+ * the values are mirrored here once (design.md §41 explicitly allows this).
+ *
+ * IMPORTANT: if a duration or curve changes in `styles/tokens.css`, change it
+ * here too. These are the only two places motion is allowed to be defined.
  */
-export const EASING = {
-  cinematic: "power3.out",
-  editorial: "power2.out",
-  gentle: "sine.out",
-  dramatic: "expo.out",
-  linear: "none",
+
+/** Durations in milliseconds — mirror of the `--duration-*` tokens. */
+export const DURATION = {
+  fast: 180,
+  normal: 400,
+  slow: 800,
+  cinematic: 1200,
 } as const;
 
-export const DURATIONS = {
-  micro: 0.2,
-  fast: 0.4,
-  normal: 0.8,
-  slow: 1.2,
-  atmospheric: 1.8,
+/** Durations in seconds — the unit GSAP and WAAPI expect. */
+export const DURATION_SECONDS = {
+  fast: DURATION.fast / 1000,
+  normal: DURATION.normal / 1000,
+  slow: DURATION.slow / 1000,
+  cinematic: DURATION.cinematic / 1000,
+} as const;
+
+/** CSS timing functions — mirror of the `--ease-*` tokens. */
+export const EASE = {
+  standard: "cubic-bezier(0.2, 0.65, 0.3, 1)",
+  smooth: "cubic-bezier(0.16, 1, 0.3, 1)",
 } as const;
 
 /**
- * Executes an animation safely with respect to prefers-reduced-motion
+ * GSAP equivalents of the CSS curves above.
+ *
+ * GSAP cannot consume a `cubic-bezier()` string as an ease, so each token is
+ * mapped to the closest named GSAP curve. `power2.out` matches
+ * `--ease-standard`; `expo.out` matches the stronger `--ease-smooth`.
  */
-export function runMotion(animate: () => gsap.core.Tween | gsap.core.Timeline | void) {
-  if (prefersReducedMotion()) {
-    return;
-  }
-  return animate();
+export const GSAP_EASE = {
+  standard: "power2.out",
+  smooth: "expo.out",
+  /** For scrubbed, scroll-linked timelines — no easing, position is the input. */
+  scrub: "none",
+} as const;
+
+export type MotionIntensity = 0 | 0.5 | 1;
+
+/**
+ * Scale a motion distance by the global intensity token (design.md §78).
+ *
+ * `0` — reduced motion: distance collapses.
+ * `0.5` — subtle variant for constrained devices.
+ * `1` — the standard cinematic value.
+ */
+export function scaleMotion(value: number, intensity: MotionIntensity = 1): number {
+  return value * intensity;
 }
 
+/** Stagger between siblings — 60ms, matching `.reveal-step-*`. */
+export const REVEAL_STAGGER_SECONDS = 0.06;
+
 /**
- * Standardized entrance animations
+ * Smooth-scroll configuration (architecture.md §7).
+ *
+ * Lenis is a scroll controller, not an animation system, so it has no CSS-token
+ * equivalent — this object is the single place its values are tuned.
+ *
+ * `syncTouch` is deliberately false: touch devices keep their native momentum
+ * and Lenis only tracks the position. That is what architecture.md §7 asks for
+ * when it says native scrolling may serve mobile better.
  */
-export const MOTION_PRESETS = {
-  fadeUp: (target: gsap.TweenTarget, vars: gsap.TweenVars = {}) => {
-    if (prefersReducedMotion()) {
-      return gsap.set(target, { opacity: 1, y: 0 });
-    }
-    return gsap.fromTo(
-      target,
-      { opacity: 0, y: 32 },
-      {
-        opacity: 1,
-        y: 0,
-        duration: DURATIONS.normal,
-        ease: EASING.cinematic,
-        ...vars,
-      }
-    );
+export const SMOOTH_SCROLL = {
+  lerp: 0.1,
+  wheelMultiplier: 1,
+  touchMultiplier: 1.5,
+  smoothWheel: true,
+  syncTouch: false,
+  autoRaf: true,
+  /* Lenis handles in-page anchor clicks itself, so navigation stays a real
+     anchor (`<a href="#journey">`) instead of a click handler. */
+  anchors: true,
+} as const;
+
+/** Lenis' exponential ease-out — no bounce, settles rather than stops. */
+export const smoothScrollEase = (t: number): number =>
+  Math.min(1, 1.001 - Math.pow(2, -10 * t));
+
+/**
+ * Shared entrance presets, mirroring `styles/animations.css`.
+ *
+ * Components that cannot use the CSS classes (scroll-linked timelines, for
+ * example) use these instead of hand-writing new values, so a change to the
+ * reveal language happens in one place.
+ */
+export const REVEAL = {
+  rise: {
+    from: { opacity: 0, y: 24 },
+    to: { opacity: 1, y: 0 },
+    duration: DURATION_SECONDS.slow,
+    ease: GSAP_EASE.smooth,
   },
-  fadeIn: (target: gsap.TweenTarget, vars: gsap.TweenVars = {}) => {
-    if (prefersReducedMotion()) {
-      return gsap.set(target, { opacity: 1 });
-    }
-    return gsap.fromTo(
-      target,
-      { opacity: 0 },
-      {
-        opacity: 1,
-        duration: DURATIONS.normal,
-        ease: EASING.editorial,
-        ...vars,
-      }
-    );
+  fade: {
+    from: { opacity: 0, scale: 0.96 },
+    to: { opacity: 1, scale: 1 },
+    duration: DURATION_SECONDS.slow,
+    ease: GSAP_EASE.smooth,
   },
-  staggerCards: (targets: gsap.TweenTarget, vars: gsap.TweenVars = {}) => {
-    if (prefersReducedMotion()) {
-      return gsap.set(targets, { opacity: 1, y: 0 });
-    }
-    return gsap.fromTo(
-      targets,
-      { opacity: 0, y: 40 },
-      {
-        opacity: 1,
-        y: 0,
-        duration: DURATIONS.slow,
-        stagger: 0.12,
-        ease: EASING.cinematic,
-        ...vars,
-      }
-    );
+  /** Text lines rising into place — chapter titles, editorial statements. */
+  textLine: {
+    from: { opacity: 0, y: "100%" },
+    to: { opacity: 1, y: "0%" },
+    duration: DURATION_SECONDS.slow,
+    ease: GSAP_EASE.smooth,
+    stagger: REVEAL_STAGGER_SECONDS,
   },
-};
+} as const;
