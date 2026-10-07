@@ -1,108 +1,62 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { temples } from "@/data/temples";
-import { WhereGodsResideHeader } from "./WhereGodsResideHeader";
-import { WhereGodsResidePortal } from "@/features/landing/sections/WhereGodsResidePortal";
-import { TempleSection } from "./TempleSection";
-import { WhereGodsResideEnding } from "./WhereGodsResideEnding";
+import { TemplesTopBar } from "./TemplesTopBar";
+import { TempleEditorialCard } from "./TempleEditorialCard";
+import { TemplesFooter } from "./TemplesFooter";
 
 /**
- * Where Gods Reside — Full Immersive Experience.
+ * Dedicated Temples Page — Luxury Editorial Gallery.
  *
- * Requirements:
- * - Dedicated redirected page
- * - Sacred Threshold entrance chamber (no temple names revealed)
- * - 8 locked temples in strict order (01 to 08) discovered one by one
- * - Alternating composition (Image Right vs Image Left)
- * - Large visual centerpiece image window (one photo at a time)
- * - Quiet minimal ending: "EIGHT DOORWAYS. ONE ETERNAL CITY."
- * - Vertical scrolling journey
+ * Visual direction:
+ * - Full-width sections (no boxed container)
+ * - Warm parchment background (#EDE5D3) — opaque, overriding the global dark body
+ * - Generous section heights (~400px+)
+ * - Large bold serif typography
+ * - Thin horizontal dividers between sections
+ * - Alternating photo/info layout
+ * - Subtle paper texture grain
  */
 export function WhereGodsResideExperience() {
-  const [activeTempleIndex, setActiveTempleIndex] = useState<number>(0);
-
-  // Track active temple as user scrolls through the threshold & the 8 sections
-  useEffect(() => {
-    if (typeof window === "undefined" || !("IntersectionObserver" in window)) {
-      return;
-    }
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            const id = entry.target.id;
-            if (id === "threshold") {
-              setActiveTempleIndex(0);
-              return;
-            }
-            const match = id.match(/temple-(\d+)/);
-            if (match) {
-              const idx = parseInt(match[1], 10);
-              if (!isNaN(idx)) {
-                setActiveTempleIndex(idx);
-              }
-            }
-          }
-        });
-      },
-      {
-        rootMargin: "-25% 0px -40% 0px",
-        threshold: 0.1,
-      }
-    );
-
-    // Observe threshold section
-    const thresholdEl = document.getElementById("threshold");
-    if (thresholdEl) observer.observe(thresholdEl);
-
-    // Observe each of the 8 temples
-    temples.forEach((temple) => {
-      const el = document.getElementById(
-        `temple-${String(temple.index).padStart(2, "0")}`
-      );
-      if (el) observer.observe(el);
-    });
-
-    return () => {
-      observer.disconnect();
-    };
-  }, []);
-
-  const handleStepInside = () => {
-    const temple1 = document.getElementById("temple-01");
-    if (temple1) {
-      temple1.scrollIntoView({ behavior: "smooth" });
-    }
-  };
-
   return (
-    <div className="relative min-h-screen bg-[#0A0908] text-[#E8E1D3] selection:bg-[#B59A63]/30 selection:text-[#FAF6F0]">
-      {/* Pinned Chapter Header */}
-      <WhereGodsResideHeader
-        activeTempleIndex={activeTempleIndex}
-        totalTemples={temples.length}
+    <div
+      className="relative min-h-screen text-[#2C241D] selection:bg-[#B59A63]/30 selection:text-[#2C241D]"
+      style={{
+        background: `
+          radial-gradient(ellipse 120% 80% at 20% 10%, rgba(210, 190, 155, 0.25) 0%, transparent 60%),
+          radial-gradient(ellipse 100% 60% at 80% 90%, rgba(195, 175, 140, 0.2) 0%, transparent 50%),
+          radial-gradient(ellipse 60% 40% at 50% 50%, rgba(220, 205, 180, 0.15) 0%, transparent 40%),
+          linear-gradient(180deg, #F0E8D5 0%, #EDE5D3 25%, #EBE3D0 50%, #EDE5D3 75%, #E8E0CC 100%)
+        `,
+      }}
+    >
+      {/* Subtle paper noise texture */}
+      <div
+        className="fixed inset-0 z-0 opacity-[0.03] pointer-events-none"
+        style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E")`,
+          backgroundRepeat: "repeat",
+        }}
       />
 
-      <main id="main">
-        {/* Sacred Threshold Entry Chamber — Unified Fixed Cosmic Hero */}
-        <WhereGodsResidePortal id="threshold" onStepInside={handleStepInside} />
+      {/* Discreet Sticky Navigation Top Bar */}
+      <TemplesTopBar />
 
-        {/* 8 Temples in Locked Sequence with Alternating Compositions */}
-        <div className="relative">
-          {temples.map((temple) => (
-            <TempleSection
-              key={temple.id}
-              temple={temple}
-              totalTemples={temples.length}
-            />
-          ))}
-        </div>
-
-        {/* Quiet Minimal Ending */}
-        <WhereGodsResideEnding />
+      {/* Main Temple Gallery — Full Width, Direct Start */}
+      <main id="temples-gallery" className="relative z-[1] w-full">
+        {temples.map((temple, i) => (
+          <TempleEditorialCard
+            key={temple.id}
+            temple={temple}
+            totalTemples={temples.length}
+            isLast={i === temples.length - 1}
+          />
+        ))}
       </main>
+
+      {/* Editorial Closing Section */}
+      <TemplesFooter />
     </div>
   );
 }

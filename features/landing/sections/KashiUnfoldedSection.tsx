@@ -261,21 +261,6 @@ export function KashiUnfoldedSection() {
           <p className="font-serif italic text-lg sm:text-xl lg:text-2xl text-[#CFC4B1]/90 mt-4 sm:mt-6 leading-snug max-w-md drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)]">
             “The city, collected in fragments.”
           </p>
-
-          {/* Discovery Cue: Ceremonial Pass Tap to Enter */}
-          <button
-            type="button"
-            onClick={handleTicketClick}
-            className="mt-8 sm:mt-10 inline-flex items-center gap-2.5 py-2 px-3.5 rounded-full bg-[#12100E]/70 border border-[#B59A63]/30 backdrop-blur-sm shadow-xl hover:border-[#B59A63]/60 hover:bg-[#1a1714]/80 transition-all duration-200 cursor-pointer text-left"
-          >
-            <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#C59B4E] opacity-75" />
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-[#C59B4E]" />
-            </span>
-            <span className="font-ui text-[11px] uppercase tracking-[0.25em] text-[#E8E1D3]">
-              CEREMONIAL PASS · TAP TO ENTER →
-            </span>
-          </button>
         </div>
 
         {/* RIGHT COLUMN: The Large Antique Ceremonial Ticket Artifact */}

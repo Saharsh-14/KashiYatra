@@ -14,6 +14,7 @@ export const ROUTES = {
   whereGodsReside: "/where-gods-reside",
   unfolded: "/unfolded",
   rasoi: "/rasoi",
+  kashiRasoi: "/kashi-rasoi",
   spirit: "/spirit",
 } as const;
 
@@ -32,4 +33,8 @@ export function templeRoute(slug: string): string {
 
 export function posterRoute(slug: string): string {
   return `${ROUTES.unfolded}/${slug}`;
+}
+
+export function kashiRasoiRoute(slug: string): string {
+  return `${ROUTES.kashiRasoi}/${slug}`;
 }

@@ -1,5 +1,5 @@
-/* Refined Devanagari display serifs for KASHI → काशी transformation */
-@import url("https://fonts.googleapis.com/css2?family=Rozha+One&family=Martel:wght@400;600;700;800;900&family=Noto+Serif+Devanagari:wght@300;400;500;600;700;800&display=swap");
+/* Refined Devanagari display serifs and Master Editorial Serifs */
+@import url("https://fonts.googleapis.com/css2?family=Rozha+One&family=Martel:wght@400;600;700;800;900&family=Noto+Serif+Devanagari:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;0,800;0,900;1,400;1,600;1,700&family=Bodoni+Moda:ital,opsz,wght@0,6..96,700;0,6..96,800;0,6..96,900;1,6..96,700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Cinzel:wght@600;700;800;900&display=swap");
 
 /* =============================================================================
    KASHI — WEBFONT DECLARATIONS
@@ -35,4 +35,26 @@
   font-weight: 400;
   font-style: normal;
   font-display: swap;
+}
+
+.font-master-title {
+  font-family: "Playfair Display", "Cinzel", "Martel", Georgia, serif;
+}
+
+.font-master-italic {
+  font-family: "Playfair Display", "Martel", Georgia, serif;
+  font-style: italic;
+}
+
+.font-master-body {
+  font-family: "Playfair Display", "Martel", Georgia, serif;
+}
+
+.font-lassi-display {
+  font-family: "Bodoni Moda", "Playfair Display", Georgia, serif;
+  font-optical-sizing: auto;
+}
+
+.font-lassi-body {
+  font-family: "Cormorant Garamond", "Martel", Georgia, serif;
 }

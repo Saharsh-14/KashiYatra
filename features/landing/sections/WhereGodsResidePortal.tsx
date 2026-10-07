@@ -2,7 +2,6 @@
 
 import React, { useEffect, useRef, useState, useCallback } from "react";
 import { useRouter } from "next/navigation";
-import { ArrowRight } from "lucide-react";
 import { ROUTES } from "@/lib/routes";
 
 interface Star {
@@ -1114,8 +1113,8 @@ export function WhereGodsResidePortal({
           </p>
         </div>
 
-        {/* PORTAL INTERACTION: STEP INSIDE BUTTON — PERMANENTLY VISIBLE & INTERACTIVE */}
-        <div className="mt-12 sm:mt-16">
+        {/* PORTAL INTERACTION: WHERE GODS RESIDE / ENTER THE TEMPLES (TEXT ONLY — NO BORDER) */}
+        <div className="mt-8 sm:mt-12">
           <button
             type="button"
             onClick={handleStepInside}
@@ -1125,28 +1124,35 @@ export function WhereGodsResidePortal({
             onMouseLeave={() => {
               isCtaHoveredRef.current = false;
             }}
-            aria-label="Step inside to enter Where Gods Reside"
-            className="group relative inline-flex items-center gap-4 px-8 sm:px-10 py-4 sm:py-5 rounded-[2px] bg-[#100E0C]/80 hover:bg-[#1A1713] border border-[#E8E1D3]/20 hover:border-[#B59A63] text-xs sm:text-sm font-ui uppercase tracking-[0.35em] text-[#E8E1D3] hover:text-[#FAF6F0] transition-all duration-500 shadow-[0_15px_50px_rgba(0,0,0,0.8)] focus:outline-none focus:ring-1 focus:ring-[#B59A63]"
+            aria-label="Where Gods Reside — Enter the Temples"
+            className="group relative inline-flex items-center gap-5 sm:gap-7 focus:outline-none cursor-pointer select-none transition-transform duration-300 hover:scale-[1.02] active:scale-[0.98]"
           >
-            {/* Golden Glow aura on hover */}
-            <span
-              aria-hidden="true"
-              className="pointer-events-none absolute -inset-0.5 rounded-[2px] bg-[#B59A63]/25 blur-md opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-            />
+            {/* The Text from the plaque */}
+            <div className="flex flex-col text-left">
+              <span
+                className="text-lg sm:text-2xl md:text-[1.75rem] font-bold tracking-[0.22em] sm:tracking-[0.26em] uppercase text-[#F8F2E6] drop-shadow-[0_2px_14px_rgba(212,175,55,0.4)] group-hover:text-white group-hover:drop-shadow-[0_0_24px_rgba(212,175,55,0.8)] transition-all duration-300"
+                style={{ fontFamily: "'Cinzel', Georgia, serif" }}
+              >
+                Where Gods Reside
+              </span>
+              <span
+                className="text-[10px] sm:text-xs md:text-[13px] font-semibold tracking-[0.38em] uppercase text-[#C5A059] group-hover:text-[#E8D5B5] mt-1 sm:mt-1.5 transition-colors duration-300"
+                style={{ fontFamily: "'Cinzel', Georgia, serif" }}
+              >
+                Enter The Temples
+              </span>
+            </div>
 
-            <span className="relative z-10 font-medium">Step Inside</span>
+            {/* Vertical Golden Divider */}
+            <div className="h-9 sm:h-12 w-px bg-gradient-to-b from-transparent via-[#C5A059]/70 to-transparent group-hover:via-[#FAF6F0] transition-colors duration-300" />
 
-            <ArrowRight
-              size={17}
-              strokeWidth={1.5}
-              className="relative z-10 text-[#B59A63] transition-transform duration-500 group-hover:translate-x-2"
-            />
-
-            {/* Hairline golden bottom underline */}
-            <span
-              aria-hidden="true"
-              className="absolute bottom-0 inset-x-8 h-px bg-gradient-to-r from-transparent via-[#B59A63] to-transparent scale-x-0 group-hover:scale-x-100 transition-transform duration-500"
-            />
+            {/* Arrow */}
+            <svg
+              viewBox="0 0 24 24"
+              className="w-6 h-6 sm:w-7 sm:h-7 text-[#C5A059] group-hover:text-[#FAF6F0] stroke-current stroke-[1.8] fill-none transition-all duration-300 group-hover:translate-x-2 drop-shadow-[0_0_12px_rgba(197,160,89,0.6)]"
+            >
+              <path d="M5 12h14M13 6l6 6-6 6" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
           </button>
         </div>
       </div>

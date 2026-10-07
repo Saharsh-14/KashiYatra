@@ -2,7 +2,6 @@
 
 import React, { useState, useCallback, useRef, useEffect } from "react";
 import Image from "next/image";
-import { ArrowRight } from "lucide-react";
 import { ghats } from "@/data/ghats";
 
 interface StepConfig {
@@ -519,28 +518,6 @@ export function StepsToEternity() {
                 descend into sacred waters. Here, dawn rituals, burning pyres, and
                 evening prayers weave the timeless soul of Kashi.
               </p>
-
-              <div className="mt-6 sm:mt-8">
-                <button
-                  type="button"
-                  onClick={(e) => {
-                    if (hasMovedRef.current) return;
-                    e.stopPropagation();
-                    scrollToPanel(1);
-                  }}
-                  className="group/cta inline-flex items-center gap-3 px-6 sm:px-8 py-3 sm:py-3.5 rounded-full border border-[#B59A63]/60 hover:border-[#F3E5AB] bg-[#141210]/80 hover:bg-[#201D18] text-[#FAF6F0] transition-all duration-300 backdrop-blur-md shadow-[0_12px_40px_rgba(0,0,0,0.8)] hover:shadow-[0_16px_50px_rgba(181,154,99,0.3)]"
-                  aria-label="Begin exploring the Ghats"
-                >
-                  <span className="type-ui text-xs sm:text-[13px] tracking-[0.22em] uppercase font-medium text-[#FAF6F0]">
-                    BEGIN THE JOURNEY →
-                  </span>
-                  <ArrowRight
-                    size={15}
-                    strokeWidth={1.75}
-                    className="text-[#B59A63] transition-transform duration-300 group-hover/cta:translate-x-1"
-                  />
-                </button>
-              </div>
             </div>
           </div>
         </div>

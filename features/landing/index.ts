@@ -8,11 +8,12 @@ export {
 export { ScrollCue } from "./components/ScrollCue";
 export { ChapterEntry } from "./components/ChapterEntry";
 export { SectionRail } from "./components/SectionRail";
-export { FloatingActionDock } from "./components/FloatingActionDock";
 export { GhatExcursionTicket } from "./components/GhatExcursionTicket";
 export { GhatLivingStage } from "./components/GhatLivingStage";
 export { ExperienceMetricBar } from "./components/ExperienceMetricBar";
 export { VisitorSchedulePanel } from "./components/VisitorSchedulePanel";
+export { ScrollToTop } from "./components/ScrollToTop";
+export { FarmaanMenu } from "./components/FarmaanMenu";
 
 export { LandingHero } from "./sections/LandingHero";
 export { KashiUnfoldedSection } from "./sections/KashiUnfoldedSection";

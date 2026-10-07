@@ -76,14 +76,7 @@ export function LandingHero() {
           ========================================================================= */}
       <div className="relative z-20 flex flex-col justify-between flex-1 w-full max-w-[1680px] mx-auto px-6 sm:px-10 md:px-12 lg:px-16 pt-6 sm:pt-8 md:pt-9 pb-8 sm:pb-10 md:pb-12 pointer-events-none">
         {/* Top Editorial Bar */}
-        <header className="reveal-fade flex w-full items-center justify-end pointer-events-auto">
-          <span
-            aria-hidden="true"
-            className="font-serif text-sm sm:text-base font-semibold text-[#E8E1D3]/85 select-none tracking-widest"
-          >
-            N
-          </span>
-        </header>
+        <header className="reveal-fade flex w-full items-center justify-end pointer-events-auto h-8" />
 
         {/* Bottom Editorial Content Block - Bottom-Left Position */}
         <footer className="w-full mt-auto pt-20 sm:pt-28 md:pt-36 pointer-events-auto flex flex-col items-start text-left">

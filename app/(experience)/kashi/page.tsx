@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
 import {
-  FloatingActionDock,
+  FarmaanMenu,
   KashiRasoiSection,
   KashiUnfoldedSection,
   LandingFooter,
   LandingHero,
   LandingPreloader,
   LandingProvider,
+  ScrollToTop,
   SpiritOfKashiSection,
   StepsToEternity,
   WhereGodsResidePortal,
@@ -47,8 +48,11 @@ export default function KashiLandingPage() {
         <LandingFooter />
       </main>
 
-      {/* Kept floating buttons only per user request */}
-      <FloatingActionDock />
+      {/* Royal Farmaan Decree Navigation */}
+      <FarmaanMenu />
+
+      {/* Floating scroll to top control */}
+      <ScrollToTop />
     </LandingProvider>
   );
 }

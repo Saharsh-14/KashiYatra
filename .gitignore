@@ -1,5 +1,8 @@
-# Dependencies
+# ==============================================================================
+# Dependencies & Package Managers
+# ==============================================================================
 /node_modules
+node_modules/
 /.pnp
 .pnp.js
 .yarn/*
@@ -8,60 +11,224 @@
 !.yarn/releases
 !.yarn/sdks
 !.yarn/versions
+.yarn/cache
+.pnpm-store
+.npm
+.bun/
+jspm_packages/
+web_modules/
 
-# Testing & Coverage
-/coverage
-*.lcov
-.nyc_output
-
-# Next.js & Build Outputs
+# ==============================================================================
+# Next.js, Build Outputs & Caches
+# ==============================================================================
 /.next/
+.next/
 /out/
+out/
 /build
+build/
 /dist
+dist/
+/.output
+.output/
 .vercel
+.turbo
+.swc/
+.cache/
+.parcel-cache/
+.rollup.cache/
+.vite/
+.temp/
 
+# ==============================================================================
 # TypeScript & Linters
+# ==============================================================================
 *.tsbuildinfo
+tsconfig.tsbuildinfo
 next-env.d.ts
 .eslintcache
+.stylelintcache
+.prettiercache
+.rpt2_cache/
+.rts2_cache_cjs/
+.rts2_cache_es/
+.rts2_cache_umd/
 
-# Environment & Secret Files
+# ==============================================================================
+# Testing & Coverage
+# ==============================================================================
+/coverage
+coverage/
+*.lcov
+.nyc_output
+test-results/
+playwright-report/
+blob-report/
+playwright/.cache/
+cypress/videos/
+cypress/screenshots/
+.jest/
+.vitest/
+
+# ==============================================================================
+# Environment, Credentials & Secret Files
+# ==============================================================================
 .env
 .env*.local
 .env.local
 .env.development.local
 .env.test.local
 .env.production.local
+.env.backup
+.env*.backup
+.env.vault
+*.env
+!.env.example
 *.pem
 *.key
 *.cert
 *.crt
+*.pfx
+*.p12
+*.p8
+*.keystore
+*.jks
+credentials.json
+secrets.json
+serviceAccountKey.json
+service-account*.json
+id_rsa*
+id_ed25519*
+*.id_rsa
 
-# Debug & Logs
+# ==============================================================================
+# Debug, Diagnostics & Logs
+# ==============================================================================
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
+bun.lockb.log*
 *.log
+*.log.*
+logs/
+*.pid
+*.seed
+*.pid.lock
+.node_repl_history
+report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
+core
+core.[0-9]*
 
-# Scratch, Dumps & Temporary Work
+# ==============================================================================
+# Scratch, References, Dumps & Temporary Work
+# ==============================================================================
 /scratch/
 scratch/
 /references/
 references/
-screenshot.png
-screenshot*.png
 *.tmp
 *.temp
 *.bak
+*.backup
+*.orig
+*.dump
+*.patch
+*.diff
 
-# Temporary / Test assets
+# Visual test captures, screenshots & comparisons
+screenshot.png
+screenshot*.png
+*screenshot*.png
+*comparison*.png
+*live_screen*.png
+*live_screen*.jpg
+final_*screen*.png
+
+# Temporary / Test assets & reference media
 public/images/hero/crop_*.png
 public/images/hero/test_*.png
+public/images/hero/boy_parts/
+public/videos/*reference*
+*reference*.mp4
+public/videos/infinite-door-opening.mp4
 
-# Python (helper & scratch scripts)
+# Landing test, crop, diff and composite images
+public/images/landing/test*
+public/images/landing/*_test*
+public/images/landing/*_crop*
+public/images/landing/*_diff*
+public/images/landing/diff_*
+public/images/landing/heading_diff.png
+public/images/landing/clean_ghats_test.jpg
+public/images/landing/debug_ticket_poly.jpg
+public/images/landing/stub_crop.jpg
+public/images/landing/left_text_crop.jpg
+public/images/landing/ticket_crop_test.jpg
+public/images/landing/sketch-reference.png
+public/images/landing/where-gods-reside-button.png
+public/images/landing/where-gods-reside-text-only.png
+public/images/landing/farmaan-decree-roller-bottom.png
+public/images/landing/farmaan-finial-*.png
+
+# Unused / duplicate / superseded temple gallery photos
+public/images/temples/kaal-bhairav/darbar-entrance.jpg
+public/images/temples/kaal-bhairav/sanctum-darshan.jpg
+public/images/temples/kashi-vishwanath/shringar-darshan.jpg
+public/images/temples/kashi-vishwanath/courtyard-view.jpg
+public/images/temples/kashi-vishwanath/ganga-dwar.jpg
+public/images/temples/kashi-vishwanath/shivling.jpg
+public/images/temples/kashi-vishwanath/temple-corridor-gate.jpg
+public/images/temples/new-vishwanath-bhu/bhu-main-gate-malaviya-dwar.jpg
+public/images/temples/new-vishwanath-bhu/bhu-vishwanath-complex.jpg
+public/images/temples/new-vishwanath-bhu/night-illumination-shikhara.jpg
+public/images/temples/new-vishwanath-bhu/sanctum-shiva-lingam.jpg
+public/images/temples/sankatha-devi/courtyard-banyan-bell.jpg
+public/images/temples/sankatha-devi/marigold-shringar.jpg
+public/images/temples/sankatha-devi/sanctum-silver-arch.jpg
+public/images/temples/sankatha-devi/sankatha-mata-darshan.jpg
+
+# Raw uncompressed / legacy poster files
+public/images/posters/*[0-9]*.png
+public/images/posters/*fitted*
+
+# Kashi Rasoi visual generation & inspection artifacts
+public/kashi-rasoi/*.png
+public/kashi-rasoi/**/test_*
+public/kashi-rasoi/**/crop_*
+public/kashi-rasoi/**/*_crop*
+public/kashi-rasoi/**/*crop*
+public/kashi-rasoi/**/shot_*
+public/kashi-rasoi/**/*_shot*
+public/kashi-rasoi/**/ref_*
+public/kashi-rasoi/**/*_check*
+public/kashi-rasoi/**/check_*
+public/kashi-rasoi/**/*_inpaint*
+public/kashi-rasoi/**/matched_*
+public/kashi-rasoi/**/template_*
+public/kashi-rasoi/**/clean_bg_*
+public/kashi-rasoi/**/actual_left_panel.*
+public/kashi-rasoi/**/found_ghost.*
+public/kashi-rasoi/**/badge_*
+public/kashi-rasoi/**/price_badge.*
+public/kashi-rasoi/**/parchment_badge.*
+public/kashi-rasoi/**/*spot*
+public/kashi-rasoi/**/pin_icon.*
+public/kashi-rasoi/**/temple_icon.*
+public/kashi-rasoi/**/mask.png
+
+# Whitelist production assets in kashi-rasoi
+!public/kashi-rasoi/food/**/background.jpg
+!public/kashi-rasoi/food/**/hero.jpg
+!public/kashi-rasoi/food/**/master-card.jpg
+!public/kashi-rasoi/food/banarasi-sweets/lotus-divider.png
+!public/kashi-rasoi/food/banarasi-sweets/temple-spire.png
+!public/kashi-rasoi/food/banarasi-lassi/parchment_price_tag.png
+
+# ==============================================================================
+# Python & Helper Script Environments
+# ==============================================================================
 __pycache__/
 *.py[cod]
 *$py.class
@@ -69,33 +236,77 @@ __pycache__/
 .venv/
 venv/
 env/
+ENV/
+.mypy_cache/
+.ruff_cache/
+*.egg-info/
+*.egg
+.ipynb_checkpoints
 
+# ==============================================================================
 # Editor & IDE Directories
+# ==============================================================================
 .vscode/*
 !.vscode/extensions.json
+!.vscode/settings.json
+!.vscode/launch.json
 .idea/
+*.iml
+*.iws
+*.ipr
 *.sublime-project
 *.sublime-workspace
 *.swp
 *.swo
+*.swn
+.*.sw[a-p]
 *~
+\#*\#
+.#*
+.fleet/
+.zed/
+*.code-workspace
+.project
+.classpath
+.settings/
+nbproject/
 
-# Agent & AI Tool Caches
+# ==============================================================================
+# Agent, AI & Assistant Tool Caches
+# ==============================================================================
 .gemini/
 .agents/
 .agent/
 .claude/
 .codex/
+.cursor/
 .impeccable/
+!.impeccable/config.json
+!.impeccable/config.local.json
 
+# ==============================================================================
 # OS Generated Files
+# ==============================================================================
+# macOS
 .DS_Store
 .DS_Store?
 ._*
 .Spotlight-V100
 .Trashes
-ehthumbs.db
-Thumbs.db
-desktop.ini
+.AppleDouble
+.LSOverride
+Icon\r\r
 
-/scratch
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+desktop.ini
+$RECYCLE.BIN/
+*.stackdump
+
+# Linux
+.fuse_hidden*
+.directory
+.Trash-*

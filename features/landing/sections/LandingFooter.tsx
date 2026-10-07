@@ -24,7 +24,7 @@ export function LandingFooter() {
     <footer
       id="kashi-night"
       aria-label="Varanasi Ghats at Night"
-      className="relative w-full bg-black flex flex-col items-center justify-center overflow-hidden select-none m-0 p-0 border-0"
+      className="relative w-full min-h-screen lg:h-screen bg-black flex flex-col items-center justify-center overflow-hidden select-none m-0 p-0 border-0"
     >
       <div className="relative w-full">
         {/* Background photo — Varanasi Ghats at Night with floating diyas */}
@@ -77,7 +77,7 @@ export function LandingFooter() {
         </div>
 
         {/* Quote Line centered directly below KASHIYATRA logo — "You don't simply come to Varanasi. Somehow, Varanasi calls you." */}
-        <div className="absolute left-[3%] sm:left-[4%] md:left-[17.5%] lg:left-[16%] md:-translate-x-1/2 ml-[1cm] -mt-[1.5cm] top-[73%] sm:top-[73.5%] md:top-[74%] w-[90%] sm:w-[70%] md:w-[48vw] lg:w-[38vw] max-w-[620px] flex items-center md:justify-center z-20 pointer-events-none select-none">
+        <div className="absolute left-[3%] sm:left-[4%] md:left-[17.5%] lg:left-[16%] md:-translate-x-1/2 ml-[1cm] -mt-[0.5cm] top-[73%] sm:top-[73.5%] md:top-[74%] w-[90%] sm:w-[70%] md:w-[48vw] lg:w-[38vw] max-w-[620px] flex items-center md:justify-center z-20 pointer-events-none select-none">
           <Image
             src="/images/landing/varanasi-calls-quote.png"
             alt="You don't simply come to Varanasi. Somehow, Varanasi calls you."

@@ -65,6 +65,8 @@ export interface TemplePhoto {
   url: string;
   alt: string;
   caption?: string;
+  objectPosition?: string;
+  fitMode?: "contain" | "cover";
 }
 
 /** A temple, as presented in "Where Gods Reside". */
@@ -77,8 +79,86 @@ export interface Temple {
   devanagariName?: string;
   /** Short descriptor, e.g. "The heart of Kashi." */
   descriptor: string;
+  /** Short poetic subtitle, e.g. "THE SPIRITUAL HEART OF KASHI" */
+  subtitle?: string;
   /** 2–4 concise sentences explaining significance. */
   description: string;
+  /** Primary hero photograph URL */
+  heroImage?: string;
+  /** Subtle line-art watermark illustration URL */
+  illustrationImage?: string;
   /** Curated collection of photographs for this temple. */
   photos: TemplePhoto[];
+}
+
+/** Structured timing item for Darshan & Timings. */
+export interface TempleTimingItem {
+  label: string;
+  time: string;
+}
+
+/** Structured Daily Aarti item. */
+export interface TempleAartiItem {
+  name: string;
+  time: string;
+  description: string;
+}
+
+/** Structured Temple At A Glance item. */
+export interface TempleAtAGlanceData {
+  deity: string;
+  significance: string;
+  location: string;
+  presentTemple: string;
+  bestExperience: string;
+}
+
+/** Full structured detail specification for an individual temple page. */
+export interface TempleDetailData {
+  timings: {
+    heading: string;
+    items: TempleTimingItem[];
+    note: string;
+  };
+  dailyAarti: {
+    heading: string;
+    items: TempleAartiItem[];
+  };
+  atAGlance: TempleAtAGlanceData;
+  introduction: {
+    eyebrow: string;
+    heading: string;
+    subheading: string;
+    leadText: string;
+    secondaryText: string;
+  };
+  story: {
+    heading: string;
+    eyebrow?: string;
+    leadParagraph: string;
+    secondaryParagraph: string;
+    focusTitle: string;
+    focusContent: string;
+  };
+  history: {
+    heading: string;
+    eyebrow?: string;
+    paragraphs: string[];
+    image?: string;
+    imageCaption?: string;
+    objectPosition?: string;
+    fitMode?: "contain" | "cover";
+    milestones?: { year: string; event: string }[];
+  };
+  whyItMatters: {
+    heading: string;
+    pillars: [string, string, string];
+    paragraph: string;
+    points?: string[];
+    note?: string;
+  };
+  closing: {
+    statement: string;
+    image?: string;
+  };
 }
