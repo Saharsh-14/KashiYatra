@@ -16,7 +16,6 @@ import { Button } from "@/components/ui";
  * errors, but do not show them to the visitor either).
  */
 export default function RouteError({
-  error,
   reset,
 }: {
   error: Error & { digest?: string };

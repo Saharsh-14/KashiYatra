@@ -16,7 +16,6 @@ interface FoodCardProps {
 export function FoodCard({
   food,
   isActive = false,
-  isAdjacent = false,
   onClick,
   className = "",
   style,

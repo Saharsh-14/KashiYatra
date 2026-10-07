@@ -18,7 +18,6 @@ export function FoodPlaceholder({
   aspect = "16/10",
   assetPath,
   caption,
-  variant = "card",
   className = "",
 }: FoodPlaceholderProps) {
   // Map aspect ratio string to tailwind-safe style or class

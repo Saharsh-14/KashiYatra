@@ -14,7 +14,6 @@ import "./globals.css";
  * (design.md §97).
  */
 export default function GlobalError({
-  error,
   reset,
 }: {
   error: Error & { digest?: string };

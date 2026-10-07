@@ -117,7 +117,7 @@ export function EditorialFoodPage({
               </h1>
 
               <p className="font-editorial text-base sm:text-lg text-neutral-600 italic leading-relaxed pt-1">
-                "{food.tagline}"
+                &ldquo;{food.tagline}&rdquo;
               </p>
             </div>
 
