@@ -2,6 +2,7 @@ import React from "react";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import { ROUTES } from "@/lib/routes";
+import { markInfiniteDoorCompleted } from "@/lib/doorState";
 
 /**
  * Where Gods Reside — Quiet Cinematic Conclusion.
@@ -45,7 +46,8 @@ export function WhereGodsResideEnding() {
 
         {/* Ending Link: ← BACK TO KASHI */}
         <Link
-          href={ROUTES.kashi}
+          href={`${ROUTES.kashi}#where-gods-reside`}
+          onClick={() => markInfiniteDoorCompleted()}
           className="group inline-flex items-center gap-3 px-8 py-3.5 rounded-[2px] bg-[#191816] hover:bg-[#25221C] border border-[#E8E1D3]/20 hover:border-[#B59A63] text-sm sm:text-base font-ui uppercase tracking-[0.25em] text-[#E8E1D3] transition-all duration-300 shadow-lg focus:outline-none focus:ring-1 focus:ring-[#B59A63]"
         >
           <ArrowLeft

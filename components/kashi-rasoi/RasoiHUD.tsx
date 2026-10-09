@@ -4,6 +4,7 @@ import React from "react";
 import Link from "next/link";
 import { KashiRasoiFood } from "@/data/kashi-rasoi";
 import { ROUTES } from "@/lib/routes";
+import { markInfiniteDoorCompleted } from "@/lib/doorState";
 
 interface RasoiHUDProps {
   currentFood?: KashiRasoiFood;
@@ -22,6 +23,8 @@ export function RasoiHUD({
         {/* BACK TO KASHI */}
         <Link
           href={ROUTES.kashi}
+          scroll={false}
+          onClick={() => markInfiniteDoorCompleted()}
           className="group flex items-center gap-2 font-mono text-xs text-white/50 hover:text-white tracking-widest uppercase transition-colors"
         >
           <span className="w-6 h-6 rounded-full border border-white/20 group-hover:border-white/60 flex items-center justify-center transition-colors">

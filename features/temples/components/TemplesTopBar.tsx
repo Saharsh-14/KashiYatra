@@ -4,6 +4,7 @@ import React from "react";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import { ROUTES } from "@/lib/routes";
+import { markInfiniteDoorCompleted } from "@/lib/doorState";
 
 export function TemplesTopBar() {
   return (
@@ -12,6 +13,7 @@ export function TemplesTopBar() {
         {/* Return to Landing */}
         <Link
           href={`${ROUTES.kashi}#where-gods-reside`}
+          onClick={() => markInfiniteDoorCompleted()}
           className="group inline-flex items-center gap-2 text-[11px] tracking-[0.2em] font-medium text-[#7A6B5B] hover:text-[#2C241D] transition-colors uppercase"
           aria-label="Return to Kashi Yatra"
         >

@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { KashiRasoiFood, getAdjacentFoods } from "@/data/kashi-rasoi";
 import { FoodPlaceholder } from "./FoodPlaceholder";
 import { ROUTES } from "@/lib/routes";
+import { markInfiniteDoorCompleted } from "@/lib/doorState";
 
 interface FoodDetailProps {
   food: KashiRasoiFood;
@@ -22,8 +23,9 @@ export function FoodDetail({
   const containerRef = useRef<HTMLDivElement>(null);
   const adjacent = getAdjacentFoods(food.id);
 
-  // Scroll to top on mount
+  // Scroll to top and mark door completed on mount
   useEffect(() => {
+    markInfiniteDoorCompleted();
     if (containerRef.current) {
       containerRef.current.scrollTop = 0;
     }
@@ -40,9 +42,8 @@ export function FoodDetail({
   return (
     <div
       ref={containerRef}
-      className={`w-full min-h-screen bg-[#080807] text-[#e8e1d3] selection:bg-[#b59a63]/30 selection:text-white ${
-        isModal ? "overflow-y-auto" : ""
-      }`}
+      className={`w-full min-h-screen bg-[#080807] text-[#e8e1d3] selection:bg-[#b59a63]/30 selection:text-white ${isModal ? "overflow-y-auto" : ""
+        }`}
     >
       {/* Top Floating Control Bar */}
       <header className="sticky top-0 z-40 w-full backdrop-blur-xl bg-[#080807]/80 border-b border-white/10 px-4 sm:px-8 py-4 transition-all duration-300">
@@ -73,6 +74,8 @@ export function FoodDetail({
 
             <Link
               href={ROUTES.kashi}
+              scroll={false}
+              onClick={() => markInfiniteDoorCompleted()}
               className="hidden sm:inline font-mono text-xs text-white/40 hover:text-white/80 tracking-widest uppercase transition-colors"
             >
               BACK TO KASHI
@@ -109,7 +112,7 @@ export function FoodDetail({
       {/* Main Editorial Content Container */}
       <main className="max-w-7xl mx-auto px-4 sm:px-8 py-8 sm:py-14">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-start">
-          
+
           {/* ================================================================
               LEFT COLUMN — Sticky Editorial Information
               ================================================================ */}
@@ -231,7 +234,7 @@ export function FoodDetail({
               RIGHT COLUMN — Vertical Visual Spread (Placeholders)
               ================================================================ */}
           <section className="lg:col-span-7 space-y-8 sm:space-y-12">
-            
+
             {/* 1. LARGE HERO IMAGE PLACEHOLDER */}
             <div className="space-y-3">
               <div className="flex items-center justify-between font-mono text-[11px] text-white/40 tracking-wider">

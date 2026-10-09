@@ -4,6 +4,7 @@ import React from "react";
 import Link from "next/link";
 import { ArrowUp, ArrowRight } from "lucide-react";
 import { ROUTES } from "@/lib/routes";
+import { markInfiniteDoorCompleted } from "@/lib/doorState";
 
 export function TemplesFooter() {
   const scrollToTop = () => {
@@ -39,7 +40,8 @@ export function TemplesFooter() {
         {/* Navigation Actions */}
         <div className="flex flex-wrap items-center justify-center gap-6 sm:gap-8 mb-14">
           <Link
-            href={ROUTES.kashi}
+            href={`${ROUTES.kashi}#where-gods-reside`}
+            onClick={() => markInfiniteDoorCompleted()}
             className="group inline-flex items-center gap-2 text-[11px] tracking-[0.22em] font-semibold text-[#7A6B5B] hover:text-[#2C241D] uppercase transition-colors"
           >
             Return to Kashi

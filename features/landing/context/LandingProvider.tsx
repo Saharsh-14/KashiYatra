@@ -9,6 +9,11 @@ import React, {
   useReducer,
 } from "react";
 import { useReducedMotion } from "@/hooks";
+import {
+  shouldSkipInfiniteDoor,
+  useIsomorphicLayoutEffect,
+} from "@/lib/doorState";
+import { useLandingScrollRestoration } from "@/lib/scrollRestoration";
 import { PRELOADER } from "../constants";
 
 /**
@@ -115,6 +120,16 @@ export function LandingProvider({
     ...INITIAL_STATE,
     phase: initialPhase ?? INITIAL_STATE.phase,
   });
+
+  /* Auto-release landing to ready before browser paints when returning from redirected pages */
+  useIsomorphicLayoutEffect(() => {
+    if (shouldSkipInfiniteDoor() && state.phase !== "ready") {
+      dispatch({ type: "entrance/complete" });
+    }
+  }, [state.phase]);
+
+  /* Track scroll before navigating to Kashi Rasoi and restore when returning */
+  useLandingScrollRestoration();
 
   /* Reduced motion skips the reveal outright rather than shortening it: a
      transform-based curtain lifting is exactly what the preference is asking

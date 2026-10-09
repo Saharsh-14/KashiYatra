@@ -74,9 +74,15 @@ export function SmoothScrollProvider({
       easing: smoothScrollEase,
     });
     lenisRef.current = lenis;
+    if (typeof window !== "undefined") {
+      (window as any).__lenis = lenis;
+    }
     setIsActive(true);
 
     return () => {
+      if (typeof window !== "undefined") {
+        (window as any).__lenis = null;
+      }
       lenis.destroy();
       lenisRef.current = null;
       setIsActive(false);

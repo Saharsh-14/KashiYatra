@@ -5,6 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { ROUTES } from "@/lib/routes";
+import { markInfiniteDoorCompleted } from "@/lib/doorState";
 import type { Temple } from "@/types/content";
 
 interface TempleHeroProps {
@@ -50,7 +51,8 @@ export function TempleHero({ temple }: TempleHeroProps) {
         className="text-[11px] sm:text-xs tracking-[0.22em] font-medium text-[#8A7968] uppercase mb-6 sm:mb-8 flex items-center gap-2 select-none"
       >
         <Link
-          href={ROUTES.kashi}
+          href={`${ROUTES.kashi}#where-gods-reside`}
+          onClick={() => markInfiniteDoorCompleted()}
           className="hover:text-[#1E1A17] transition-colors"
         >
           Kashi
@@ -75,9 +77,8 @@ export function TempleHero({ temple }: TempleHeroProps) {
             return (
               <div
                 key={photo.id || idx}
-                className={`absolute inset-0 transition-opacity duration-700 ease-in-out ${
-                  isActive ? "opacity-100 z-10" : "opacity-0 z-0 pointer-events-none"
-                }`}
+                className={`absolute inset-0 transition-opacity duration-700 ease-in-out ${isActive ? "opacity-100 z-10" : "opacity-0 z-0 pointer-events-none"
+                  }`}
               >
                 <Image
                   src={photo.url}
@@ -126,11 +127,10 @@ export function TempleHero({ temple }: TempleHeroProps) {
                   type="button"
                   onClick={() => setCurrentIndex(dotIdx)}
                   aria-label={`Go to photograph ${dotIdx + 1}`}
-                  className={`h-1.5 rounded-full transition-all duration-300 ${
-                    dotIdx === currentIndex
+                  className={`h-1.5 rounded-full transition-all duration-300 ${dotIdx === currentIndex
                       ? "w-7 bg-[#E8D19B]"
                       : "w-2 bg-white/40 hover:bg-white/70"
-                  }`}
+                    }`}
                 />
               ))}
             </div>

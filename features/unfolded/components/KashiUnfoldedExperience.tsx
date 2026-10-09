@@ -1,11 +1,12 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowLeft, X } from "lucide-react";
 import { posters } from "@/data/posters";
 import type { Poster } from "@/types/content";
+import { markInfiniteDoorCompleted } from "@/lib/doorState";
 import { UnfoldedDetailModal } from "./UnfoldedDetailModal";
 
 /**
@@ -16,6 +17,10 @@ import { UnfoldedDetailModal } from "./UnfoldedDetailModal";
  */
 export function KashiUnfoldedExperience() {
   const [selectedPoster, setSelectedPoster] = useState<Poster | null>(null);
+
+  useEffect(() => {
+    markInfiniteDoorCompleted();
+  }, []);
 
   const getPosterCardImage = (poster: Poster) => {
     if (poster.id === "shaam-e-banaras") return "/images/posters/shaam-e-banaras-card.jpg";

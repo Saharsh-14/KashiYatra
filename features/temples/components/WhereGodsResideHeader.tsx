@@ -4,6 +4,7 @@ import React from "react";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import { ROUTES } from "@/lib/routes";
+import { markInfiniteDoorCompleted } from "@/lib/doorState";
 
 interface WhereGodsResideHeaderProps {
   activeTempleIndex: number; // 0 = threshold, 1..8 = temple
@@ -34,7 +35,8 @@ export function WhereGodsResideHeader({
       <div className="max-w-7xl mx-auto h-full px-4 sm:px-6 lg:px-8 flex items-center justify-between">
         {/* Back Link */}
         <Link
-          href={ROUTES.kashi}
+          href={`${ROUTES.kashi}#where-gods-reside`}
+          onClick={() => markInfiniteDoorCompleted()}
           className="group inline-flex items-center gap-2.5 text-xs sm:text-sm uppercase tracking-[0.2em] font-ui text-[#CFC4B1] hover:text-[#FAF6F0] transition-colors py-2 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#B59A63]"
           aria-label="Back to Kashi landing page"
         >

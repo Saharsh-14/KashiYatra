@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useLanding } from "../context/LandingProvider";
 import { useReducedMotion } from "@/hooks";
+import { saveLandingScrollPosition } from "@/lib/scrollRestoration";
 
 interface FoodAsset {
   id: string;
@@ -404,6 +405,7 @@ export function KashiRasoiSection() {
                 key={item.id}
                 href="/kashi-rasoi"
                 scroll={true}
+                onClick={saveLandingScrollPosition}
                 aria-label={`Enter Kashi Rasoi via ${item.name}`}
                 className="group absolute pointer-events-auto cursor-pointer block select-none outline-none focus:outline-none focus-visible:ring-1 focus-visible:ring-[#C59B4E]/60 transition-all duration-400 ease-out"
                 style={{

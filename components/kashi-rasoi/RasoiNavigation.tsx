@@ -4,6 +4,7 @@ import React from "react";
 import Link from "next/link";
 import { KASHI_RASOI_FOODS } from "@/data/kashi-rasoi";
 import { ROUTES } from "@/lib/routes";
+import { markInfiniteDoorCompleted } from "@/lib/doorState";
 
 interface RasoiNavigationProps {
   currentIndex: number;
@@ -20,12 +21,14 @@ export function RasoiNavigation({
 
   return (
     <div className={`pointer-events-none fixed inset-0 z-30 flex flex-col justify-between p-4 sm:p-8 select-none ${className}`}>
-      
+
       {/* Top HUD */}
       <div className="flex items-center justify-between w-full pointer-events-auto">
         {/* Minimal BACK TO KASHI */}
         <Link
           href={ROUTES.kashi}
+          scroll={false}
+          onClick={() => markInfiniteDoorCompleted()}
           className="group flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-black/40 hover:bg-black/80 backdrop-blur-md border border-white/10 hover:border-white/30 text-white/70 hover:text-white transition-all duration-300 font-mono text-xs tracking-widest uppercase"
         >
           <svg
@@ -77,11 +80,10 @@ export function RasoiNavigation({
                 key={food.id}
                 onClick={() => onSelectIndex(idx)}
                 aria-label={`Jump to ${food.number}: ${food.name}`}
-                className={`relative px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full font-mono text-xs transition-all duration-300 flex items-center gap-1.5 ${
-                  isActive
+                className={`relative px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full font-mono text-xs transition-all duration-300 flex items-center gap-1.5 ${isActive
                     ? "bg-[#b59a63] text-black font-semibold shadow-lg shadow-[#b59a63]/20"
                     : "text-white/40 hover:text-white hover:bg-white/10"
-                }`}
+                  }`}
               >
                 <span>{food.number}</span>
                 {isActive && (

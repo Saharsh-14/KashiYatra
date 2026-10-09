@@ -4,6 +4,7 @@ import React, { useRef, useEffect } from "react";
 import Link from "next/link";
 import { KashiRasoiFood, getAdjacentFoods } from "@/data/kashi-rasoi";
 import { ROUTES } from "@/lib/routes";
+import { markInfiniteDoorCompleted } from "@/lib/doorState";
 
 interface EditorialFoodPageProps {
   food: KashiRasoiFood;
@@ -17,8 +18,9 @@ export function EditorialFoodPage({
   const containerRef = useRef<HTMLDivElement>(null);
   const adjacent = getAdjacentFoods(food.id);
 
-  // Scroll to top when opening
+  // Scroll to top when opening and mark door completed
   useEffect(() => {
+    markInfiniteDoorCompleted();
     if (containerRef.current) {
       containerRef.current.scrollTop = 0;
     }
@@ -58,6 +60,8 @@ export function EditorialFoodPage({
 
           <Link
             href={ROUTES.kashi}
+            scroll={false}
+            onClick={() => markInfiniteDoorCompleted()}
             className="hidden sm:inline text-black/45 hover:text-black transition-colors"
           >
             BACK TO KASHI

@@ -8,6 +8,7 @@ import {
   KashiRasoiFood,
   getKashiRasoiFood,
 } from "@/data/kashi-rasoi";
+import { markInfiniteDoorCompleted } from "@/lib/doorState";
 import { GalleryCamera } from "./GalleryCamera";
 import { EditorialFoodPage } from "./EditorialFoodPage";
 import { RasoiHUD } from "./RasoiHUD";
@@ -32,6 +33,10 @@ export function RasoiScene({ initialFoodSlug }: RasoiSceneProps) {
   const galleryLayerRef = useRef<HTMLDivElement>(null);
   const editorialLayerRef = useRef<HTMLDivElement>(null);
   const isTransitioningRef = useRef(false);
+
+  useEffect(() => {
+    markInfiniteDoorCompleted();
+  }, []);
 
   // Sync browser back/forward history
   useEffect(() => {

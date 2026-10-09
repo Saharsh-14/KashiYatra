@@ -4,6 +4,11 @@ import React, { useEffect, useRef, useState, useCallback } from "react";
 import Image from "next/image";
 import gsap from "gsap";
 import { useReducedMotion } from "@/hooks";
+import {
+  markInfiniteDoorCompleted,
+  shouldSkipInfiniteDoor,
+  useIsomorphicLayoutEffect,
+} from "@/lib/doorState";
 import { useLanding } from "../context/LandingProvider";
 
 interface Particle {
@@ -39,6 +44,14 @@ export function InfiniteDoorOpening() {
 
   const [hasExited, setHasExited] = useState(false);
 
+  // Auto-complete before browser paint if returning from redirected pages or door already viewed
+  useIsomorphicLayoutEffect(() => {
+    if (shouldSkipInfiniteDoor()) {
+      completeEntrance();
+      setHasExited(true);
+    }
+  }, [completeEntrance]);
+
   // DOM Refs for high-performance direct animation
   const containerRef = useRef<HTMLDivElement | null>(null);
   const dollyRef = useRef<HTMLDivElement | null>(null);
@@ -64,6 +77,8 @@ export function InfiniteDoorOpening() {
 
   // Preload walk cycle sprite sheet and fallback silhouette
   useEffect(() => {
+    if (hasExited || shouldSkipInfiniteDoor()) return;
+
     const sheet = new window.Image();
     sheet.src = "/images/hero/boy-walk-cycle.png";
     sheet.onload = () => {
@@ -75,10 +90,12 @@ export function InfiniteDoorOpening() {
     fallback.onload = () => {
       fallbackImgRef.current = fallback;
     };
-  }, []);
+  }, [hasExited]);
 
   // Initialize particles once
   useEffect(() => {
+    if (hasExited || shouldSkipInfiniteDoor()) return;
+
     const count = 65;
     const particles: Particle[] = [];
     for (let i = 0; i < count; i++) {
@@ -94,10 +111,12 @@ export function InfiniteDoorOpening() {
       });
     }
     particlesRef.current = particles;
-  }, []);
+  }, [hasExited]);
 
   // Handle immediate skip
   const handleSkip = useCallback(() => {
+    markInfiniteDoorCompleted();
+
     if (timelineRef.current) {
       timelineRef.current.kill();
     }
@@ -137,6 +156,7 @@ export function InfiniteDoorOpening() {
   // Reduced motion: immediate entrance
   useEffect(() => {
     if (prefersReducedMotion) {
+      markInfiniteDoorCompleted();
       skipEntrance();
       setHasExited(true);
     }
@@ -144,7 +164,12 @@ export function InfiniteDoorOpening() {
 
   // Master Cinematic Timeline
   useEffect(() => {
-    if (prefersReducedMotion || hasExited) return;
+    if (
+      prefersReducedMotion ||
+      hasExited ||
+      shouldSkipInfiniteDoor()
+    )
+      return;
 
     const ctx = gsap.context(() => {
       const tl = gsap.timeline();
@@ -200,7 +225,7 @@ export function InfiniteDoorOpening() {
         3.6,
       );
 
-      {/* Scene 04: Literary Quote Framing the Boy (fades in 3.8s, lingers, fades out 8.2s) */}
+      {/* Scene 04: Literary Quote Framing the Boy (fades in 3.8s, lingers, fades out 8.2s) */ }
       tl.to(
         quoteRef.current,
         {
@@ -237,6 +262,7 @@ export function InfiniteDoorOpening() {
               containerRef.current.style.backgroundColor = "transparent";
             }
             // Signal landing page to be ready underneath
+            markInfiniteDoorCompleted();
             completeEntrance();
           },
         },
@@ -261,11 +287,20 @@ export function InfiniteDoorOpening() {
     return () => {
       ctx.revert();
     };
-  }, [prefersReducedMotion, hasExited, completeEntrance]);
+  }, [
+    prefersReducedMotion,
+    hasExited,
+    completeEntrance,
+  ]);
 
   // Canvas & Walking Animation Loop (60 FPS)
   useEffect(() => {
-    if (prefersReducedMotion || hasExited) return;
+    if (
+      prefersReducedMotion ||
+      hasExited ||
+      shouldSkipInfiniteDoor()
+    )
+      return;
 
     let isCancelled = false;
 
@@ -513,7 +548,9 @@ export function InfiniteDoorOpening() {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  if (hasExited) return null;
+  if (hasExited) {
+    return null;
+  }
 
   return (
     <div

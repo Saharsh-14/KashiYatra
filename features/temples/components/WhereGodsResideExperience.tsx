@@ -1,7 +1,8 @@
 "use client";
 
-import React from "react";
+import React, { useEffect } from "react";
 import { temples } from "@/data/temples";
+import { markInfiniteDoorCompleted } from "@/lib/doorState";
 import { TemplesTopBar } from "./TemplesTopBar";
 import { TempleEditorialCard } from "./TempleEditorialCard";
 import { TemplesFooter } from "./TemplesFooter";
@@ -19,6 +20,10 @@ import { TemplesFooter } from "./TemplesFooter";
  * - Subtle paper texture grain
  */
 export function WhereGodsResideExperience() {
+  useEffect(() => {
+    markInfiniteDoorCompleted();
+  }, []);
+
   return (
     <div
       className="relative min-h-screen text-[#2C241D] selection:bg-[#B59A63]/30 selection:text-[#2C241D]"
