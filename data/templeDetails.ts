@@ -24,7 +24,7 @@ export const templeDetails: Record<string, TempleDetailData> = {
         { label: "Mangala Aarti", time: "3:00 AM – 4:00 AM" },
         { label: "Morning Darshan", time: "4:00 AM – 11:00 AM" },
         { label: "Midday", time: "12:00 PM – 7:00 PM" },
-        { label: "Evening Darshan", time: "After Sapta Rishi Aarti – 9:00 PM" },
+        { label: "Evening Darshan", time: "Sapta Rishi Aarti – 9:00 PM" },
         { label: "Temple Closing", time: "11:00 PM" },
       ],
       note: "Timings may vary on festivals, eclipses and special occasions.",

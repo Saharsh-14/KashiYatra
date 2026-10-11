@@ -208,15 +208,18 @@ export function FarmaanMenu() {
           1. FARMAAN TRIGGER (The Authentic Rolled Royal Farmaan Scroll)
           ===================================================================== */}
       {!isOpen && (
-        <div className="fixed top-5 right-5 sm:top-7 sm:right-8 z-50 flex items-center">
+        <div
+          className="fixed right-4 sm:right-8 z-50 flex items-center"
+          style={{ top: "max(1rem, calc(0.75rem + env(safe-area-inset-top, 0px)))" }}
+        >
           <button
             type="button"
             onClick={handleToggle}
             aria-expanded={false}
             aria-label="Unroll royal Farmaan decree"
-            className="group relative flex flex-col items-center focus:outline-none select-none transition-transform duration-300 hover:scale-105 active:scale-95 cursor-pointer"
+            className="group relative flex flex-col items-center focus:outline-none select-none transition-transform duration-300 hover:scale-105 active:scale-95 cursor-pointer touch-manipulation"
           >
-            <div className="relative w-36 sm:w-44 md:w-52 aspect-[1010/165] drop-shadow-[0_8px_20px_rgba(0,0,0,0.7)] group-hover:drop-shadow-[0_12px_28px_rgba(197,160,89,0.45)] transition-all duration-300">
+            <div className="relative w-32 min-[380px]:w-36 sm:w-44 md:w-52 aspect-[1010/165] drop-shadow-[0_8px_20px_rgba(0,0,0,0.7)] group-hover:drop-shadow-[0_12px_28px_rgba(197,160,89,0.45)] transition-all duration-300">
               <Image
                 src="/images/landing/farmaan-scroll.png"
                 alt="Royal Farmaan Scroll"
@@ -236,7 +239,7 @@ export function FarmaanMenu() {
         ref={containerRef}
         aria-hidden={!isOpen}
         style={{ pointerEvents: "none" }}
-        className="fixed inset-0 z-40 overflow-hidden flex items-start justify-end p-3 sm:p-6 md:p-8 lg:p-10 select-none"
+        className="fixed inset-0 z-40 overflow-hidden flex items-start justify-end p-2 min-[380px]:p-3 sm:p-6 md:p-8 lg:p-10 select-none"
       >
         {/* Soft atmospheric background dimming (preserves landing page visibility) */}
         <div
@@ -250,7 +253,7 @@ export function FarmaanMenu() {
             ===================================================================== */}
         <div
           ref={scrollWrapperRef}
-          className="relative z-10 w-[88vw] max-w-[390px] sm:max-w-[440px] md:max-w-[480px] lg:max-w-[510px] aspect-[682/1024] max-h-[calc(100vh-28px)] origin-top mt-2 sm:mt-4 mr-0 sm:mr-2"
+          className="relative z-10 w-[90vw] max-w-[340px] sm:max-w-[440px] md:max-w-[480px] lg:max-w-[510px] aspect-[682/1024] max-h-[calc(100vh-28px)] origin-top mt-2 sm:mt-4 mr-0 sm:mr-2"
           style={{ willChange: "transform, opacity, filter" }}
         >
           {/* One Simple Cross Close Button (Without any text) */}

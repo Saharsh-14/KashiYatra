@@ -61,7 +61,8 @@ export function ScrollToTop() {
 
   return (
     <div
-      className={`fixed bottom-6 right-6 sm:bottom-8 sm:right-8 z-40 flex items-center justify-end transition-all duration-300 ${
+      style={{ bottom: "max(1.25rem, calc(1rem + env(safe-area-inset-bottom, 0px)))" }}
+      className={`fixed right-4 sm:right-8 z-40 flex items-center justify-end transition-all duration-300 touch-manipulation ${
         isScrolled
           ? "opacity-100 translate-y-0"
           : "opacity-70 hover:opacity-100 translate-y-0"

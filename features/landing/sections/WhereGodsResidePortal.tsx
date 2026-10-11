@@ -1080,14 +1080,14 @@ export function WhereGodsResidePortal({
       />
 
       {/* Floating Celestial Composition — Left-side editorial placement */}
-      <div className="relative z-20 w-full px-8 sm:px-14 md:px-20 lg:px-24 pt-4 pb-2 flex flex-col justify-center">
+      <div className="relative z-20 w-full px-5 sm:px-14 md:px-20 lg:px-24 pt-4 pb-2 flex flex-col justify-center">
         {/* 
           MAIN TYPOGRAPHY — PERMANENTLY VISIBLE, FIXED, AND ROCK SOLID:
           Line 1: WHERE [pure white] GODS [warm antique gold with celestial glow]
           Line 2: RESIDE [pure white, crisp & elegant]
         */}
         <div ref={textContainerRef} className="relative inline-block my-2">
-          <h2 className="font-display font-bold uppercase tracking-tight leading-[0.96] select-none text-[3.25rem] sm:text-[5rem] md:text-[6.5rem] lg:text-[7.75rem]">
+          <h2 className="font-display font-bold uppercase tracking-tight leading-[0.96] select-none text-[2.6rem] min-[390px]:text-[3.25rem] sm:text-[5rem] md:text-[6.5rem] lg:text-[7.75rem]">
             <span className="block">
               <span className="text-[#FAF6F0] [text-shadow:0_0_20px_rgba(250,246,240,0.2)]">
                 Where{" "}
@@ -1107,14 +1107,14 @@ export function WhereGodsResidePortal({
         </div>
 
         {/* SUPPORTING LINE — PERMANENTLY VISIBLE */}
-        <div className="mt-8 sm:mt-12 max-w-xl">
-          <p className="text-xl sm:text-2xl md:text-3xl font-editorial italic text-[#CFC4B1] leading-relaxed opacity-90">
+        <div className="mt-6 sm:mt-12 max-w-xl">
+          <p className="text-lg sm:text-2xl md:text-3xl font-editorial italic text-[#CFC4B1] leading-relaxed opacity-90">
             “Every temple here is a doorway to the divine.”
           </p>
         </div>
 
-        {/* PORTAL INTERACTION: WHERE GODS RESIDE / ENTER THE TEMPLES (TEXT ONLY — NO BORDER) */}
-        <div className="mt-8 sm:mt-12">
+        {/* PORTAL INTERACTION: WHERE GODS RESIDE / ENTER THE TEMPLES BUTTON */}
+        <div className="mt-7 sm:mt-12">
           <button
             type="button"
             onClick={handleStepInside}
@@ -1125,18 +1125,18 @@ export function WhereGodsResidePortal({
               isCtaHoveredRef.current = false;
             }}
             aria-label="Where Gods Reside — Enter the Temples"
-            className="group relative inline-flex items-center gap-5 sm:gap-7 focus:outline-none cursor-pointer select-none transition-transform duration-300 hover:scale-[1.02] active:scale-[0.98]"
+            className="group relative inline-flex items-center gap-3.5 sm:gap-7 px-4 sm:px-8 py-3 sm:py-4.5 rounded-[2px] bg-[#12100C]/75 hover:bg-[#1B1813]/90 border border-[#C5A059]/40 hover:border-[#E8D5B5] backdrop-blur-md shadow-[0_8px_30px_rgba(0,0,0,0.6)] hover:shadow-[0_0_28px_rgba(197,160,89,0.25)] focus:outline-none cursor-pointer select-none transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] max-w-full touch-manipulation"
           >
             {/* The Text from the plaque */}
             <div className="flex flex-col text-left">
               <span
-                className="text-lg sm:text-2xl md:text-[1.75rem] font-bold tracking-[0.22em] sm:tracking-[0.26em] uppercase text-[#F8F2E6] drop-shadow-[0_2px_14px_rgba(212,175,55,0.4)] group-hover:text-white group-hover:drop-shadow-[0_0_24px_rgba(212,175,55,0.8)] transition-all duration-300"
+                className="text-base sm:text-2xl md:text-[1.75rem] font-bold tracking-[0.16em] sm:tracking-[0.26em] uppercase text-[#F8F2E6] drop-shadow-[0_2px_14px_rgba(212,175,55,0.4)] group-hover:text-white group-hover:drop-shadow-[0_0_24px_rgba(212,175,55,0.8)] transition-all duration-300"
                 style={{ fontFamily: "'Cinzel', Georgia, serif" }}
               >
                 Where Gods Reside
               </span>
               <span
-                className="text-[10px] sm:text-xs md:text-[13px] font-semibold tracking-[0.38em] uppercase text-[#C5A059] group-hover:text-[#E8D5B5] mt-1 sm:mt-1.5 transition-colors duration-300"
+                className="text-[9px] sm:text-xs md:text-[13px] font-semibold tracking-[0.28em] sm:tracking-[0.38em] uppercase text-[#C5A059] group-hover:text-[#E8D5B5] mt-1 sm:mt-1.5 transition-colors duration-300"
                 style={{ fontFamily: "'Cinzel', Georgia, serif" }}
               >
                 Enter The Temples
@@ -1144,12 +1144,12 @@ export function WhereGodsResidePortal({
             </div>
 
             {/* Vertical Golden Divider */}
-            <div className="h-9 sm:h-12 w-px bg-gradient-to-b from-transparent via-[#C5A059]/70 to-transparent group-hover:via-[#FAF6F0] transition-colors duration-300" />
+            <div className="h-8 sm:h-12 w-px bg-gradient-to-b from-transparent via-[#C5A059]/70 to-transparent group-hover:via-[#FAF6F0] transition-colors duration-300 shrink-0" />
 
             {/* Arrow */}
             <svg
               viewBox="0 0 24 24"
-              className="w-6 h-6 sm:w-7 sm:h-7 text-[#C5A059] group-hover:text-[#FAF6F0] stroke-current stroke-[1.8] fill-none transition-all duration-300 group-hover:translate-x-2 drop-shadow-[0_0_12px_rgba(197,160,89,0.6)]"
+              className="w-5 h-5 sm:w-7 sm:h-7 text-[#C5A059] group-hover:text-[#FAF6F0] stroke-current stroke-[1.8] fill-none transition-all duration-300 group-hover:translate-x-2 drop-shadow-[0_0_12px_rgba(197,160,89,0.6)] shrink-0"
             >
               <path d="M5 12h14M13 6l6 6-6 6" strokeLinecap="round" strokeLinejoin="round" />
             </svg>

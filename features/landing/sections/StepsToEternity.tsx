@@ -265,8 +265,13 @@ export function StepsToEternity() {
 
   // Pointer drag handlers for click-and-drag continuous scrolling
   const handlePointerDown = useCallback((e: React.PointerEvent) => {
-    // Only primary button
-    if (e.button !== 0) return;
+    // Only primary button or touch
+    if (e.pointerType === "mouse" && e.button !== 0) return;
+    try {
+      (e.target as HTMLElement)?.setPointerCapture?.(e.pointerId);
+    } catch {
+      // Ignore if pointer capture unavailable
+    }
     isPointerDownRef.current = true;
     hasMovedRef.current = false;
     dragStartXRef.current = e.clientX;
@@ -491,15 +496,9 @@ export function StepsToEternity() {
 
             {/* Right-side Editorial Content */}
             <div
-              className="absolute z-20 flex flex-col justify-start items-start text-left pointer-events-auto"
-              style={{
-                top: "14%",
-                left: "67%",
-                right: "5%",
-                maxWidth: "460px",
-              }}
+              className="absolute z-20 flex flex-col justify-start items-start text-left pointer-events-auto left-[36%] min-[390px]:left-[40%] right-3 top-[8%] sm:top-[12%] md:left-[67%] md:right-[5%] md:top-[14%] max-w-[220px] min-[390px]:max-w-xs md:max-w-[460px]"
             >
-              <h2 className="font-serif text-4xl sm:text-5xl md:text-6xl lg:text-[4.75rem] xl:text-[5.5rem] font-normal tracking-tight text-[#FAF6F0] leading-[0.98] drop-shadow-[0_4px_30px_rgba(0,0,0,0.95)]">
+              <h2 className="font-serif text-2xl min-[390px]:text-3xl sm:text-5xl md:text-6xl lg:text-[4.75rem] xl:text-[5.5rem] font-normal tracking-tight text-[#FAF6F0] leading-[0.98] drop-shadow-[0_4px_30px_rgba(0,0,0,0.95)]">
                 Steps to <br />
                 <span className="text-[#C5A059] bg-gradient-to-r from-[#F3E5AB] via-[#E5C178] to-[#B59A63] bg-clip-text text-transparent [text-shadow:0_0_35px_rgba(212,175,55,0.25)]">
                   Eternity
@@ -507,16 +506,15 @@ export function StepsToEternity() {
               </h2>
 
               <span
-                className="font-serif text-lg sm:text-xl lg:text-2xl text-[#E09F3E] tracking-widest block font-medium mt-2 sm:mt-3 drop-shadow-[0_2px_10px_rgba(0,0,0,0.7)]"
+                className="font-serif text-sm min-[390px]:text-base sm:text-xl lg:text-2xl text-[#E09F3E] tracking-widest block font-medium mt-1 sm:mt-3 drop-shadow-[0_2px_10px_rgba(0,0,0,0.7)]"
                 style={{ fontFamily: "'Noto Serif Devanagari', 'Rozha One', serif" }}
               >
                 अनंत की सीढ़ियाँ
               </span>
 
-              <p className="mt-4 sm:mt-5 text-xs sm:text-sm md:text-[0.95rem] lg:text-[1rem] leading-relaxed text-[#D6CEBE]/85 font-normal max-w-sm lg:max-w-md font-serif italic drop-shadow-[0_2px_12px_rgba(0,0,0,0.8)]">
+              <p className="mt-2 min-[390px]:mt-3 sm:mt-5 text-[10px] min-[390px]:text-xs sm:text-sm md:text-[0.95rem] lg:text-[1rem] leading-relaxed text-[#D6CEBE]/90 font-normal font-serif italic drop-shadow-[0_2px_12px_rgba(0,0,0,0.9)]">
                 Along the crescent bend of the Ganga, eighty-four stone ghats
-                descend into sacred waters. Here, dawn rituals, burning pyres, and
-                evening prayers weave the timeless soul of Kashi.
+                descend into sacred waters.
               </p>
             </div>
           </div>
@@ -544,9 +542,9 @@ export function StepsToEternity() {
               </div>
 
               {/* Ghat Editorial Content */}
-              <div className="relative z-20 flex flex-col justify-center h-full px-8 sm:px-16 md:px-24 lg:px-32 max-w-4xl">
+              <div className="relative z-20 flex flex-col justify-center h-full px-6 sm:px-16 md:px-24 lg:px-32 max-w-4xl">
                 {/* Ghat Name */}
-                <h2 className="font-serif text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-normal text-[#FAF6F0] leading-none tracking-tight drop-shadow-[0_4px_30px_rgba(0,0,0,0.95)]">
+                <h2 className="font-serif text-3xl min-[390px]:text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-normal text-[#FAF6F0] leading-none tracking-tight drop-shadow-[0_4px_30px_rgba(0,0,0,0.95)]">
                   {ghat.name}
                 </h2>
 

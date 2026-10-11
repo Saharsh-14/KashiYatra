@@ -15,7 +15,7 @@ export function LandingHero() {
     <section
       id="hero"
       aria-label="Kashi — A City Beyond Time"
-      className="relative w-full min-h-screen flex flex-col justify-between overflow-hidden bg-[#10100E] text-[#FAF6F0]"
+      className="relative w-full min-h-[100svh] flex flex-col justify-between overflow-hidden bg-[#10100E] text-[#FAF6F0]"
     >
       {/* =========================================================================
           LAYER 1 (z-0): Clean Master Background Ganga Photography

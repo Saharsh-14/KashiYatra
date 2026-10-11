@@ -53,6 +53,14 @@ export function SpiritOfKashiSection() {
             if (!lockReleasedRef.current && video.currentTime < (video.duration || 10.0) * 0.9) {
               isLockedRef.current = true;
             }
+            // Mobile failsafe: ensure lock auto-releases after 3.5s so touch users are never trapped
+            setTimeout(() => {
+              if (isLockedRef.current && !lockReleasedRef.current) {
+                lockReleasedRef.current = true;
+                isLockedRef.current = false;
+                if (smoothScroll) smoothScroll.start();
+              }
+            }, 3500);
           })
           .catch(() => {
             // Autoplay blocked: wait for first interaction
@@ -240,12 +248,11 @@ export function SpiritOfKashiSection() {
 
         {/* First: Sacred Divine Couplet in Top-Left Corner — Plain Text */}
         <div
-          className={`absolute top-6 left-6 sm:top-8 sm:left-8 md:top-10 md:left-12 lg:top-12 lg:left-14 z-20 pointer-events-none select-none transition-opacity duration-1000 ease-out ${
-            isRevealed ? "opacity-100" : "opacity-0"
-          }`}
+          className={`absolute top-6 left-5 sm:top-8 sm:left-8 md:top-10 md:left-12 lg:top-12 lg:left-14 z-20 pointer-events-none select-none transition-opacity duration-1000 ease-out ${isRevealed ? "opacity-100" : "opacity-0"
+            }`}
         >
           <p
-            className="font-['Noto_Serif_Devanagari',serif] font-light text-[#d8b4fe] text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl leading-relaxed tracking-wider text-left drop-shadow-[0_2px_10px_rgba(0,0,0,0.9)]"
+            className="font-['Noto_Serif_Devanagari',serif] font-light text-[#d8b4fe] text-xs sm:text-lg md:text-xl lg:text-2xl xl:text-3xl leading-relaxed tracking-wider text-left drop-shadow-[0_2px_10px_rgba(0,0,0,0.9)]"
             style={{ fontFamily: "'Noto Serif Devanagari', 'Rozha One', serif" }}
           >
             ॥ जहाँ कण-कण में शिव का वास है,<br />
@@ -255,12 +262,11 @@ export function SpiritOfKashiSection() {
 
         {/* Second: Shiv Ki Nagari in Top-Right Corner — Placed below the Farmaan header icon to prevent overlap */}
         <div
-          className={`absolute top-16 sm:top-20 right-6 sm:right-8 md:right-12 lg:right-14 z-20 pointer-events-none select-none transition-opacity duration-1000 ease-out ${
-            isRevealed ? "opacity-100" : "opacity-0"
-          }`}
+          className={`absolute top-20 sm:top-20 right-5 sm:right-8 md:right-12 lg:right-14 z-20 pointer-events-none select-none transition-opacity duration-1000 ease-out ${isRevealed ? "opacity-100" : "opacity-0"
+            }`}
         >
           <h2
-            className="font-['Noto_Serif_Devanagari',serif] font-normal text-[#c084fc] text-2xl sm:text-3xl md:text-5xl lg:text-6xl xl:text-7xl tracking-widest text-right drop-shadow-[0_2px_14px_rgba(0,0,0,0.9)]"
+            className="font-['Noto_Serif_Devanagari',serif] font-normal text-[#c084fc] text-xl sm:text-3xl md:text-5xl lg:text-6xl xl:text-7xl tracking-widest text-right drop-shadow-[0_2px_14px_rgba(0,0,0,0.9)]"
             style={{ fontFamily: "'Noto Serif Devanagari', 'Rozha One', serif" }}
           >
             शिव की नगरी

@@ -39,6 +39,13 @@ dist/
 .rollup.cache/
 .vite/
 .temp/
+temp/
+tmp/
+/temp/
+/tmp/
+.serverless/
+.netlify/
+.open-next/
 
 # ==============================================================================
 # TypeScript & Linters
@@ -55,7 +62,7 @@ next-env.d.ts
 .rts2_cache_umd/
 
 # ==============================================================================
-# Testing & Coverage
+# Testing, Coverage & Playwright / Cypress
 # ==============================================================================
 /coverage
 coverage/
@@ -71,7 +78,7 @@ cypress/screenshots/
 .vitest/
 
 # ==============================================================================
-# Environment, Credentials & Secret Files
+# Environment, Credentials, Tokens & Secret Files
 # ==============================================================================
 .env
 .env*.local
@@ -84,6 +91,12 @@ cypress/screenshots/
 .env.vault
 *.env
 !.env.example
+*.local
+local.env*
+*.secret
+*.secrets
+*.token
+*.tokens
 *.pem
 *.key
 *.cert
@@ -94,15 +107,20 @@ cypress/screenshots/
 *.keystore
 *.jks
 credentials.json
+credentials*.json
 secrets.json
+secrets*.json
 serviceAccountKey.json
 service-account*.json
+firebase-adminsdk*.json
+google-services.json
+GoogleService-Info.plist
 id_rsa*
 id_ed25519*
 *.id_rsa
 
 # ==============================================================================
-# Debug, Diagnostics & Logs
+# Debug, Diagnostics, Profiling & Logs
 # ==============================================================================
 npm-debug.log*
 yarn-debug.log*
@@ -120,9 +138,36 @@ logs/
 report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
 core
 core.[0-9]*
+*.cpuprofile
+*.heapsnapshot
+*.clinic/
+flamegraph.*
 
 # ==============================================================================
-# Scratch, References, Dumps & Temporary Work
+# Database, Storage & Cache Dumps
+# ==============================================================================
+*.sqlite
+*.sqlite3
+*.db
+*.db-journal
+*.db-shm
+*.db-wal
+local.db
+dump.rdb
+
+# ==============================================================================
+# Archives & Bundles
+# ==============================================================================
+*.zip
+*.tar
+*.tar.gz
+*.tgz
+*.rar
+*.7z
+*.gz
+
+# ==============================================================================
+# Scratch, References, Dumps, Captures & Temporary Work
 # ==============================================================================
 /scratch/
 scratch/
@@ -137,7 +182,7 @@ references/
 *.patch
 *.diff
 
-# Visual test captures, screenshots & comparisons
+# Visual test captures, browser recordings & comparisons
 screenshot.png
 screenshot*.png
 *screenshot*.png
@@ -145,6 +190,13 @@ screenshot*.png
 *live_screen*.png
 *live_screen*.jpg
 final_*screen*.png
+recordings/
+browser/
+*.recording.webp
+*.recording.mp4
+*recording*
+captures/
+audit_results/
 
 # Temporary / Test assets & reference media
 public/images/hero/crop_*.png
@@ -270,6 +322,10 @@ ENV/
 .classpath
 .settings/
 nbproject/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
 
 # ==============================================================================
 # Agent, AI & Assistant Tool Caches
@@ -280,9 +336,22 @@ nbproject/
 .claude/
 .codex/
 .cursor/
+.antigravity/
+.windsurf/
+.trae/
+.continue/
+.aide/
+.cody/
+.copilot/
+.devin/
+.openhands/
+.v0/
 .impeccable/
 !.impeccable/config.json
 !.impeccable/config.local.json
+.system_generated/
+artifacts/
+agent-artifacts/
 
 # ==============================================================================
 # OS Generated Files
@@ -305,6 +374,7 @@ ehthumbs_vista.db
 desktop.ini
 $RECYCLE.BIN/
 *.stackdump
+*.lnk
 
 # Linux
 .fuse_hidden*

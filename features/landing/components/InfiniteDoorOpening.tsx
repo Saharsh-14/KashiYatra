@@ -638,32 +638,32 @@ export function InfiniteDoorOpening() {
       <div
         ref={quoteRef}
         aria-hidden="true"
-        className="absolute inset-x-0 z-40 flex items-center justify-center pointer-events-none px-4 sm:px-8"
+        className="absolute inset-x-0 z-40 flex items-center justify-center pointer-events-none px-2 min-[380px]:px-4 sm:px-8"
         style={{
           top: "68%",
           transform: "translateY(-50%)",
         }}
       >
-        <div className="w-full max-w-6xl grid grid-cols-[1fr_auto_1fr] items-center gap-3 sm:gap-6 md:gap-8 lg:gap-10">
+        <div className="w-full max-w-6xl grid grid-cols-[1fr_auto_1fr] items-center gap-1.5 min-[380px]:gap-3 sm:gap-6 md:gap-8 lg:gap-10">
           {/* Left Wing: Right-aligned toward the boy */}
-          <div className="flex flex-col items-end text-right font-serif uppercase tracking-[0.22em] sm:tracking-[0.26em] md:tracking-[0.3em] text-[#FFFBF2] leading-[1.6] sm:leading-[1.8] drop-shadow-[0_2px_4px_rgba(0,0,0,1)] drop-shadow-[0_4px_16px_rgba(0,0,0,0.95)] drop-shadow-[0_0_24px_rgba(0,0,0,0.9)]">
-            <span className="text-sm sm:text-lg md:text-2xl lg:text-3xl font-medium whitespace-nowrap">
+          <div className="flex flex-col items-end text-right font-serif uppercase tracking-[0.14em] min-[380px]:tracking-[0.18em] sm:tracking-[0.26em] md:tracking-[0.3em] text-[#FFFBF2] leading-[1.5] sm:leading-[1.8] drop-shadow-[0_2px_4px_rgba(0,0,0,1)] drop-shadow-[0_4px_16px_rgba(0,0,0,0.95)] drop-shadow-[0_0_24px_rgba(0,0,0,0.9)]">
+            <span className="text-[10px] min-[360px]:text-[11.5px] min-[400px]:text-xs sm:text-lg md:text-2xl lg:text-3xl font-medium whitespace-nowrap">
               The three worlds
             </span>
-            <span className="text-sm sm:text-lg md:text-2xl lg:text-3xl font-medium text-[#F0C068] whitespace-nowrap mt-1 sm:mt-2">
+            <span className="text-[10px] min-[360px]:text-[11.5px] min-[400px]:text-xs sm:text-lg md:text-2xl lg:text-3xl font-medium text-[#F0C068] whitespace-nowrap mt-1 sm:mt-2">
               and Kashi is my
             </span>
           </div>
 
           {/* Central Frame: Spacer sized to match the boy's silhouette width */}
-          <div className="w-20 sm:w-24 md:w-28 lg:w-32 h-16 shrink-0 pointer-events-none" />
+          <div className="w-10 min-[380px]:w-14 sm:w-24 md:w-28 lg:w-32 h-16 shrink-0 pointer-events-none" />
 
           {/* Right Wing: Left-aligned toward the boy */}
-          <div className="flex flex-col items-start text-left font-serif uppercase tracking-[0.22em] sm:tracking-[0.26em] md:tracking-[0.3em] text-[#FFFBF2] leading-[1.6] sm:leading-[1.8] drop-shadow-[0_2px_4px_rgba(0,0,0,1)] drop-shadow-[0_4px_16px_rgba(0,0,0,0.95)] drop-shadow-[0_0_24px_rgba(0,0,0,0.9)]">
-            <span className="text-sm sm:text-lg md:text-2xl lg:text-3xl font-medium whitespace-nowrap">
+          <div className="flex flex-col items-start text-left font-serif uppercase tracking-[0.14em] min-[380px]:tracking-[0.18em] sm:tracking-[0.26em] md:tracking-[0.3em] text-[#FFFBF2] leading-[1.5] sm:leading-[1.8] drop-shadow-[0_2px_4px_rgba(0,0,0,1)] drop-shadow-[0_4px_16px_rgba(0,0,0,0.95)] drop-shadow-[0_0_24px_rgba(0,0,0,0.9)]">
+            <span className="text-[10px] min-[360px]:text-[11.5px] min-[400px]:text-xs sm:text-lg md:text-2xl lg:text-3xl font-medium whitespace-nowrap">
               form one city of mine,
             </span>
-            <span className="text-sm sm:text-lg md:text-2xl lg:text-3xl font-medium text-[#FFFBF2] whitespace-nowrap mt-1 sm:mt-2">
+            <span className="text-[10px] min-[360px]:text-[11.5px] min-[400px]:text-xs sm:text-lg md:text-2xl lg:text-3xl font-medium text-[#FFFBF2] whitespace-nowrap mt-1 sm:mt-2">
               royal palace therein.
             </span>
           </div>

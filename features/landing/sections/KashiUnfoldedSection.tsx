@@ -248,7 +248,7 @@ export function KashiUnfoldedSection() {
           </span>
 
           {/* Main Title: Ivory white + Muted Antique Gold */}
-          <h2 className="font-serif text-5xl sm:text-6xl xl:text-7xl font-bold tracking-tight leading-[0.92]">
+          <h2 className="font-serif text-4xl sm:text-6xl xl:text-7xl font-bold tracking-tight leading-[0.92]">
             <span className="text-[#FAF6F0] block drop-shadow-[0_2px_14px_rgba(0,0,0,0.85)]">
               KASHI
             </span>
@@ -258,7 +258,7 @@ export function KashiUnfoldedSection() {
           </h2>
 
           {/* Editorial Tagline */}
-          <p className="font-serif italic text-lg sm:text-xl lg:text-2xl text-[#CFC4B1]/90 mt-4 sm:mt-6 leading-snug max-w-md drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)]">
+          <p className="font-serif italic text-base sm:text-xl lg:text-2xl text-[#CFC4B1]/90 mt-3 sm:mt-6 leading-snug max-w-md drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)]">
             “The city, collected in fragments.”
           </p>
         </div>
@@ -269,7 +269,7 @@ export function KashiUnfoldedSection() {
           {/* 
             THE ENTIRE TICKET OBJECT (Sole Clickable Trigger)
             - 3D perspective rotation
-            - Subtly angled at -15.5deg to match reference
+            - Subtly angled at -15.5deg on desktop (-9deg on mobile to prevent clipping)
             - Subtle natural drop shadow
             - Refined hover lift and slight brightness boost
             - Expand & zoom on click transition
@@ -283,12 +283,11 @@ export function KashiUnfoldedSection() {
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
             aria-label="Ceremonial Kashi Unfolded Pass — Click anywhere to enter Kashi Unfolded"
-            className={`group relative cursor-pointer outline-none select-none ${isEntering ? "scale-105" : ""
+            className={`group relative cursor-pointer outline-none select-none -rotate-[9deg] sm:-rotate-[15.5deg] ${isEntering ? "scale-105" : ""
               }`}
             style={{
               transform: `
                 perspective(1200px)
-                rotate(-15.5deg)
                 rotateX(${tiltX}deg)
                 rotateY(${tiltY}deg)
                 scale(${isEntering ? 1.05 : isHovered ? 1.018 : 1})
@@ -306,7 +305,7 @@ export function KashiUnfoldedSection() {
 
               {/* Ticket Graphic with Distressed Torn Edges & Tactile Drop Shadow */}
               <div
-                className="relative w-[320px] sm:w-[480px] md:w-[560px] lg:w-[640px] xl:w-[700px] aspect-[960/536] transition-all duration-300"
+                className="relative w-[265px] min-[390px]:w-[305px] sm:w-[480px] md:w-[560px] lg:w-[640px] xl:w-[700px] aspect-[960/536] transition-all duration-300"
                 style={{
                   filter: `
                     drop-shadow(${shadowX}px ${shadowY}px 32px rgba(0, 0, 0, 0.85))

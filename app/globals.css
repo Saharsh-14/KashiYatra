@@ -27,7 +27,31 @@ html {
      the mobile address bar adopt the correct treatment. */
   color-scheme: dark;
   -webkit-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: transparent;
   scroll-behavior: smooth;
+}
+
+/* Mobile-native tap feel: immediate touch feedback without 300ms delay */
+button,
+a,
+[role="button"] {
+  touch-action: manipulation;
+}
+
+/* Long press on interactive buttons/tabs should not select their labels */
+button,
+[role="button"],
+.tab,
+.chip {
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* Prevent iOS Safari automatic zoom on inputs */
+input,
+textarea,
+select {
+  font-size: 16px;
 }
 
 @media (prefers-reduced-motion: reduce) {

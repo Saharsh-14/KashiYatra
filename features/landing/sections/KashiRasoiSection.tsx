@@ -344,7 +344,7 @@ export function KashiRasoiSection() {
     <section
       id="rasoi"
       aria-label="Kashi Rasoi"
-      className="relative w-full z-10 min-h-screen lg:h-screen overflow-hidden select-none"
+      className="relative w-full z-10 h-[100svh] min-h-[580px] max-h-[100svh] md:h-auto md:min-h-screen lg:h-screen overflow-hidden select-none"
     >
       {/* 
         ========================================================================
@@ -365,7 +365,147 @@ export function KashiRasoiSection() {
         and the heading remains in its exact reference position.
         ========================================================================
       */}
-      <div className="absolute inset-0 overflow-hidden">
+      {/* 
+        ========================================================================
+        MOBILE SINGLE-SCREEN COMPOSITION (< md)
+        Organized cleanly within 1 single screen without any horizontal or vertical scroll.
+        Features the sunrise Ganges backdrop, Kashi Rasoi heading, 4 signature delicacies
+        arranged in a balanced, mouth-watering composition, and direct exploration access.
+        ========================================================================
+      */}
+      <div className="block md:hidden absolute inset-0 overflow-hidden flex flex-col justify-between py-6 px-4">
+        {/* Clean Background Image filling the mobile screen */}
+        <div className="absolute inset-0 pointer-events-none select-none z-0">
+          <Image
+            src="/images/landing/kashi-rasoi-kachori-bg.jpg"
+            alt="Kashi Rasoi — Authentic morning kachori stall and Ganges sunrise"
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover object-[center_65%] brightness-[0.88] contrast-[1.05]"
+            draggable={false}
+          />
+          {/* Subtle top shadow blending into darkness */}
+          <div
+            aria-hidden="true"
+            className="absolute inset-x-0 top-0 h-28 bg-gradient-to-b from-[#060504] via-[#060504]/70 to-transparent"
+          />
+          {/* Warm counter depth shadow at bottom */}
+          <div
+            aria-hidden="true"
+            className="absolute inset-x-0 bottom-0 h-36 bg-gradient-to-t from-black/85 via-black/40 to-transparent"
+          />
+        </div>
+
+        {/* TOP: Kashi Rasoi Heading */}
+        <div className="relative z-20 flex flex-col items-center pt-5 sm:pt-7 pointer-events-none">
+          <div className="relative w-[210px] min-[380px]:w-[245px] aspect-[2/1] drop-shadow-[0_4px_16px_rgba(0,0,0,0.65)]">
+            <Image
+              src="/images/food/kashi-rasoi-heading.png"
+              alt="Kashi Rasoi — The Living Culinary Soul of Banaras"
+              fill
+              priority
+              sizes="245px"
+              className="object-contain"
+              draggable={false}
+            />
+          </div>
+          <span className="font-serif italic text-[11px] min-[380px]:text-xs text-[#F3E5AB]/90 tracking-wide mt-0.5 drop-shadow-[0_1px_6px_rgba(0,0,0,0.85)]">
+            The Sacred Culinary Soul of Banaras
+          </span>
+        </div>
+
+        {/* MIDDLE: 4 Signature Delicacies in Balanced 2x2 Counter Arrangement */}
+        <div className="relative z-20 w-full max-w-[360px] mx-auto grid grid-cols-2 gap-x-4 gap-y-2 items-end justify-items-center my-auto px-2">
+          {/* 1. Kachori Sabji */}
+          <Link
+            href="/kashi-rasoi"
+            scroll={true}
+            onClick={saveLandingScrollPosition}
+            aria-label="Enter Kashi Rasoi via Kachori Sabji"
+            className="group relative flex flex-col items-center w-full max-w-[155px] cursor-pointer touch-manipulation active:scale-95 transition-transform duration-200"
+          >
+            <div className="relative w-full aspect-[912/554] drop-shadow-[0_8px_18px_rgba(0,0,0,0.7)]">
+              <Image
+                src="/images/food/kachori-transparent.png"
+                alt="Kachori Sabji"
+                fill
+                sizes="155px"
+                className="object-contain pointer-events-none"
+                draggable={false}
+              />
+            </div>
+          </Link>
+
+          {/* 2. Chaat */}
+          <Link
+            href="/kashi-rasoi"
+            scroll={true}
+            onClick={saveLandingScrollPosition}
+            aria-label="Enter Kashi Rasoi via Chaat"
+            className="group relative flex flex-col items-center w-full max-w-[150px] cursor-pointer touch-manipulation active:scale-95 transition-transform duration-200"
+          >
+            <div className="relative w-full aspect-[902/509] drop-shadow-[0_8px_18px_rgba(0,0,0,0.7)]">
+              <Image
+                src="/images/food/chaat-transparent.png"
+                alt="Chaat"
+                fill
+                sizes="150px"
+                className="object-contain pointer-events-none"
+                draggable={false}
+              />
+            </div>
+          </Link>
+
+          {/* 3. Lassi */}
+          <Link
+            href="/kashi-rasoi"
+            scroll={true}
+            onClick={saveLandingScrollPosition}
+            aria-label="Enter Kashi Rasoi via Lassi"
+            className="group relative flex flex-col items-center w-full max-w-[115px] cursor-pointer touch-manipulation active:scale-95 transition-transform duration-200"
+          >
+            <div className="relative w-full aspect-[526/617] drop-shadow-[0_8px_18px_rgba(0,0,0,0.7)]">
+              <Image
+                src="/images/food/lassi-transparent.png"
+                alt="Lassi"
+                fill
+                sizes="115px"
+                className="object-contain pointer-events-none"
+                draggable={false}
+              />
+            </div>
+          </Link>
+
+          {/* 4. Banarasi Paan */}
+          <Link
+            href="/kashi-rasoi"
+            scroll={true}
+            onClick={saveLandingScrollPosition}
+            aria-label="Enter Kashi Rasoi via Paan"
+            className="group relative flex flex-col items-center w-full max-w-[150px] cursor-pointer touch-manipulation active:scale-95 transition-transform duration-200"
+          >
+            <div className="relative w-full aspect-[905/522] drop-shadow-[0_8px_18px_rgba(0,0,0,0.7)]">
+              <Image
+                src="/images/food/paan-transparent.png"
+                alt="Paan"
+                fill
+                sizes="150px"
+                className="object-contain pointer-events-none"
+                draggable={false}
+              />
+            </div>
+          </Link>
+        </div>
+      </div>
+
+      {/* 
+        ========================================================================
+        DESKTOP 16:9 CINEMATIC STAGE (100% UNCHANGED AND PRESERVED >= md)
+        Locks background, heading, and the 4 food assets in the identical coordinate system.
+        ========================================================================
+      */}
+      <div className="hidden md:block absolute inset-0 overflow-hidden">
         <div
           className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
           style={{
