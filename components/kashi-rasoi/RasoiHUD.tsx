@@ -8,13 +8,10 @@ import { markInfiniteDoorCompleted } from "@/lib/doorState";
 
 interface RasoiHUDProps {
   currentFood?: KashiRasoiFood;
-  isEditorialOpen?: boolean;
 }
 
 export function RasoiHUD({
-  isEditorialOpen = false,
 }: RasoiHUDProps) {
-  if (isEditorialOpen) return null;
 
   return (
     <div className="pointer-events-none fixed inset-0 z-30 flex flex-col justify-between p-6 sm:p-10 select-none">

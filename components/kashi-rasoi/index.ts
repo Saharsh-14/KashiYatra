@@ -1,6 +1,5 @@
 export { RasoiScene } from "./RasoiScene";
 export { WebPagePanel } from "./WebPagePanel";
-export { EditorialFoodPage } from "./EditorialFoodPage";
 export { GalleryCamera } from "./GalleryCamera";
 export { RasoiHUD } from "./RasoiHUD";
 

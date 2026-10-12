@@ -2,14 +2,12 @@
 
 import React, { useRef, useEffect, useState, useCallback } from "react";
 import gsap from "gsap";
-import { KASHI_RASOI_FOODS, KashiRasoiFood } from "@/data/kashi-rasoi";
+import { KASHI_RASOI_FOODS } from "@/data/kashi-rasoi";
 import { WebPagePanel } from "./WebPagePanel";
 
 interface GalleryCameraProps {
   currentIndex: number;
   onIndexChange: (index: number) => void;
-  onSelectFood: (food: KashiRasoiFood) => void;
-  isEditorialOpen?: boolean;
 }
 
 /**
@@ -86,8 +84,6 @@ function computePanel3D(d: number, viewportWidth: number) {
 export function GalleryCamera({
   currentIndex,
   onIndexChange,
-  onSelectFood,
-  isEditorialOpen = false,
 }: GalleryCameraProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const panelRefs = useRef<(HTMLDivElement | null)[]>([]);
@@ -199,25 +195,53 @@ export function GalleryCamera({
   // Mouse wheel / trackpad scroll handling with INFINITE unbounded progression
   useEffect(() => {
     const el = containerRef.current;
-    if (!el || isEditorialOpen) return;
+    if (!el) return;
 
     const handleWheel = (e: WheelEvent) => {
       e.preventDefault();
+      const isMobile = window.innerWidth < 640;
 
-      // Vertical wheel scrolling is primary; also accepts horizontal trackpad gestures
+      if (!isMobile) {
+        // Laptop / Desktop: 100% UNCHANGED
+        const delta =
+          Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
+        const step = delta * 0.0016;
+
+        gsap.killTweensOf(physicsRef.current);
+
+        // Unbounded infinite circular progress
+        physicsRef.current.target += step;
+
+        isInteractingRef.current = true;
+        triggerLoop();
+
+        // Debounced settle: smoothly glides into the nearest whole panel without abrupt snapping
+        if (settleTimeoutRef.current) clearTimeout(settleTimeoutRef.current);
+        settleTimeoutRef.current = setTimeout(() => {
+          isInteractingRef.current = false;
+          const bounded = Math.round(physicsRef.current.target);
+
+          gsap.to(physicsRef.current, {
+            target: bounded,
+            duration: 0.68,
+            ease: "power2.out",
+            onUpdate: triggerLoop,
+          });
+        }, 190);
+        return;
+      }
+
+      // Mobile View: Controlled card-by-card step
       const delta =
         Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
-      const step = delta * 0.0016;
+      const step = Math.sign(delta) * Math.min(0.35, Math.abs(delta * 0.001));
 
       gsap.killTweensOf(physicsRef.current);
-
-      // Unbounded infinite circular progress
       physicsRef.current.target += step;
 
       isInteractingRef.current = true;
       triggerLoop();
 
-      // Debounced settle: smoothly glides into the nearest whole panel without abrupt snapping
       if (settleTimeoutRef.current) clearTimeout(settleTimeoutRef.current);
       settleTimeoutRef.current = setTimeout(() => {
         isInteractingRef.current = false;
@@ -225,11 +249,11 @@ export function GalleryCamera({
 
         gsap.to(physicsRef.current, {
           target: bounded,
-          duration: 0.68,
+          duration: 0.5,
           ease: "power2.out",
           onUpdate: triggerLoop,
         });
-      }, 190);
+      }, 140);
     };
 
     el.addEventListener("wheel", handleWheel, { passive: false });
@@ -237,19 +261,20 @@ export function GalleryCamera({
       el.removeEventListener("wheel", handleWheel);
       if (settleTimeoutRef.current) clearTimeout(settleTimeoutRef.current);
     };
-  }, [isEditorialOpen, triggerLoop]);
+  }, [triggerLoop]);
 
   // Pointer drag gestures with unbounded infinite circular progression
   const dragRef = useRef({
     startX: 0,
+    startY: 0,
     startTarget: 0,
     lastX: 0,
+    lastY: 0,
     lastTime: 0,
     velocity: 0,
   });
 
   const handlePointerDown = (e: React.PointerEvent) => {
-    if (isEditorialOpen) return;
     if (e.button !== 0 && e.pointerType === "mouse") return;
 
     isInteractingRef.current = true;
@@ -257,8 +282,10 @@ export function GalleryCamera({
     gsap.killTweensOf(physicsRef.current);
 
     dragRef.current.startX = e.clientX;
+    dragRef.current.startY = e.clientY;
     dragRef.current.startTarget = physicsRef.current.target;
     dragRef.current.lastX = e.clientX;
+    dragRef.current.lastY = e.clientY;
     dragRef.current.lastTime = performance.now();
     dragRef.current.velocity = 0;
 
@@ -266,15 +293,47 @@ export function GalleryCamera({
   };
 
   const handlePointerMove = (e: React.PointerEvent) => {
-    if (!isInteractingRef.current || isEditorialOpen) return;
+    if (!isInteractingRef.current) return;
+    const isMobile = window.innerWidth < 640;
+
+    if (!isMobile) {
+      // Laptop / Desktop: 100% UNCHANGED
+      const now = performance.now();
+      const dt = Math.max(1, now - dragRef.current.lastTime);
+      const dx = e.clientX - dragRef.current.startX;
+      const stepPerPx = 1 / 800;
+
+      const newTarget = dragRef.current.startTarget - dx * stepPerPx;
+      dragRef.current.velocity = -(e.clientX - dragRef.current.lastX) / dt;
+      dragRef.current.lastX = e.clientX;
+      dragRef.current.lastTime = now;
+
+      physicsRef.current.target = newTarget;
+      triggerLoop();
+      return;
+    }
+
+    // Mobile View: Natural touch drag tracking
     const now = performance.now();
     const dt = Math.max(1, now - dragRef.current.lastTime);
     const dx = e.clientX - dragRef.current.startX;
-    const stepPerPx = 1 / (window.innerWidth < 640 ? 400 : 800);
+    const dy = e.clientY - dragRef.current.startY;
 
-    const newTarget = dragRef.current.startTarget - dx * stepPerPx;
-    dragRef.current.velocity = -(e.clientX - dragRef.current.lastX) / dt;
+    // Follow horizontal swipe primarily, or vertical swipe smoothly
+    const primaryDelta = Math.abs(dx) >= Math.abs(dy) ? dx : dy;
+    const lastDelta =
+      Math.abs(dx) >= Math.abs(dy)
+        ? e.clientX - dragRef.current.lastX
+        : e.clientY - dragRef.current.lastY;
+
+    // Smooth mobile ratio (~280px per full card advance)
+    const mobileStepPerPx = 1 / Math.max(260, window.innerWidth * 0.75);
+    const newTarget = dragRef.current.startTarget - primaryDelta * mobileStepPerPx;
+
+    // Velocity in cards / millisecond
+    dragRef.current.velocity = -(lastDelta * mobileStepPerPx) / dt;
     dragRef.current.lastX = e.clientX;
+    dragRef.current.lastY = e.clientY;
     dragRef.current.lastTime = now;
 
     physicsRef.current.target = newTarget;
@@ -284,45 +343,71 @@ export function GalleryCamera({
   const handlePointerUp = () => {
     if (!isInteractingRef.current) return;
     isInteractingRef.current = false;
+    const isMobile = window.innerWidth < 640;
 
-    // Release momentum based on flick velocity
-    const momentum = dragRef.current.velocity * 160;
-    const rawTarget = physicsRef.current.target + momentum;
-    const target = Math.round(rawTarget);
+    if (!isMobile) {
+      // Laptop / Desktop: 100% UNCHANGED
+      const momentum = dragRef.current.velocity * 160;
+      const rawTarget = physicsRef.current.target + momentum;
+      const target = Math.round(rawTarget);
+
+      gsap.to(physicsRef.current, {
+        target: target,
+        duration: 0.75,
+        ease: "power3.out",
+        onUpdate: triggerLoop,
+      });
+      return;
+    }
+
+    // Mobile View: Smooth, controlled card-by-card snap (max 1 card per flick)
+    const deltaFromStart = physicsRef.current.target - dragRef.current.startTarget;
+    const velocity = dragRef.current.velocity;
+
+    let targetShift = 0;
+    // Flick threshold: ~0.0008 cards/ms (~0.25 px/ms)
+    if (Math.abs(velocity) > 0.0008) {
+      targetShift = Math.sign(velocity);
+    } else if (Math.abs(deltaFromStart) > 0.18) {
+      // Dragged past 18% of a card
+      targetShift = Math.sign(deltaFromStart);
+    }
+
+    // Advance at most 1 card per swipe on mobile
+    const targetIndex = Math.round(dragRef.current.startTarget + targetShift);
 
     gsap.to(physicsRef.current, {
-      target: target,
-      duration: 0.75,
+      target: targetIndex,
+      duration: 0.52,
+      ease: "power2.out",
+      onUpdate: triggerLoop,
+    });
+  };
+
+  // Click on panel: side glides to center via shortest circular path; center card remains focused
+  const handlePanelClick = (index: number) => {
+    const diff = getCircularDist(index, physicsRef.current.current, totalPanels);
+
+    if (Math.abs(diff) < 0.38) {
+      // Center panel: already centered, no detail window
+      return;
+    }
+
+    // Side panel: smoothly glide it to center along the shortest circular arc
+    if (settleTimeoutRef.current) clearTimeout(settleTimeoutRef.current);
+    isInteractingRef.current = false;
+    gsap.killTweensOf(physicsRef.current);
+
+    gsap.to(physicsRef.current, {
+      target: physicsRef.current.current + diff,
+      duration: 0.8,
       ease: "power3.out",
       onUpdate: triggerLoop,
     });
   };
 
-  // Click on panel: center opens case study; side glides to center via shortest circular path
-  const handlePanelClick = (index: number, food: KashiRasoiFood) => {
-    const diff = getCircularDist(index, physicsRef.current.current, totalPanels);
-
-    if (Math.abs(diff) < 0.38) {
-      // Center panel: open full editorial page
-      onSelectFood(food);
-    } else {
-      // Side panel: smoothly glide it to center along the shortest circular arc
-      if (settleTimeoutRef.current) clearTimeout(settleTimeoutRef.current);
-      isInteractingRef.current = false;
-      gsap.killTweensOf(physicsRef.current);
-
-      gsap.to(physicsRef.current, {
-        target: physicsRef.current.current + diff,
-        duration: 0.8,
-        ease: "power3.out",
-        onUpdate: triggerLoop,
-      });
-    }
-  };
-
   // Keyboard navigation: unbounded infinite cycling
   useEffect(() => {
-    if (isEditorialOpen) return;
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "ArrowRight" || e.key === "ArrowDown") {
         e.preventDefault();
@@ -347,7 +432,7 @@ export function GalleryCamera({
 
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [isEditorialOpen, triggerLoop]);
+  }, [triggerLoop]);
 
   return (
     <div
@@ -356,7 +441,7 @@ export function GalleryCamera({
       onPointerMove={handlePointerMove}
       onPointerUp={handlePointerUp}
       onPointerCancel={handlePointerUp}
-      className="relative w-full h-full min-h-screen overflow-hidden flex items-center justify-center cursor-grab active:cursor-grabbing select-none bg-transparent"
+      className="relative w-full h-full min-h-screen overflow-hidden flex items-center justify-center cursor-grab active:cursor-grabbing select-none bg-transparent touch-none"
       style={{
         perspective: `${viewportWidth < 640 ? 1100 : 1450}px`,
         perspectiveOrigin: "50% 50%",
@@ -385,7 +470,7 @@ export function GalleryCamera({
               <WebPagePanel
                 food={food}
                 isCenter={isCenter}
-                onClick={() => handlePanelClick(index, food)}
+                onClick={() => handlePanelClick(index)}
               />
             </div>
           );
