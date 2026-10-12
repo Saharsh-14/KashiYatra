@@ -10,7 +10,7 @@ const LANDING_SCROLL_POS_KEY = "kashi_landing_scroll_pos";
 export function saveLandingScrollPosition(): void {
   if (typeof window === "undefined") return;
 
-  const lenis = (window as any).__lenis;
+  const lenis = window.__lenis;
   const currentY =
     typeof lenis?.scroll === "number" && !isNaN(lenis.scroll)
       ? lenis.scroll
@@ -83,7 +83,7 @@ export function restoreLandingScrollPosition(): () => void {
       window.scrollTo({ top: clampedY, behavior: "instant" });
 
       // 2. Lenis instance if active
-      const lenis = (window as any).__lenis;
+      const lenis = window.__lenis;
       if (lenis && typeof lenis.scrollTo === "function") {
         lenis.scrollTo(clampedY, { immediate: true });
       }
