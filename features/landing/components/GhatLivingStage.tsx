@@ -564,8 +564,8 @@ export function GhatLivingStage({ onGhatChange }: GhatLivingStageProps) {
             }}
             className={`group/way flex items-center gap-1.5 px-2 py-1.5 rounded transition-all duration-300 ${
               isIntro
-                ? "text-[#E8E1D3] font-medium"
-                : "text-white/40 hover:text-white/80"
+                ? "text-[#FFE4A0] font-bold drop-shadow-[0_0_14px_rgba(255,228,160,0.9)]"
+                : "text-white font-semibold hover:text-[#FFE4A0] drop-shadow-[0_2px_8px_rgba(0,0,0,0.95)]"
             }`}
             aria-label="Jump to Steps to Eternity Introduction"
             aria-current={isIntro ? "true" : undefined}
@@ -573,11 +573,11 @@ export function GhatLivingStage({ onGhatChange }: GhatLivingStageProps) {
             <span
               className={`block transition-all duration-500 rounded-full ${
                 isIntro
-                  ? "w-5 sm:w-6 h-[2px] bg-[#B59A63]"
-                  : "w-2 sm:w-2.5 h-[1.5px] bg-white/20 group-hover/way:bg-white/40"
+                  ? "w-5 sm:w-6 h-[2px] bg-[#FFE4A0] shadow-[0_0_10px_rgba(255,228,160,0.95)]"
+                  : "w-2 sm:w-2.5 h-[1.5px] bg-white/60 group-hover/way:bg-white"
               }`}
             />
-            <span className="type-ui text-[10px] sm:text-[11px] tracking-wider uppercase whitespace-nowrap">
+            <span className="type-ui text-[10px] sm:text-[11.5px] tracking-wider uppercase whitespace-nowrap">
               INTRO
             </span>
           </button>
@@ -596,8 +596,8 @@ export function GhatLivingStage({ onGhatChange }: GhatLivingStageProps) {
                 }}
                 className={`group/way flex items-center gap-1.5 px-2 py-1.5 rounded transition-all duration-300 ${
                   isCurrent
-                    ? "text-[#E8E1D3] font-medium"
-                    : "text-white/40 hover:text-white/80"
+                    ? "text-[#FFE4A0] font-bold drop-shadow-[0_0_14px_rgba(255,228,160,0.9)]"
+                    : "text-white font-semibold hover:text-[#FFE4A0] drop-shadow-[0_2px_8px_rgba(0,0,0,0.95)]"
                 }`}
                 aria-label={`Jump to Ghat 0${ghat.index}: ${ghat.name}`}
                 aria-current={isCurrent ? "true" : undefined}
@@ -605,11 +605,11 @@ export function GhatLivingStage({ onGhatChange }: GhatLivingStageProps) {
                 <span
                   className={`block transition-all duration-500 rounded-full ${
                     isCurrent
-                      ? "w-5 sm:w-6 h-[2px] bg-[#B59A63]"
-                      : "w-2 sm:w-2.5 h-[1.5px] bg-white/20 group-hover/way:bg-white/40"
+                      ? "w-5 sm:w-6 h-[2px] bg-[#FFE4A0] shadow-[0_0_10px_rgba(255,228,160,0.95)]"
+                      : "w-2 sm:w-2.5 h-[1.5px] bg-white/60 group-hover/way:bg-white"
                   }`}
                 />
-                <span className="type-ui text-[10px] sm:text-[11px] tracking-wider uppercase whitespace-nowrap hidden lg:inline">
+                <span className="type-ui text-[10px] sm:text-[11.5px] tracking-wider uppercase whitespace-nowrap hidden lg:inline">
                   {ghat.name.split(" ")[0]}
                 </span>
                 <span className="type-ui text-[10px] tracking-widest font-mono lg:hidden">
@@ -621,7 +621,7 @@ export function GhatLivingStage({ onGhatChange }: GhatLivingStageProps) {
         </div>
 
         {/* Continuous navigation guide hint */}
-        <div className="flex items-center justify-center text-[10px] sm:text-[11px] type-ui text-white/40 tracking-wider px-2 pt-0.5">
+        <div className="flex items-center justify-center text-[10px] sm:text-[11px] type-ui text-white/80 tracking-wider px-2 pt-0.5 drop-shadow-[0_1px_6px_rgba(0,0,0,0.9)]">
           <span className="flex items-center gap-1.5">
             <span className="text-[#B59A63]">↔</span>{" "}
             Drag, swipe or scroll horizontally to travel across the riverfront

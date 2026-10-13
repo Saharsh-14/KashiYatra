@@ -16,6 +16,55 @@ const SUBPAGE_PATH_PATTERNS = [
   "/kashi-unfolded",
 ];
 
+function isLandingPath(pathname: string): boolean {
+  const clean = pathname.toLowerCase().replace(/\/$/, "");
+  return clean === "" || clean === "/kashi";
+}
+
+function isReloadNavigation(): boolean {
+  if (typeof window === "undefined") return false;
+  try {
+    const navEntries = performance.getEntriesByType("navigation");
+    if (navEntries.length > 0) {
+      const navTiming = navEntries[0] as PerformanceNavigationTiming;
+      return navTiming.type === "reload";
+    }
+    const perfNav = (performance as unknown as { navigation?: { type?: number } }).navigation;
+    if (perfNav && perfNav.type === 1) {
+      return true;
+    }
+  } catch {
+    // ignore
+  }
+  return false;
+}
+
+// Track whether this document load was initiated by a page reload on the landing page
+let isReloadOnLanding = false;
+
+if (typeof window !== "undefined") {
+  if (isReloadNavigation() && isLandingPath(window.location.pathname)) {
+    isReloadOnLanding = true;
+    try {
+      sessionStorage.removeItem(KASHI_DOOR_KEY);
+    } catch {
+      // ignore
+    }
+  }
+
+  // Also hook into beforeunload: when user refreshes or reloads while on the landing page,
+  // clear the sessionStorage key so the intro door video plays fresh on reload
+  window.addEventListener("beforeunload", () => {
+    if (isLandingPath(window.location.pathname)) {
+      try {
+        sessionStorage.removeItem(KASHI_DOOR_KEY);
+      } catch {
+        // ignore
+      }
+    }
+  });
+}
+
 const listeners = new Set<() => void>();
 
 function notifyListeners() {
@@ -40,6 +89,7 @@ export function subscribeDoorState(callback: () => void): () => void {
  */
 export function markInfiniteDoorCompleted(): void {
   if (typeof window === "undefined") return;
+  isReloadOnLanding = false;
   try {
     sessionStorage.setItem(KASHI_DOOR_KEY, "true");
     notifyListeners();
@@ -57,9 +107,17 @@ export function markInfiniteDoorCompleted(): void {
  *    - Where Gods Reside (/temples, /where-gods-reside)
  *    - Kashi Unfolded (/unfolded, /kashi-unfolded)
  * 3. The URL contains a skip flag or a landing section hash (e.g., #rasoi, #unfolded, #where-gods-reside).
+ *
+ * NOTE: On page refresh / reload while on the landing page, this returns false so the intro
+ * infinite door video plays every time.
  */
 export function shouldSkipInfiniteDoor(): boolean {
   if (typeof window === "undefined") return false;
+
+  // On page reload of the landing page, always play the infinite door intro sequence
+  if (isReloadOnLanding) {
+    return false;
+  }
 
   // 1. Session storage flag
   try {
@@ -103,3 +161,4 @@ export function useShouldSkipInfiniteDoor(): boolean {
     () => false, // SSR snapshot is always false
   );
 }
+

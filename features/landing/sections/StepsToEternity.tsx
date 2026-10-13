@@ -598,8 +598,8 @@ export function StepsToEternity() {
             onClick={() => scrollToPanel(0)}
             className={`group/way flex items-center gap-1.5 px-2 py-0.5 rounded transition-all duration-300 ${
               activePanel === 0
-                ? "text-[#FAF6F0] font-medium"
-                : "text-white/40 hover:text-white/80"
+                ? "text-[#FFE4A0] font-bold drop-shadow-[0_0_14px_rgba(255,228,160,0.9)]"
+                : "text-white font-semibold hover:text-[#FFE4A0] drop-shadow-[0_2px_8px_rgba(0,0,0,0.95)]"
             }`}
             aria-label="View Steps to Eternity overview"
             aria-current={activePanel === 0 ? "true" : undefined}
@@ -607,11 +607,11 @@ export function StepsToEternity() {
             <span
               className={`block transition-all duration-500 rounded-full ${
                 activePanel === 0
-                  ? "w-4 sm:w-5 h-[2px] bg-[#B59A63]"
-                  : "w-2 h-[1.5px] bg-white/20 group-hover/way:bg-white/40"
+                  ? "w-4 sm:w-5 h-[2px] bg-[#FFE4A0] shadow-[0_0_10px_rgba(255,228,160,0.95)]"
+                  : "w-2 h-[1.5px] bg-white/60 group-hover/way:bg-white"
               }`}
             />
-            <span className="type-ui text-[9px] sm:text-[10.5px] tracking-wider uppercase whitespace-nowrap">
+            <span className="type-ui text-[10px] sm:text-[11.5px] tracking-wider uppercase whitespace-nowrap">
               INTRO
             </span>
           </button>
@@ -621,14 +621,14 @@ export function StepsToEternity() {
             const isSelected = activePanel === ghat.index;
             return (
               <React.Fragment key={ghat.id}>
-                <span className="text-white/20 text-xs select-none hidden sm:inline">—</span>
+                <span className="text-[#E5C178]/80 text-xs select-none hidden sm:inline drop-shadow-[0_1px_4px_rgba(0,0,0,0.9)]">—</span>
                 <button
                   type="button"
                   onClick={() => scrollToPanel(ghat.index)}
                   className={`group/way flex items-center gap-1.5 px-1 sm:px-2 py-0.5 rounded transition-all duration-300 ${
                     isSelected
-                      ? "text-[#FAF6F0] font-medium"
-                      : "text-white/40 hover:text-white/80"
+                      ? "text-[#FFE4A0] font-bold drop-shadow-[0_0_14px_rgba(255,228,160,0.9)]"
+                      : "text-white font-semibold hover:text-[#FFE4A0] drop-shadow-[0_2px_8px_rgba(0,0,0,0.95)]"
                   }`}
                   aria-label={`Go to Ghat 0${ghat.index}: ${ghat.name}`}
                   aria-current={isSelected ? "true" : undefined}
@@ -636,14 +636,14 @@ export function StepsToEternity() {
                   <span
                     className={`block transition-all duration-500 rounded-full ${
                       isSelected
-                        ? "w-3 sm:w-4 h-[2px] bg-[#B59A63]"
+                        ? "w-3 sm:w-4 h-[2px] bg-[#FFE4A0] shadow-[0_0_10px_rgba(255,228,160,0.95)]"
                         : "w-0 h-[1.5px] bg-transparent"
                     }`}
                   />
-                  <span className="type-ui text-[9px] sm:text-[10.5px] tracking-wider uppercase whitespace-nowrap hidden md:inline">
+                  <span className="type-ui text-[10px] sm:text-[11.5px] tracking-wider uppercase whitespace-nowrap hidden md:inline">
                     {ghat.name.split(" ")[0]}
                   </span>
-                  <span className="type-ui text-[9px] tracking-widest font-mono md:hidden">
+                  <span className="type-ui text-[10px] tracking-widest font-mono md:hidden">
                     0{ghat.index}
                   </span>
                 </button>
@@ -653,8 +653,8 @@ export function StepsToEternity() {
         </div>
 
         {/* Travel Hint */}
-        <div className="text-[9.5px] sm:text-[10.5px] type-ui text-white/40 tracking-wider flex items-center gap-1.5">
-          <span className="text-[#B59A63]">⤹</span>
+        <div className="text-[10px] sm:text-[11px] type-ui text-white/80 tracking-wider flex items-center gap-1.5 drop-shadow-[0_1px_6px_rgba(0,0,0,0.9)]">
+          <span className="text-[#FFE4A0]">⤹</span>
           <span>Drag or scroll smoothly to travel continuously across the riverfront</span>
         </div>
       </div>

@@ -24,7 +24,7 @@ export function LandingFooter() {
     <footer
       id="kashi-night"
       aria-label="Varanasi Ghats at Night"
-      className="relative w-full min-h-screen lg:h-screen bg-black flex flex-col items-center justify-center overflow-hidden select-none m-0 p-0 border-0"
+      className="relative w-full min-h-screen bg-black flex flex-col items-center justify-start select-none m-0 p-0 border-0"
     >
       {/* =====================================================================
           MOBILE EDITORIAL FOOTER (Clean, luxury vertical composition < md)
@@ -409,14 +409,14 @@ export function LandingFooter() {
         </div>
 
         {/* RED BOX 5 — BOTTOM LEFT (© 2026 KASHIYATRA) */}
-        <div className="absolute left-[5%] sm:left-[6%] md:left-[7%] lg:left-[8%] bottom-[4%] sm:bottom-[5%] z-20 pointer-events-auto">
+        <div className="absolute left-[5%] sm:left-[6%] md:left-[7%] lg:left-[8%] bottom-[4.5%] sm:bottom-[5%] z-20 pointer-events-auto">
           <span className="text-[10px] sm:text-[11px] tracking-[0.2em] uppercase text-[#FAF6F0] select-none">
             © 2026 KASHIYATRA
           </span>
         </div>
 
         {/* RED BOX 6 — BOTTOM MIDDLE (Privacy · Terms & Crafted By) */}
-        <div className="absolute left-[42%] md:left-[41%] lg:left-[42%] bottom-[2.2%] sm:bottom-[3%] md:bottom-[3.5%] z-20 pointer-events-auto flex flex-col items-start gap-1 sm:gap-1.5">
+        <div className="absolute left-[42%] md:left-[41%] lg:left-[42%] bottom-[3.2%] sm:bottom-[3.8%] md:bottom-[4.2%] z-20 pointer-events-auto flex flex-col items-start gap-1 sm:gap-1.5">
           <div className="flex items-center gap-1.5 text-[10px] sm:text-[11px] tracking-[0.2em] uppercase text-[#FAF6F0]">
             <button
               onClick={() => setIsPrivacyOpen(true)}
