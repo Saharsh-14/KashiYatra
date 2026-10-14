@@ -339,9 +339,8 @@ export function StepsToEternity() {
       id="steps-to-eternity"
       ref={sectionRef}
       aria-label="Steps to Eternity — The Ghats of Kashi"
-      className={`relative w-full h-screen min-h-[640px] max-h-[1080px] bg-[#0c0c0a] text-[#FAF6F0] overflow-hidden select-none touch-pan-y ${
-        isDragging ? "cursor-grabbing" : "cursor-grab"
-      }`}
+      className={`relative w-full h-screen min-h-[640px] max-h-[1080px] bg-[#0c0c0a] text-[#FAF6F0] overflow-hidden select-none touch-pan-y ${isDragging ? "cursor-grabbing" : "cursor-grab"
+        }`}
       onPointerDown={handlePointerDown}
       onPointerMove={handlePointerMove}
       onPointerUp={handlePointerUp}
@@ -429,9 +428,8 @@ export function StepsToEternity() {
                       }}
                     >
                       <div
-                        className={`relative w-full h-full transition-all duration-500 ${
-                          isHovered ? "brightness-115 contrast-108" : "brightness-[0.9] contrast-100"
-                        }`}
+                        className={`relative w-full h-full transition-all duration-500 ${isHovered ? "brightness-115 contrast-108" : "brightness-[0.9] contrast-100"
+                          }`}
                       >
                         <Image
                           src={ghat.image}
@@ -446,11 +444,10 @@ export function StepsToEternity() {
                       {/* Top Bevel Highlight */}
                       <div
                         aria-hidden="true"
-                        className={`absolute top-0 inset-x-0 h-[1.5px] transition-opacity duration-300 z-20 pointer-events-none ${
-                          isHovered
+                        className={`absolute top-0 inset-x-0 h-[1.5px] transition-opacity duration-300 z-20 pointer-events-none ${isHovered
                             ? "bg-gradient-to-r from-[#D4AF37] via-[#FFF3D1] to-[#B59A63] opacity-100 shadow-[0_0_12px_#F3E5AB]"
                             : "bg-gradient-to-r from-[#C5A059]/90 via-[#E5C178]/70 to-[#9E824C]/40 opacity-80"
-                        }`}
+                          }`}
                       />
 
                       {/* Right Edge Highlight */}
@@ -468,11 +465,10 @@ export function StepsToEternity() {
                       {/* Ghat Badge */}
                       <div className="absolute left-2.5 sm:left-3.5 top-1/2 -translate-y-1/2 z-20 flex items-center gap-1.5 pointer-events-none">
                         <span
-                          className={`type-ui text-[9px] sm:text-[10px] font-mono tracking-widest px-1.5 py-0.5 rounded transition-colors duration-300 ${
-                            isHovered
+                          className={`type-ui text-[9px] sm:text-[10px] font-mono tracking-widest px-1.5 py-0.5 rounded transition-colors duration-300 ${isHovered
                               ? "bg-[#B59A63] text-black font-bold"
                               : "bg-black/65 text-[#E8E1D3] border border-white/10"
-                          }`}
+                            }`}
                         >
                           0{ghat.index}
                         </span>
@@ -484,9 +480,8 @@ export function StepsToEternity() {
                       {/* Bottom Hover Glow */}
                       <div
                         aria-hidden="true"
-                        className={`absolute bottom-0 inset-x-0 h-[1px] bg-gradient-to-r from-[#B59A63]/80 via-[#F3E5AB]/60 to-transparent transition-opacity duration-300 z-20 pointer-events-none ${
-                          isHovered ? "opacity-100" : "opacity-0"
-                        }`}
+                        className={`absolute bottom-0 inset-x-0 h-[1px] bg-gradient-to-r from-[#B59A63]/80 via-[#F3E5AB]/60 to-transparent transition-opacity duration-300 z-20 pointer-events-none ${isHovered ? "opacity-100" : "opacity-0"
+                          }`}
                       />
                     </div>
                   </div>
@@ -596,20 +591,18 @@ export function StepsToEternity() {
           <button
             type="button"
             onClick={() => scrollToPanel(0)}
-            className={`group/way flex items-center gap-1.5 px-2 py-0.5 rounded transition-all duration-300 ${
-              activePanel === 0
+            className={`group/way flex items-center gap-1.5 px-2 py-0.5 rounded transition-all duration-300 ${activePanel === 0
                 ? "text-[#FFE4A0] font-bold drop-shadow-[0_0_14px_rgba(255,228,160,0.9)]"
                 : "text-white font-semibold hover:text-[#FFE4A0] drop-shadow-[0_2px_8px_rgba(0,0,0,0.95)]"
-            }`}
+              }`}
             aria-label="View Steps to Eternity overview"
             aria-current={activePanel === 0 ? "true" : undefined}
           >
             <span
-              className={`block transition-all duration-500 rounded-full ${
-                activePanel === 0
+              className={`block transition-all duration-500 rounded-full ${activePanel === 0
                   ? "w-4 sm:w-5 h-[2px] bg-[#FFE4A0] shadow-[0_0_10px_rgba(255,228,160,0.95)]"
                   : "w-2 h-[1.5px] bg-white/60 group-hover/way:bg-white"
-              }`}
+                }`}
             />
             <span className="type-ui text-[10px] sm:text-[11.5px] tracking-wider uppercase whitespace-nowrap">
               INTRO
@@ -625,20 +618,18 @@ export function StepsToEternity() {
                 <button
                   type="button"
                   onClick={() => scrollToPanel(ghat.index)}
-                  className={`group/way flex items-center gap-1.5 px-1 sm:px-2 py-0.5 rounded transition-all duration-300 ${
-                    isSelected
+                  className={`group/way flex items-center gap-1.5 px-1 sm:px-2 py-0.5 rounded transition-all duration-300 ${isSelected
                       ? "text-[#FFE4A0] font-bold drop-shadow-[0_0_14px_rgba(255,228,160,0.9)]"
                       : "text-white font-semibold hover:text-[#FFE4A0] drop-shadow-[0_2px_8px_rgba(0,0,0,0.95)]"
-                  }`}
+                    }`}
                   aria-label={`Go to Ghat 0${ghat.index}: ${ghat.name}`}
                   aria-current={isSelected ? "true" : undefined}
                 >
                   <span
-                    className={`block transition-all duration-500 rounded-full ${
-                      isSelected
+                    className={`block transition-all duration-500 rounded-full ${isSelected
                         ? "w-3 sm:w-4 h-[2px] bg-[#FFE4A0] shadow-[0_0_10px_rgba(255,228,160,0.95)]"
                         : "w-0 h-[1.5px] bg-transparent"
-                    }`}
+                      }`}
                   />
                   <span className="type-ui text-[10px] sm:text-[11.5px] tracking-wider uppercase whitespace-nowrap hidden md:inline">
                     {ghat.name.split(" ")[0]}

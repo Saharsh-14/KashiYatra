@@ -38,11 +38,10 @@ function ArchivalImagePlaceholder({
     return (
       <div
         onClick={onClick}
-        className={`group relative w-full h-full rounded-[2px] border overflow-hidden select-none transition-all duration-300 shadow-sm ${
-          isActive
+        className={`group relative w-full h-full rounded-[2px] border overflow-hidden select-none transition-all duration-300 shadow-sm ${isActive
             ? "border-[#8B2515] ring-2 ring-[#8B2515]/60 scale-[1.02]"
             : "border-[#523A28]/30 hover:border-[#8B2515]/60 hover:shadow-md"
-        } ${onClick ? "cursor-pointer" : ""}`}
+          } ${onClick ? "cursor-pointer" : ""}`}
       >
         <Image
           src={placeholder.src}
@@ -63,9 +62,8 @@ function ArchivalImagePlaceholder({
   return (
     <div
       onClick={onClick}
-      className={`relative w-full h-full rounded-[2px] border border-[#523A28]/25 bg-gradient-to-b from-[#EDE4D4] to-[#E5DAC8] overflow-hidden flex flex-col items-center justify-center p-3 select-none transition-all duration-300 hover:border-[#523A28]/45 shadow-inner ${
-        isHero ? "min-h-[220px]" : "min-h-[75px]"
-      } ${onClick ? "cursor-pointer" : ""}`}
+      className={`relative w-full h-full rounded-[2px] border border-[#523A28]/25 bg-gradient-to-b from-[#EDE4D4] to-[#E5DAC8] overflow-hidden flex flex-col items-center justify-center p-3 select-none transition-all duration-300 hover:border-[#523A28]/45 shadow-inner ${isHero ? "min-h-[220px]" : "min-h-[75px]"
+        } ${onClick ? "cursor-pointer" : ""}`}
     >
       {/* Subtle vintage inner matting frame line */}
       <div className="absolute inset-[3px] border border-[#523A28]/15 pointer-events-none" />
@@ -87,11 +85,10 @@ function ArchivalImagePlaceholder({
       {/* Center content */}
       <div className="relative z-10 flex flex-col items-center text-center px-2">
         <div
-          className={`rounded-full flex items-center justify-center mb-1.5 ${
-            isHero
+          className={`rounded-full flex items-center justify-center mb-1.5 ${isHero
               ? "w-8 h-8 sm:w-9 sm:h-9 bg-[#523A28]/10 text-[#523A28]/70"
               : "w-5 h-5 bg-[#523A28]/10 text-[#523A28]/60"
-          }`}
+            }`}
         >
           <Camera size={isHero ? 16 : 11} strokeWidth={1.5} />
         </div>
@@ -153,9 +150,8 @@ export function UnfoldedDetailModal({ poster, onClose }: UnfoldedDetailModalProp
       aria-label={detail.title}
       data-lenis-prevent="true"
       onClick={onClose}
-      className={`fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-5 lg:p-6 bg-black/60 backdrop-blur-[4px] transition-opacity duration-[600ms] ease-out ${
-        isOpening ? "opacity-100" : "opacity-0"
-      }`}
+      className={`fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-5 lg:p-6 bg-black/60 backdrop-blur-[4px] transition-opacity duration-[600ms] ease-out ${isOpening ? "opacity-100" : "opacity-0"
+        }`}
     >
       {/* 
         80% Viewport Detail Experience Panel
@@ -165,11 +161,10 @@ export function UnfoldedDetailModal({ poster, onClose }: UnfoldedDetailModalProp
       <div
         data-lenis-prevent="true"
         onClick={(e) => e.stopPropagation()}
-        className={`relative w-[96vw] lg:w-[80vw] max-w-[1240px] h-[92vh] lg:h-[80vh] max-h-[760px] min-h-0 rounded-[3px] border border-[#523A28]/40 bg-[#F7F3E9] text-[#2C1810] shadow-[0_25px_65px_-12px_rgba(26,18,12,0.45)] overflow-hidden transition-all duration-[600ms] ease-out flex flex-col ${
-          isOpening
+        className={`relative w-[96vw] lg:w-[80vw] max-w-[1240px] h-[92vh] lg:h-[80vh] max-h-[760px] min-h-0 rounded-[3px] border border-[#523A28]/40 bg-[#F7F3E9] text-[#2C1810] shadow-[0_25px_65px_-12px_rgba(26,18,12,0.45)] overflow-hidden transition-all duration-[600ms] ease-out flex flex-col ${isOpening
             ? "scale-100 opacity-100 translate-y-0"
             : "scale-[0.96] opacity-0 translate-y-2"
-        }`}
+          }`}
       >
         {/* Subtle vintage inner matting frame line */}
         <div className="absolute inset-[3px] border border-[#523A28]/20 pointer-events-none z-30" />
@@ -193,7 +188,7 @@ export function UnfoldedDetailModal({ poster, onClose }: UnfoldedDetailModalProp
               LEFT / MAIN AREA (roughly 52% on Desktop): Hero & 3 Image Strip
               =================================================================== */}
           <div className="relative w-full lg:w-[52%] h-[46vh] sm:h-[50vh] lg:h-full shrink-0 p-3.5 sm:p-5 lg:p-6 flex flex-col justify-between bg-[#EFE6D5]/35 border-b lg:border-b-0 lg:border-r border-[#523A28]/20 overflow-hidden">
-            
+
 
             {/* Large Hero Image or Active Preview */}
             <div className="relative flex-1 w-full min-h-0 mb-3">
@@ -234,9 +229,9 @@ export function UnfoldedDetailModal({ poster, onClose }: UnfoldedDetailModalProp
             tabIndex={0}
             className="archival-scrollbar relative w-full lg:w-[48%] h-auto lg:h-full min-h-0 flex-1 flex flex-col overflow-y-auto overscroll-contain focus:outline-none p-4 sm:p-6 lg:p-7 selection:bg-[#8B2515]/20 text-[#2C1810]"
           >
-            
+
             <div className="space-y-3.5 sm:space-y-4 pb-8">
-              
+
 
               {/* MAIN: Location Title & Poetic Tagline */}
               <div>

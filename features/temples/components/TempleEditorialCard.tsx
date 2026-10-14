@@ -74,9 +74,8 @@ export function TempleEditorialCard({
         >
           {/* ─── PHOTO BANNER (Expands from half section ~50% to 100% full section on hover) ─── */}
           <div
-            className={`relative lg:absolute lg:top-0 lg:bottom-0 ${
-              isPhotoLeft ? "lg:left-0" : "lg:right-0"
-            } w-full h-[220px] sm:h-[240px] lg:h-full lg:w-1/2 group-hover:lg:w-full transition-all duration-700 ease-[cubic-bezier(0.25,0.46,0.45,0.94)] z-0 overflow-hidden pointer-events-none`}
+            className={`relative lg:absolute lg:top-0 lg:bottom-0 ${isPhotoLeft ? "lg:left-0" : "lg:right-0"
+              } w-full h-[220px] sm:h-[240px] lg:h-full lg:w-1/2 group-hover:lg:w-full transition-all duration-700 ease-[cubic-bezier(0.25,0.46,0.45,0.94)] z-0 overflow-hidden pointer-events-none`}
           >
             <div className="relative w-full h-full transform-gpu transition-transform duration-[900ms] ease-[cubic-bezier(0.25,0.46,0.45,0.94)] group-hover:scale-[1.04]">
               <Image
@@ -110,28 +109,25 @@ export function TempleEditorialCard({
 
               {/* Hover contrast scrim — fades in to ensure text remains clearly readable over image */}
               <div
-                className={`absolute inset-0 pointer-events-none transition-opacity duration-700 opacity-0 group-hover:opacity-100 ${
-                  isPhotoLeft
+                className={`absolute inset-0 pointer-events-none transition-opacity duration-700 opacity-0 group-hover:opacity-100 ${isPhotoLeft
                     ? "bg-gradient-to-r from-black/20 via-black/55 to-black/85"
                     : "bg-gradient-to-l from-black/20 via-black/55 to-black/85"
-                }`}
+                  }`}
               />
             </div>
           </div>
 
           {/* ─── INFO / EDITORIAL COLUMN (Positioned on top of image in z-10) ─── */}
           <div
-            className={`relative z-10 flex flex-col justify-center overflow-hidden ${
-              isPhotoLeft ? "lg:col-start-2" : "lg:col-start-1"
-            } px-6 sm:px-10 lg:px-12 xl:px-16 py-5 lg:py-5`}
+            className={`relative z-10 flex flex-col justify-center overflow-hidden ${isPhotoLeft ? "lg:col-start-2" : "lg:col-start-1"
+              } px-6 sm:px-10 lg:px-12 xl:px-16 py-5 lg:py-5`}
           >
             {/* ── Foreground Editorial Text Block — Centered & Vertically Balanced ── */}
             <div
-              className={`relative z-10 w-full max-w-[420px] mx-auto h-full flex flex-col justify-between transition-all duration-700 ease-out ${
-                isVisible
+              className={`relative z-10 w-full max-w-[420px] mx-auto h-full flex flex-col justify-between transition-all duration-700 ease-out ${isVisible
                   ? "opacity-100 translate-y-0"
                   : "opacity-0 translate-y-5"
-              }`}
+                }`}
             >
               {/* Header group: Title + Subtitle */}
               <div>

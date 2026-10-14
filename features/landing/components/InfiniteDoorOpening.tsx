@@ -8,6 +8,7 @@ import {
   markInfiniteDoorCompleted,
   shouldSkipInfiniteDoor,
   useIsomorphicLayoutEffect,
+  useShouldSkipInfiniteDoor,
 } from "@/lib/doorState";
 import { useLanding } from "../context/LandingProvider";
 
@@ -41,6 +42,7 @@ interface Particle {
 export function InfiniteDoorOpening() {
   const { completeEntrance, skipEntrance } = useLanding();
   const prefersReducedMotion = useReducedMotion();
+  const shouldSkip = useShouldSkipInfiniteDoor();
 
   const [hasExited, setHasExited] = useState(false);
 
@@ -92,11 +94,12 @@ export function InfiniteDoorOpening() {
     };
   }, [hasExited]);
 
-  // Initialize particles once
+  // Initialize particles once (optimized for mobile device GPUs)
   useEffect(() => {
     if (hasExited || shouldSkipInfiniteDoor()) return;
 
-    const count = 65;
+    const isMobile = typeof window !== "undefined" && window.innerWidth < 768;
+    const count = isMobile ? 32 : 65;
     const particles: Particle[] = [];
     for (let i = 0; i < count; i++) {
       particles.push({
@@ -122,13 +125,12 @@ export function InfiniteDoorOpening() {
     }
 
     if (whiteoutRef.current) {
-      // Rapid white flash into Kashi
+      // Snappy white flash into Kashi
       gsap.to(whiteoutRef.current, {
         opacity: 1,
-        duration: 0.25,
+        duration: 0.15,
         ease: "power2.in",
         onComplete: () => {
-          // Immediately eliminate doorway scene & dark container background
           if (dollyRef.current) {
             dollyRef.current.style.display = "none";
           }
@@ -136,10 +138,9 @@ export function InfiniteDoorOpening() {
             containerRef.current.style.backgroundColor = "transparent";
           }
           skipEntrance();
-          // Smoothly dissolve white curtain directly to reveal Kashi landing page
           gsap.to(whiteoutRef.current, {
             opacity: 0,
-            duration: 0.7,
+            duration: 0.25,
             ease: "power2.out",
             onComplete: () => {
               setHasExited(true);
@@ -203,11 +204,13 @@ export function InfiniteDoorOpening() {
       );
 
       // Camera Dolly (2.5s - 10.8s): Slow, monumental forward push
+      const isMobile =
+        typeof window !== "undefined" && window.innerWidth < 640;
       tl.to(
         dollyRef.current,
         {
-          scale: 1.18,
-          y: -22,
+          scale: isMobile ? 1.06 : 1.18,
+          y: isMobile ? -8 : -22,
           duration: 8.3,
           ease: "power1.inOut",
         },
@@ -282,7 +285,7 @@ export function InfiniteDoorOpening() {
         },
         10.8,
       );
-    }, containerRef);
+    }, containerRef.current || undefined);
 
     return () => {
       ctx.revert();
@@ -363,8 +366,12 @@ export function InfiniteDoorOpening() {
             ? 2 * currentProgress * currentProgress
             : 1 - Math.pow(-2 * currentProgress + 2, 2) / 2;
 
-        const bottomPercent = 3.5 + (14.5 - 3.5) * smoothProgress;
-        const boyScale = 0.98 - (0.98 - 0.58) * smoothProgress;
+        const isMobile =
+          typeof window !== "undefined" && window.innerWidth < 640;
+        const targetBottom = isMobile ? 17.0 : 14.5;
+        const targetScale = isMobile ? 0.54 : 0.58;
+        const bottomPercent = 3.5 + (targetBottom - 3.5) * smoothProgress;
+        const boyScale = 0.98 - (0.98 - targetScale) * smoothProgress;
 
         if (boyContainerRef.current) {
           boyContainerRef.current.style.bottom = `${bottomPercent}%`;
@@ -392,9 +399,10 @@ export function InfiniteDoorOpening() {
 
           ctx.clearRect(0, 0, w, h);
 
-          // Center of the doorway light portal
+          // Center of the doorway light portal (responsive vertical alignment)
+          const isMobilePortal = w < 640;
           const cx = w * 0.502;
-          const cy = h * 0.44;
+          const cy = h * (isMobilePortal ? 0.42 : 0.44);
 
           // Volumetric rays intensity curve
           let raysIntensity = 0.0;
@@ -539,8 +547,15 @@ export function InfiniteDoorOpening() {
   useEffect(() => {
     const handleResize = () => {
       if (canvasRef.current) {
-        canvasRef.current.width = window.innerWidth;
-        canvasRef.current.height = window.innerHeight;
+        const newW = window.innerWidth;
+        const newH = window.innerHeight;
+        if (
+          Math.abs(canvasRef.current.width - newW) > 10 ||
+          Math.abs(canvasRef.current.height - newH) > 50
+        ) {
+          canvasRef.current.width = newW;
+          canvasRef.current.height = newH;
+        }
       }
     };
     handleResize();
@@ -548,7 +563,7 @@ export function InfiniteDoorOpening() {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  if (hasExited) {
+  if (hasExited || shouldSkip) {
     return null;
   }
 
@@ -557,7 +572,7 @@ export function InfiniteDoorOpening() {
       ref={containerRef}
       role="dialog"
       aria-label="The Infinite Door — Entering Kashi"
-      className="fixed inset-0 z-[100] overflow-hidden select-none bg-[#050504] cursor-default"
+      className="fixed inset-0 z-[100] h-[100dvh] w-full overflow-hidden select-none bg-[#050504] cursor-default touch-none overscroll-none"
     >
       {/* =====================================================================
           CINEMATIC CAMERA DOLLY CONTAINER
@@ -576,6 +591,7 @@ export function InfiniteDoorOpening() {
             alt="The Infinite Doorway of Kashi"
             fill
             priority
+            unoptimized
             sizes="100vw"
             className="object-cover object-[center_42%] sm:object-[center_45%]"
           />
@@ -597,8 +613,8 @@ export function InfiniteDoorOpening() {
             transformOrigin: "50% 100%",
           }}
         >
-          {/* High-fidelity 60 FPS Walking Cycle Canvas */}
-          <div className="relative w-16 sm:w-20 md:w-24 aspect-[345/1120] drop-shadow-[0_0_16px_rgba(255,220,150,0.25)]">
+          {/* High-fidelity 60 FPS Walking Cycle Canvas — Responsively scaled for mobile */}
+          <div className="relative w-11 min-[380px]:w-12 sm:w-20 md:w-24 aspect-[345/1120] drop-shadow-[0_0_16px_rgba(255,220,150,0.25)]">
             <canvas
               ref={boyCanvasRef}
               width={345}
@@ -610,7 +626,7 @@ export function InfiniteDoorOpening() {
           {/* Contact shadow dynamically anchored to stance foot */}
           <div
             ref={shadowRef}
-            className="w-14 sm:w-16 h-2.5 rounded-full bg-black/85 blur-[3px] -mt-2 transform scale-y-50 will-change-transform"
+            className="w-10 min-[380px]:w-11 sm:w-16 h-2 sm:h-2.5 rounded-full bg-black/85 blur-[3px] -mt-1.5 sm:-mt-2 transform scale-y-50 will-change-transform"
           />
         </div>
       </div>
@@ -625,45 +641,53 @@ export function InfiniteDoorOpening() {
       >
         {/* Breathing warm ember in distance during pitch darkness */}
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-          <div className="w-32 h-32 rounded-full bg-[#E5B869]/15 blur-3xl animate-pulse" />
+          <div className="w-28 sm:w-32 h-28 sm:h-32 rounded-full bg-[#E5B869]/15 blur-3xl animate-pulse" />
         </div>
       </div>
 
       {/* =====================================================================
-          LITERARY EDITORIAL QUOTE: FRAMING THE BOY IN THE CENTER
-          Arrangement:
-          THE THREE WORLDS        [BOY]        FORM ONE CITY OF MINE
-          AND KASHI IS MY         [BOY]        ROYAL PALACE THEREIN
+          LITERARY EDITORIAL QUOTE:
+          - Mobile (< sm): Centered, multi-line cinematic quote positioned
+            elegantly in the radiant light portal above the walking boy,
+            with zero truncation, clear typography and rich drop shadows.
+          - Desktop (sm+): Iconic flanking arrangement framing the boy in the center.
           ===================================================================== */}
       <div
         ref={quoteRef}
         aria-hidden="true"
-        className="absolute inset-x-0 z-40 flex items-center justify-center pointer-events-none px-2 min-[380px]:px-4 sm:px-8"
-        style={{
-          top: "68%",
-          transform: "translateY(-50%)",
-        }}
+        className="absolute inset-x-0 z-40 flex items-center justify-center pointer-events-none px-4 sm:px-8 opacity-0 top-[56%] sm:top-[68%] -translate-y-1/2"
       >
-        <div className="w-full max-w-6xl grid grid-cols-[1fr_auto_1fr] items-center gap-1.5 min-[380px]:gap-3 sm:gap-6 md:gap-8 lg:gap-10">
+        {/* Mobile Layout (< sm): Centered, elegant, perfectly legible, zero truncation */}
+        <div className="flex sm:hidden flex-col items-center text-center max-w-[340px] min-[390px]:max-w-[370px] mx-auto px-1">
+          <p className="font-serif uppercase tracking-[0.11em] min-[380px]:tracking-[0.13em] text-[11px] min-[380px]:text-[12px] font-medium text-[#FFFBF2] leading-[1.65] drop-shadow-[0_2px_4px_rgba(0,0,0,1)] drop-shadow-[0_4px_16px_rgba(0,0,0,0.95)] drop-shadow-[0_0_24px_rgba(0,0,0,0.9)]">
+            The three worlds form one city of mine,
+          </p>
+          <p className="font-serif uppercase tracking-[0.11em] min-[380px]:tracking-[0.13em] text-[11px] min-[380px]:text-[12px] font-medium text-[#F0C068] leading-[1.65] mt-1 drop-shadow-[0_2px_4px_rgba(0,0,0,1)] drop-shadow-[0_4px_16px_rgba(0,0,0,0.95)] drop-shadow-[0_0_24px_rgba(0,0,0,0.9)]">
+            and Kashi is my royal palace therein.
+          </p>
+        </div>
+
+        {/* Desktop / Tablet Layout (sm+): Iconic flanking arrangement around the boy */}
+        <div className="hidden sm:grid w-full max-w-6xl grid-cols-[1fr_auto_1fr] items-center sm:gap-6 md:gap-8 lg:gap-10">
           {/* Left Wing: Right-aligned toward the boy */}
-          <div className="flex flex-col items-end text-right font-serif uppercase tracking-[0.14em] min-[380px]:tracking-[0.18em] sm:tracking-[0.26em] md:tracking-[0.3em] text-[#FFFBF2] leading-[1.5] sm:leading-[1.8] drop-shadow-[0_2px_4px_rgba(0,0,0,1)] drop-shadow-[0_4px_16px_rgba(0,0,0,0.95)] drop-shadow-[0_0_24px_rgba(0,0,0,0.9)]">
-            <span className="text-[10px] min-[360px]:text-[11.5px] min-[400px]:text-xs sm:text-lg md:text-2xl lg:text-3xl font-medium whitespace-nowrap">
+          <div className="flex flex-col items-end text-right font-serif uppercase tracking-[0.24em] md:tracking-[0.28em] text-[#FFFBF2] sm:leading-[1.7] md:leading-[1.8] drop-shadow-[0_2px_4px_rgba(0,0,0,1)] drop-shadow-[0_4px_16px_rgba(0,0,0,0.95)] drop-shadow-[0_0_24px_rgba(0,0,0,0.9)]">
+            <span className="sm:text-lg md:text-2xl lg:text-3xl font-medium whitespace-nowrap">
               The three worlds
             </span>
-            <span className="text-[10px] min-[360px]:text-[11.5px] min-[400px]:text-xs sm:text-lg md:text-2xl lg:text-3xl font-medium text-[#F0C068] whitespace-nowrap mt-1 sm:mt-2">
+            <span className="sm:text-lg md:text-2xl lg:text-3xl font-medium text-[#F0C068] whitespace-nowrap sm:mt-1.5 md:mt-2">
               and Kashi is my
             </span>
           </div>
 
           {/* Central Frame: Spacer sized to match the boy's silhouette width */}
-          <div className="w-10 min-[380px]:w-14 sm:w-24 md:w-28 lg:w-32 h-16 shrink-0 pointer-events-none" />
+          <div className="sm:w-20 md:w-28 lg:w-32 h-16 shrink-0 pointer-events-none" />
 
           {/* Right Wing: Left-aligned toward the boy */}
-          <div className="flex flex-col items-start text-left font-serif uppercase tracking-[0.14em] min-[380px]:tracking-[0.18em] sm:tracking-[0.26em] md:tracking-[0.3em] text-[#FFFBF2] leading-[1.5] sm:leading-[1.8] drop-shadow-[0_2px_4px_rgba(0,0,0,1)] drop-shadow-[0_4px_16px_rgba(0,0,0,0.95)] drop-shadow-[0_0_24px_rgba(0,0,0,0.9)]">
-            <span className="text-[10px] min-[360px]:text-[11.5px] min-[400px]:text-xs sm:text-lg md:text-2xl lg:text-3xl font-medium whitespace-nowrap">
+          <div className="flex flex-col items-start text-left font-serif uppercase tracking-[0.24em] md:tracking-[0.28em] text-[#FFFBF2] sm:leading-[1.7] md:leading-[1.8] drop-shadow-[0_2px_4px_rgba(0,0,0,1)] drop-shadow-[0_4px_16px_rgba(0,0,0,0.95)] drop-shadow-[0_0_24px_rgba(0,0,0,0.9)]">
+            <span className="sm:text-lg md:text-2xl lg:text-3xl font-medium whitespace-nowrap">
               form one city of mine,
             </span>
-            <span className="text-[10px] min-[360px]:text-[11.5px] min-[400px]:text-xs sm:text-lg md:text-2xl lg:text-3xl font-medium text-[#FFFBF2] whitespace-nowrap mt-1 sm:mt-2">
+            <span className="sm:text-lg md:text-2xl lg:text-3xl font-medium text-[#FFFBF2] whitespace-nowrap sm:mt-1.5 md:mt-2">
               royal palace therein.
             </span>
           </div>
@@ -678,7 +702,7 @@ export function InfiniteDoorOpening() {
       <div
         ref={whiteoutRef}
         aria-hidden="true"
-        className="fixed inset-0 z-50 pointer-events-none bg-[#FFFFFF]"
+        className="fixed inset-0 z-50 pointer-events-none bg-[#FFFFFF] opacity-0"
       >
         <div
           className="absolute inset-0"
@@ -690,12 +714,21 @@ export function InfiniteDoorOpening() {
       </div>
 
       {/* =====================================================================
-          SKIP CONTROL: Minimalist, discreet corner button
+          SKIP CONTROL: Minimalist, discreet corner button with safe area insets
           ===================================================================== */}
       <button
         type="button"
         onClick={handleSkip}
-        className="fixed top-6 right-6 sm:top-8 sm:right-10 z-[120] flex items-center gap-2.5 px-3.5 py-1.5 rounded-full border border-[#FAF6F0]/20 bg-[#10100E]/50 backdrop-blur-md text-[11px] sm:text-xs font-mono tracking-[0.25em] text-[#D6CEBE]/70 hover:text-[#FAF6F0] hover:border-[#E5B869]/70 hover:bg-[#10100E]/80 transition-all duration-300 pointer-events-auto select-none"
+        onTouchEnd={(e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          handleSkip();
+        }}
+        style={{
+          top: "max(1.25rem, calc(0.75rem + env(safe-area-inset-top, 0px)))",
+          right: "max(1rem, calc(0.75rem + env(safe-area-inset-right, 0px)))",
+        }}
+        className="fixed z-[120] flex items-center gap-2.5 px-3.5 py-2 min-h-[44px] rounded-full border border-[#FAF6F0]/20 bg-[#10100E]/50 backdrop-blur-md text-[11px] sm:text-xs font-mono tracking-[0.25em] text-[#D6CEBE]/80 hover:text-[#FAF6F0] active:scale-95 hover:border-[#E5B869]/70 hover:bg-[#10100E]/80 transition-all duration-300 pointer-events-auto select-none touch-manipulation cursor-pointer"
         aria-label="Skip introduction to Kashi"
       >
         <span>SKIP</span>
