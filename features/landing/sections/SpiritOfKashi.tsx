@@ -45,7 +45,7 @@ export function SpiritOfKashi() {
           {/* Natural image plate with NO card background */}
           <div className="relative aspect-[16/10] overflow-hidden rounded-sm border border-slate-300/60 bg-transparent shadow-md transition-shadow hover:shadow-xl">
             <SafeImage
-              src="/images/hero/ganga-hero.jpg"
+              src="/images/hero/ganga-hero.webp"
               alt="The Ganga at Kashi, seen from the water."
               fallbackLabel="The Ganga at Kashi"
               fill

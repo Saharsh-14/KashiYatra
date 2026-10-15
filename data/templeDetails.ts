@@ -98,7 +98,7 @@ export const templeDetails: Record<string, TempleDetailData> = {
         "The present Kashi Vishwanath Temple was built in 1780 by Maharani Ahilyabai Holkar of Indore. The shrine had been destroyed and rebuilt several times throughout history.",
         "Later, Maharaja Ranjit Singh donated gold for two of the temple's domes in 1839, contributing to the golden identity of the shrine seen today.",
       ],
-      image: "/images/temples/kashi-vishwanath/golden-shikharas.jpg",
+      image: "/images/temples/kashi-vishwanath/golden-shikharas.webp",
       imageCaption: "Historic Gilded Shikharas & Architecture",
       milestones: [
         {
@@ -200,7 +200,7 @@ export const templeDetails: Record<string, TempleDetailData> = {
         "The deity is traditionally represented by a silver-faced image adorned with flowers and associated with a dog, Kaal Bhairav's vahana (vehicle).",
         "His fierce appearance reflects his role not simply as a destroyer, but as the guardian who protects the sacred order of Kashi.",
       ],
-      image: "/images/temples/kaal-bhairav/silver-mask.jpg",
+      image: "/images/temples/kaal-bhairav/silver-mask.webp",
       imageCaption: "The Sacred Silver Face of Bhairava",
     },
     whyItMatters: {
@@ -299,7 +299,7 @@ export const templeDetails: Record<string, TempleDetailData> = {
         "Sankat Mochan is also one of the places where Kashi's spiritual life meets its artistic tradition, hosting the renowned Sankat Mochan Sangeet Samaroh, an annual classical music and dance festival where celebrated artists perform as an offering to Lord Hanuman.",
         "The deity of Hanuman here is traditionally adorned with sindoor and flowers. Devotees also offer sweets, particularly besan laddus, as prasad. The peaceful green surroundings and the presence of monkeys have become familiar parts of the Sankat Mochan experience.",
       ],
-      image: "/images/temples/sankat-mochan/sanctum-darshan.jpg",
+      image: "/images/temples/sankat-mochan/sanctum-darshan.webp",
       imageCaption: "Sacred Sindoor-Adorned Deity of Lord Hanuman",
       objectPosition: "object-[center_30%]",
       milestones: [
@@ -411,7 +411,7 @@ export const templeDetails: Record<string, TempleDetailData> = {
         "Navratri is one of the most important periods at Durga Temple. During these nine sacred nights, devotees gather to worship the different manifestations of Goddess Durga. The temple becomes especially vibrant with flowers, lamps, devotional singing and ritual offerings.",
         "The atmosphere during Navratri reflects the eternal essence of Shakti worship: Strength that protects. Power that destroys evil. Energy that sustains life.",
       ],
-      image: "/images/temples/durga-temple/durga-kund-night.jpg",
+      image: "/images/temples/durga-temple/durga-kund-night.webp",
       imageCaption: "Sacred Durga Kund & Nagara Shikhara Reflection",
       objectPosition: "object-center",
       milestones: [
@@ -526,7 +526,7 @@ export const templeDetails: Record<string, TempleDetailData> = {
         "Like several important shrines of Kashi, Gauri Kedareshwar is associated with the restoration efforts of Maharani Ahilyabai Holkar in the 18th century. Her patronage helped restore and strengthen several sacred sites across Kashi, preserving temples that remain active places of worship today.",
         "The temple stands above Kedar Ghat, one of Kashi's most distinctive riverfront spaces. Pilgrims traditionally approach through the ghat, creating a unique spiritual sequence: Ganga → Kedar Ghat → Gauri Kedareshwar → Darshan. Here, river, ghat and temple become one continuous sacred landscape.",
       ],
-      image: "/images/temples/gauri-kedareshwar/svayambhu-lingam.jpg",
+      image: "/images/temples/gauri-kedareshwar/svayambhu-lingam.webp",
       imageCaption: "Sacred Svayambhu Lingam & Silver Serpent",
       objectPosition: "object-center",
       milestones: [
@@ -645,7 +645,7 @@ export const templeDetails: Record<string, TempleDetailData> = {
         "The offerings symbolize gratitude for the food that sustains life and the abundance provided by the divine mother. After the offering, the food becomes prasad and is distributed among devotees. The ritual transforms food from something ordinary into an expression of devotion.",
         "The worship of Annapurna has always been closely connected with the act of feeding others. The temple's traditions reflect the belief that offering food is itself an act of worship. Here, devotion does not end at the sanctum — it reaches the plate, reaches the hungry, and becomes sacred service (annadaan).",
       ],
-      image: "/images/temples/annapurna-temple/golden-darshan.jpg",
+      image: "/images/temples/annapurna-temple/golden-darshan.webp",
       imageCaption: "The Rare Golden Darshan on Annakut",
       objectPosition: "object-[center_35%]",
       milestones: [
@@ -763,7 +763,7 @@ export const templeDetails: Record<string, TempleDetailData> = {
         "Sankatha Mata is worshipped as a powerful, compassionate form of Shakti, and the shrine is traditionally associated with protective maternal energy. Devotees offer flowers, lamps, sweets and sindoor while praying for the removal of difficulties.",
         "The temple is best experienced not as an isolated monument, but as part of the living spiritual fabric of Kashi — a quiet refuge where everyday life and the transcendent meet.",
       ],
-      image: "/images/temples/sankatha-devi/darshan-silver-mukut.jpg",
+      image: "/images/temples/sankatha-devi/darshan-silver-mukut.webp",
       imageCaption: "Sacred Form of Maa Sankatha & Silver Mukut",
       objectPosition: "object-[center_45%]",
       milestones: [
@@ -878,7 +878,7 @@ export const templeDetails: Record<string, TempleDetailData> = {
         "One of the temple's remarkable features is the presence of sacred Sanskrit texts and verses carved into its walls. The temple is especially associated with the Bhagavad Gita, allowing visitors to encounter spiritual philosophy not only through worship but also through written teachings.",
         "This creates an important connection between the temple and the educational identity of BHU: Knowledge, Faith, and Discipline.",
       ],
-      image: "/images/temples/new-vishwanath-bhu/sanctum-darshan-lingam.jpg",
+      image: "/images/temples/new-vishwanath-bhu/sanctum-darshan-lingam.webp",
       imageCaption: "Sacred Sanctum Darshan & Shiva Lingam",
       objectPosition: "object-[center_45%]",
       milestones: [

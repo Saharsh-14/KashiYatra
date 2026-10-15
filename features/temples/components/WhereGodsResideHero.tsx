@@ -123,7 +123,7 @@ export function WhereGodsResideHero({ onEnter }: WhereGodsResideHeroProps) {
                 }`}
               >
                 <Image
-                  src="/images/temples/threshold-aperture.jpg"
+                  src="/images/temples/threshold-aperture.webp"
                   alt="Atmospheric stone doorway bathed in quiet shadows and lantern glow"
                   fill
                   priority

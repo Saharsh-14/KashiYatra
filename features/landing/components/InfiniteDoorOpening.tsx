@@ -82,13 +82,13 @@ export function InfiniteDoorOpening() {
     if (hasExited || shouldSkipInfiniteDoor()) return;
 
     const sheet = new window.Image();
-    sheet.src = "/images/hero/boy-walk-cycle.png";
+    sheet.src = "/images/hero/boy-walk-cycle.webp";
     sheet.onload = () => {
       walkSheetRef.current = sheet;
     };
 
     const fallback = new window.Image();
-    fallback.src = "/images/hero/boy-silhouette.png";
+    fallback.src = "/images/hero/boy-silhouette.webp";
     fallback.onload = () => {
       fallbackImgRef.current = fallback;
     };
@@ -587,7 +587,7 @@ export function InfiniteDoorOpening() {
         {/* Layer 1: Monumental Freestanding Doorway Plate */}
         <div className="absolute inset-0">
           <Image
-            src="/images/hero/infinite-door-empty.jpg"
+            src="/images/hero/infinite-door-empty.webp"
             alt="The Infinite Doorway of Kashi"
             fill
             priority

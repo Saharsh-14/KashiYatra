@@ -18,7 +18,7 @@ export function GhatExcursionTicket() {
         {/* Top Panoramic Banner (Natural image plate with no card background) */}
         <div className="relative aspect-[4.2/1] w-full overflow-hidden bg-transparent">
           <SafeImage
-            src="/images/hero/ganga-hero.jpg"
+            src="/images/hero/ganga-hero.webp"
             alt="Dawn excursion boats along the Varanasi ghats"
             fallbackLabel="Kashi Ghat Yatra Pass"
             fill

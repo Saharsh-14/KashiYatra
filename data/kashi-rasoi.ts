@@ -163,7 +163,7 @@ export const KASHI_RASOI_FOODS: KashiRasoiFood[] = [
     longDescription:
       "Banaras holds one of India's most reverent confectionery traditions. Generations of halwais in Chaukhamba and Vishwanath Gali craft iconic sweets like caramelized red Lal Peda stamped with heritage dies, delicate candied pointed-gourd stuffed with pistachios and mawa, and ghee-soaked Chandrakalas wrapped in tissue-thin edible silver foil. Each confection is rooted in temple devotion, prepared with unpasteurized buffalo milk reduced for hours in seasoned brass cauldrons until dense and golden.",
     mediaDir: "/kashi-rasoi/food/banarasi-sweets",
-    image: "/kashi-rasoi/food/banarasi-sweets/master-card.jpg",
+    image: "/kashi-rasoi/food/banarasi-sweets/master-card.webp",
     placeholders: {
       hero: {
         title: "Heritage Banarasi Sweets Platter",
@@ -209,7 +209,7 @@ export const KASHI_RASOI_FOODS: KashiRasoiFood[] = [
     longDescription:
       "In Kashi, golgappe (locally known as paani batashas) are served not as an assembly-line snack, but as an orchestrated progression of temperatures and herbs. Crisp spheres of hand-rolled suji crack open to receive steaming spiced matar (white peas), before being immersed into earthenware urns containing five distinct herbal infusions: pungent heeng, cooling mint coriander, fiery black pepper, sweet tamarind saunth, and tart amchur.",
     mediaDir: "/kashi-rasoi/food/golgappe",
-    image: "/kashi-rasoi/food/golgappe/master-card.jpg",
+    image: "/kashi-rasoi/food/golgappe/master-card.webp",
     placeholders: {
       hero: {
         title: "Five-Herb Golgappe Presentation",
@@ -255,7 +255,7 @@ export const KASHI_RASOI_FOODS: KashiRasoiFood[] = [
     longDescription:
       "In the cultural ethos of Banaras, Paan is far more than an after-meal palate cleanser — it is a sophisticated performing art, a symbol of royal court etiquette, and a gesture of supreme hospitality. The sacred Maghai leaf, grown in sheltered betel gardens and harvested tender, is celebrated for having zero fibrous ribs; it melts upon the tongue without requiring mastication. The paan-wala operates with the precision of a master jeweler: smearing the leaf with subtle slaked lime and boiled acacia kattha, sprinkling toasted sweet fennel, fragrant sun-cooked gulkand (Damask rose petal preserve), crushed betel nut, warming cardamom seeds, and cooling menthol crystals.",
     mediaDir: "/kashi-rasoi/food/banarasi-paan",
-    image: "/kashi-rasoi/food/banarasi-paan/master-card.jpg",
+    image: "/kashi-rasoi/food/banarasi-paan/master-card.webp",
     placeholders: {
       hero: {
         title: "Shahi Maghai Paan Gilouri",
@@ -301,7 +301,7 @@ export const KASHI_RASOI_FOODS: KashiRasoiFood[] = [
     longDescription:
       "Makhmali Malaiyo is perhaps the most ethereal dessert in the world — an ephemeral delicacy that exists only during the crisp winter months from November to February. Large cauldrons of raw whole milk are boiled until dense, then placed on open rooftop terraces overnight under the cold, star-filled Banarasi sky. The ambient winter dew (os) and chilly river breeze initiate a unique micro-aeration. Before sunrise, sweetmakers vigorously churn the chilled milk with long wooden beaters until a miraculous, golden-yellow cloud of foam rises to the brim.",
     mediaDir: "/kashi-rasoi/food/malaiyo",
-    image: "/kashi-rasoi/food/malaiyo/master-card.jpg",
+    image: "/kashi-rasoi/food/malaiyo/master-card.webp",
     placeholders: {
       hero: {
         title: "Saffron Dew-Whipped Malaiyo Cloud",
@@ -347,7 +347,7 @@ export const KASHI_RASOI_FOODS: KashiRasoiFood[] = [
     longDescription:
       "Across every ghat and alleyway of Kashi, dawn begins with the rhythmic clink of brass saucepans. Strong Assam tea leaves, crushed fresh ginger, green cardamom, and rich buffalo milk simmer endlessly over glowing charcoal. It is paired with rustic hearth-toasted bread slathered with freshly churned unsalted white butter (safed makkhan) and dusted with sugar crystals. Here philosophers, poets, scholars, and pilgrims gather to debate life over scalding sips.",
     mediaDir: "/kashi-rasoi/food/chai-toast",
-    image: "/kashi-rasoi/food/chai-toast/master-card.jpg",
+    image: "/kashi-rasoi/food/chai-toast/master-card.webp",
     placeholders: {
       hero: {
         title: "Steaming Ghatside Chai & Toast",
@@ -393,7 +393,7 @@ export const KASHI_RASOI_FOODS: KashiRasoiFood[] = [
     longDescription:
       "A glass of lassi in Banaras bears little resemblance to ordinary commercial smoothies. Here, rich, unpasteurized buffalo milk is boiled in wide cauldrons until deeply reduced, inoculated with heirloom curd culture, and set overnight inside unglazed clay pots. Come morning, the curd is churned entirely by hand using a ribbed wooden mathani (churner) in rhythmic cadence, blending crystallized sugar into thick, silky velvet without adding a single drop of water. It is poured into porous kulhads that naturally chill the yogurt, topped with a dense golden slab of skimmed malai, saffron rabdi, and rose petals.",
     mediaDir: "/kashi-rasoi/food/banarasi-lassi",
-    image: "/kashi-rasoi/food/banarasi-lassi/master-card.jpg",
+    image: "/kashi-rasoi/food/banarasi-lassi/master-card.webp",
     placeholders: {
       hero: {
         title: "Dense Velvet Lassi Kulhad",

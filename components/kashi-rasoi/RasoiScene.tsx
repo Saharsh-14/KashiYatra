@@ -35,7 +35,7 @@ export function RasoiScene({ initialFoodSlug }: RasoiSceneProps) {
       {/* Background Image of Kashi Ghats & Exhibition Stage */}
       <div className="absolute inset-0 z-0 pointer-events-none select-none">
         <Image
-          src="/images/kashi-rasoi-bg.jpg"
+          src="/images/kashi-rasoi-bg.webp"
           alt="Kashi Rasoi Background"
           fill
           priority

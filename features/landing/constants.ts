@@ -31,7 +31,7 @@ export const PRELOADER = {
  * else lazy-loads as the visitor scrolls (architecture.md §29, §53). Preloading
  * all eight ghat photographs here would turn a preloader into a download.
  */
-export const PRELOAD_ASSETS = ["/images/hero/ganga-hero.jpg"] as const;
+export const PRELOAD_ASSETS = ["/images/hero/ganga-hero.webp"] as const;
 
 /**
  * Landing section ids, in document order.

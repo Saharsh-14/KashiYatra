@@ -366,7 +366,7 @@ export function StepsToEternity() {
             {/* Background Image */}
             <div className="absolute inset-0 z-0">
               <Image
-                src="/images/landing/steps-to-eternity-bg.jpg"
+                src="/images/landing/steps-to-eternity-bg.webp"
                 alt="Ancient stone steps of Varanasi at sunset along the sacred River Ganga"
                 fill
                 priority

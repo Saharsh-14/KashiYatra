@@ -54,7 +54,7 @@ export function TempleEditorialCard({
     return () => observer.disconnect();
   }, []);
 
-  const heroSrc = temple.heroImage || `/images/temples/${temple.slug}/hero.jpg`;
+  const heroSrc = temple.heroImage || `/images/temples/${temple.slug}/hero.webp`;
 
   return (
     <article

@@ -23,7 +23,7 @@ export const storyChapters: readonly StoryChapter[] = [
     title: "Origins",
     narrative:
       "Before it was written about, it was already old. The earliest records are not the beginning of the city — they are the moment it began to be described.",
-    image: "/images/story/origin.jpg",
+    image: "/images/story/origin.webp",
     imageAlt: "Old riverside architecture at Kashi, seen across the water.",
     basis: "tradition",
   },
@@ -33,7 +33,7 @@ export const storyChapters: readonly StoryChapter[] = [
     title: "Shiva and the River",
     narrative:
       "Here the two are not separate stories. The river comes down and the city gathers where it does, and the telling of how that happened belongs to faith rather than to chronology.",
-    image: "/images/story/ganga.jpg",
+    image: "/images/story/ganga.webp",
     imageAlt: "The Ganga flowing past the ghats of Kashi.",
     basis: "tradition",
   },
@@ -43,7 +43,7 @@ export const storyChapters: readonly StoryChapter[] = [
     title: "Sarnath",
     narrative:
       "A short distance north, the first sermon is recorded. It is one of the few parts of this landscape that history can date rather than inherit.",
-    image: "/images/story/buddha.jpg",
+    image: "/images/story/buddha.webp",
     imageAlt: "The stupa and monastic remains at Sarnath.",
     basis: "record",
   },
@@ -53,7 +53,7 @@ export const storyChapters: readonly StoryChapter[] = [
     title: "The City Now",
     narrative:
       "Kashi is not preserved. It is lived in — continuously, by people who treat its oldest structures as ordinary parts of a working day.",
-    image: "/images/story/contemporary.jpg",
+    image: "/images/story/contemporary.webp",
     imageAlt: "Present-day life along the ghats and lanes of Kashi.",
     basis: "record",
   },

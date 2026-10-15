@@ -13,7 +13,7 @@ interface TempleHeroProps {
 }
 
 export function TempleHero({ temple }: TempleHeroProps) {
-  const heroSrc = temple.heroImage || `/images/temples/${temple.slug}/hero.jpg`;
+  const heroSrc = temple.heroImage || `/images/temples/${temple.slug}/hero.webp`;
 
   const photos = temple.photos || [];
 

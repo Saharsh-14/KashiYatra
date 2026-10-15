@@ -35,7 +35,7 @@ export function TempleDetailView({ temple }: TempleDetailViewProps) {
   const detail = getTempleDetail(temple.slug, temple.name, temple.subtitle);
 
   const heroSrc =
-    temple.heroImage || `/images/temples/${temple.slug}/hero.jpg`;
+    temple.heroImage || `/images/temples/${temple.slug}/hero.webp`;
 
   return (
     <div className="relative min-h-screen bg-[#FAF7F2] text-[#1E1A17] selection:bg-[#B59A63]/30 selection:text-[#1E1A17]">

@@ -33,7 +33,7 @@ export function LandingFooter() {
           {/* Background photo with atmospheric dark overlay */}
           <div className="absolute inset-0 z-0 pointer-events-none">
             <Image
-              src="/images/landing/kashi-night-ghats.jpg"
+              src="/images/landing/kashi-night-ghats.webp"
               alt="Varanasi illuminated ghats at night"
               fill
               sizes="100vw"
@@ -45,7 +45,7 @@ export function LandingFooter() {
           {/* Golden temple watermark in bottom-right background */}
           <div className="absolute right-0 bottom-0 w-[80%] max-w-[340px] pointer-events-none opacity-40 mix-blend-screen z-0">
             <Image
-              src="/images/landing/golden-temple-ghats.png"
+              src="/images/landing/golden-temple-ghats.webp"
               alt=""
               width={1024}
               height={364}
@@ -61,7 +61,7 @@ export function LandingFooter() {
                 className="absolute w-28 h-28 rounded-full bg-[radial-gradient(circle,rgba(245,158,11,0.3)_0%,transparent_70%)] blur-xl pointer-events-none"
               />
               <Image
-                src="/images/landing/kashiyatra-trishul-logo.png"
+                src="/images/landing/kashiyatra-trishul-logo.webp"
                 alt="Kashiyatra Emblem"
                 fill
                 sizes="128px"
@@ -72,7 +72,7 @@ export function LandingFooter() {
             {/* Quote */}
             <div className="w-full max-w-[300px] mt-3 mb-8 flex justify-center">
               <Image
-                src="/images/landing/varanasi-calls-quote.png"
+                src="/images/landing/varanasi-calls-quote.webp"
                 alt="You don't simply come to Varanasi. Somehow, Varanasi calls you."
                 width={829}
                 height={77}
@@ -225,7 +225,7 @@ export function LandingFooter() {
         <div className="hidden md:block relative w-full">
           {/* Background photo — Varanasi Ghats at Night with floating diyas */}
           <Image
-            src="/images/landing/kashi-night-ghats.jpg"
+            src="/images/landing/kashi-night-ghats.webp"
             alt="Varanasi illuminated ghats at night with sacred floating diyas on the Ganges"
             width={1920}
             height={1080}
@@ -244,7 +244,7 @@ export function LandingFooter() {
           {/* Golden temple structure blended seamlessly in the bottom-right rectangular region — UNCHANGED */}
           <div className="absolute right-0 bottom-0 w-[55%] md:w-[48%] lg:w-[44%] max-w-[900px] pointer-events-none select-none z-10">
             <Image
-              src="/images/landing/golden-temple-ghats.png"
+              src="/images/landing/golden-temple-ghats.webp"
               alt="Golden temple skyline and ripples on the sacred Ganga"
               width={1024}
               height={364}
@@ -262,7 +262,7 @@ export function LandingFooter() {
               />
 
               <Image
-                src="/images/landing/kashiyatra-trishul-logo.png"
+                src="/images/landing/kashiyatra-trishul-logo.webp"
                 alt="Kashiyatra Golden Trishul Emblem"
                 fill
                 sizes="(max-width: 768px) 30vw, 22vw"
@@ -275,7 +275,7 @@ export function LandingFooter() {
           {/* Quote Line centered directly below KASHIYATRA logo — "You don't simply come to Varanasi. Somehow, Varanasi calls you." */}
           <div className="absolute left-[3%] sm:left-[4%] md:left-[17.5%] lg:left-[16%] md:-translate-x-1/2 ml-[1cm] -mt-[0.5cm] top-[73%] sm:top-[73.5%] md:top-[74%] w-[90%] sm:w-[70%] md:w-[48vw] lg:w-[38vw] max-w-[620px] flex items-center md:justify-center z-20 pointer-events-none select-none">
             <Image
-              src="/images/landing/varanasi-calls-quote.png"
+              src="/images/landing/varanasi-calls-quote.webp"
               alt="You don't simply come to Varanasi. Somehow, Varanasi calls you."
               width={829}
               height={77}

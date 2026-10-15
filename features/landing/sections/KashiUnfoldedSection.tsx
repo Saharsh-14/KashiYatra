@@ -218,7 +218,7 @@ export function KashiUnfoldedSection() {
         }}
       >
         <Image
-          src="/images/landing/kashi-unfolded-unified-bg.jpg"
+          src="/images/landing/kashi-unfolded-unified-bg.webp"
           alt="Ancient Varanasi Cartographic Map and Sacred Riverfront"
           fill
           priority
@@ -315,7 +315,7 @@ export function KashiUnfoldedSection() {
                 }}
               >
                 <Image
-                  src="/images/landing/kashi-ticket-artifact@2x.png"
+                  src="/images/landing/kashi-ticket-artifact@2x.webp"
                   alt="Kashi Unfolded Antique Ceremonial Travel Ticket"
                   fill
                   priority

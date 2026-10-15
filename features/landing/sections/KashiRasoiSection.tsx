@@ -22,7 +22,7 @@ const FOOD_ASSETS: FoodAsset[] = [
   {
     id: "kachori",
     name: "Kachori Sabji",
-    src: "/images/food/kachori-transparent.png",
+    src: "/images/food/kachori-transparent.webp",
     width: 912,
     height: 554,
     left: "5.2%",
@@ -32,7 +32,7 @@ const FOOD_ASSETS: FoodAsset[] = [
   {
     id: "chaat",
     name: "Chaat",
-    src: "/images/food/chaat-transparent.png",
+    src: "/images/food/chaat-transparent.webp",
     width: 902,
     height: 509,
     left: "34.0%",
@@ -42,7 +42,7 @@ const FOOD_ASSETS: FoodAsset[] = [
   {
     id: "lassi",
     name: "Lassi",
-    src: "/images/food/lassi-transparent.png",
+    src: "/images/food/lassi-transparent.webp",
     width: 526,
     height: 617,
     left: "57.2%",
@@ -52,7 +52,7 @@ const FOOD_ASSETS: FoodAsset[] = [
   {
     id: "paan",
     name: "Paan",
-    src: "/images/food/paan-transparent.png",
+    src: "/images/food/paan-transparent.webp",
     width: 905,
     height: 522,
     left: "71.6%",
@@ -305,7 +305,7 @@ function KashiRasoiHeading() {
         }}
       >
         <Image
-          src="/images/food/kashi-rasoi-heading.png"
+          src="/images/food/kashi-rasoi-heading.webp"
           alt="Kashi Rasoi — The Living Culinary Soul of Banaras"
           fill
           priority
@@ -377,7 +377,7 @@ export function KashiRasoiSection() {
         {/* Mobile Background Image filling the mobile screen */}
         <div className="absolute inset-0 pointer-events-none select-none z-0">
           <Image
-            src="/images/food/kashi-rasoi-mobile-bg.jpg"
+            src="/images/food/kashi-rasoi-mobile-bg.webp"
             alt="Kashi Rasoi — The Sacred Culinary Soul of Banaras"
             fill
             priority
@@ -396,7 +396,7 @@ export function KashiRasoiSection() {
         <div className="relative z-20 flex flex-col items-center pt-5 sm:pt-7 pointer-events-none">
           <div className="relative w-[210px] min-[380px]:w-[245px] aspect-[2/1] drop-shadow-[0_4px_16px_rgba(0,0,0,0.65)]">
             <Image
-              src="/images/food/kashi-rasoi-heading.png"
+              src="/images/food/kashi-rasoi-heading.webp"
               alt="Kashi Rasoi — The Living Culinary Soul of Banaras"
               fill
               priority
@@ -430,7 +430,7 @@ export function KashiRasoiSection() {
           >
             <div className="relative w-full aspect-[912/554] drop-shadow-[0_8px_18px_rgba(0,0,0,0.7)]">
               <Image
-                src="/images/food/kachori-transparent.png"
+                src="/images/food/kachori-transparent.webp"
                 alt="Kachori Sabji"
                 fill
                 sizes="(max-width: 430px) 46vw, 155px"
@@ -450,7 +450,7 @@ export function KashiRasoiSection() {
           >
             <div className="relative w-full aspect-[902/509] drop-shadow-[0_8px_18px_rgba(0,0,0,0.7)]">
               <Image
-                src="/images/food/chaat-transparent.png"
+                src="/images/food/chaat-transparent.webp"
                 alt="Chaat"
                 fill
                 sizes="(max-width: 430px) 46vw, 150px"
@@ -476,7 +476,7 @@ export function KashiRasoiSection() {
           >
             <div className="relative w-full aspect-[526/617] drop-shadow-[0_8px_18px_rgba(0,0,0,0.7)]">
               <Image
-                src="/images/food/lassi-transparent.png"
+                src="/images/food/lassi-transparent.webp"
                 alt="Lassi"
                 fill
                 sizes="(max-width: 430px) 33vw, 115px"
@@ -496,7 +496,7 @@ export function KashiRasoiSection() {
           >
             <div className="relative w-full aspect-[905/522] drop-shadow-[0_8px_18px_rgba(0,0,0,0.7)]">
               <Image
-                src="/images/food/paan-transparent.png"
+                src="/images/food/paan-transparent.webp"
                 alt="Paan"
                 fill
                 sizes="(max-width: 430px) 46vw, 150px"
@@ -525,7 +525,7 @@ export function KashiRasoiSection() {
         >
           {/* Locked Clean Background Image */}
           <Image
-            src="/images/landing/kashi-rasoi-kachori-bg.jpg"
+            src="/images/landing/kashi-rasoi-kachori-bg.webp"
             alt="Kashi Rasoi — Authentic morning kachori stall and Ganges sunrise"
             fill
             priority

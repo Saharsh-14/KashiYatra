@@ -239,7 +239,7 @@ export function SpiritOfKashiSection() {
         <video
           ref={videoRef}
           src="/videos/spirit-of-kashi.mp4"
-          poster="/images/landing/spirit-of-kashi-poster.jpg"
+          poster="/images/landing/spirit-of-kashi-poster.webp"
           muted
           playsInline
           preload="auto"

@@ -22,7 +22,7 @@ export const ghats: readonly Ghat[] = [
     significance: "Southern Threshold & Morning Aarti",
     timeOfDay: "Subah-e-Banaras · Dawn",
     accentColor: "#D4AF37",
-    image: "/images/ghats/assi.jpg",
+    image: "/images/ghats/assi.webp",
     imageAlt: "Assi Ghat, with boats moored along the water at the river's edge.",
   },
   {
@@ -37,7 +37,7 @@ export const ghats: readonly Ghat[] = [
     significance: "Grand Ritual Epicenter",
     timeOfDay: "Sandhya Aarti · Twilight",
     accentColor: "#E07A5F",
-    image: "/images/ghats/dashashwamedh.jpg",
+    image: "/images/ghats/dashashwamedh.webp",
     imageAlt: "Dashashwamedh Ghat, crowded with people along the steps.",
   },
   {
@@ -52,7 +52,7 @@ export const ghats: readonly Ghat[] = [
     significance: "The Realm of Mahashamshana",
     timeOfDay: "Sacred Pyres · Eternal",
     accentColor: "#F4A261",
-    image: "/images/ghats/manikarnika.jpg",
+    image: "/images/ghats/manikarnika.webp",
     imageAlt: "Manikarnika Ghat, seen from the river.",
   },
   {
@@ -67,7 +67,7 @@ export const ghats: readonly Ghat[] = [
     significance: "Himalayan Sanctuary by the Ganga",
     timeOfDay: "Mid-Morning · Calm Waters",
     accentColor: "#C94A4A",
-    image: "/images/ghats/kedar.jpg",
+    image: "/images/ghats/kedar.webp",
     imageAlt: "Kedar Ghat, its striped steps rising from the water.",
   },
   {
@@ -82,7 +82,7 @@ export const ghats: readonly Ghat[] = [
     significance: "Legacy of Truth & Release",
     timeOfDay: "Dusk · Sacred Embers",
     accentColor: "#B59A63",
-    image: "/images/ghats/harishchandra.jpg",
+    image: "/images/ghats/harishchandra.webp",
     imageAlt: "Harishchandra Ghat, with the riverbank and buildings behind it.",
   },
   {
@@ -97,7 +97,7 @@ export const ghats: readonly Ghat[] = [
     significance: "Panoramic Crescent Bend",
     timeOfDay: "Golden Afternoon · Solitude",
     accentColor: "#AEB8B3",
-    image: "/images/ghats/guleria.jpg",
+    image: "/images/ghats/guleria.webp",
     imageAlt: "Guleria Ghat, a narrow landing on the river with boats alongside.",
   },
   {
@@ -112,7 +112,7 @@ export const ghats: readonly Ghat[] = [
     significance: "Sandstone Fortress of Resistance",
     timeOfDay: "Late Afternoon · Ochre Light",
     accentColor: "#C89D7C",
-    image: "/images/ghats/chet-singh.jpg",
+    image: "/images/ghats/chet-singh.webp",
     imageAlt: "Chet Singh Ghat, its fort wall rising beside the river.",
   },
   {
@@ -127,7 +127,7 @@ export const ghats: readonly Ghat[] = [
     significance: "Northern Gateway & Eternal Greeting",
     timeOfDay: "Open Horizon · Pranam",
     accentColor: "#8FA3A0",
-    image: "/images/ghats/namo.jpg",
+    image: "/images/ghats/namo.webp",
     imageAlt: "Namo Ghat, a broad sweep of steps meeting the river.",
   },
 ];

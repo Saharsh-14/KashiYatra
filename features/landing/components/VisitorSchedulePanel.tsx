@@ -15,7 +15,7 @@ export function VisitorSchedulePanel() {
         {/* Left Side: Salon Gallery Wall (5 cols) - NO card background */}
         <div className="relative min-h-[300px] overflow-hidden border-b border-slate-200 bg-transparent md:col-span-5 md:min-h-full md:border-b-0 md:border-r">
           <SafeImage
-            src="/images/ghats/chet-singh.jpg"
+            src="/images/ghats/chet-singh.webp"
             alt="Historical stone ramparts and river steps of Varanasi"
             fallbackLabel="Ghat Architecture"
             fill

@@ -6,7 +6,7 @@ import { KashiWordInteract } from "../components/KashiWordInteract";
  * Editorial Master Hero — KASHI: A City Beyond Time.
  *
  * Targeted refinement:
- * - 'K' of KASHI placed below the left temple structure via precision cutout mask (/images/hero/left-temple-cutout.png)
+ * - 'K' of KASHI placed below the left temple structure via precision cutout mask (/images/hero/left-temple-cutout.webp)
  * - Zero overlays over the rest of KASHI (ASHI / शी), keeping the sky completely clean.
  * - Everything else strictly preserved.
  */
@@ -22,7 +22,7 @@ export function LandingHero() {
           ========================================================================= */}
       <div className="absolute inset-0 z-0 pointer-events-none select-none">
         <Image
-          src="/images/hero/ganga-hero.jpg"
+          src="/images/hero/ganga-hero.webp"
           alt="Ancient stone ghats and temple spires of Varanasi along the sacred Ganga at dusk and dawn"
           fill
           priority
@@ -61,7 +61,7 @@ export function LandingHero() {
         className="absolute inset-0 z-[15] pointer-events-none select-none"
       >
         <Image
-          src="/images/hero/k-temple-overlap.png"
+          src="/images/hero/k-temple-overlap.webp"
           alt=""
           fill
           priority

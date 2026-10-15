@@ -221,7 +221,7 @@ export function FarmaanMenu() {
           >
             <div className="relative w-32 min-[380px]:w-36 sm:w-44 md:w-52 aspect-[1010/165] drop-shadow-[0_8px_20px_rgba(0,0,0,0.7)] group-hover:drop-shadow-[0_12px_28px_rgba(197,160,89,0.45)] transition-all duration-300">
               <Image
-                src="/images/landing/farmaan-scroll.png"
+                src="/images/landing/farmaan-scroll.webp"
                 alt="Royal Farmaan Scroll"
                 fill
                 priority
@@ -271,7 +271,7 @@ export function FarmaanMenu() {
           {/* Authentic Unrolled Scroll Graphic (Exactly as uploaded) */}
           <div className="relative w-full h-full pointer-events-none">
             <Image
-              src="/images/landing/farmaan-decree-menu.png"
+              src="/images/landing/farmaan-decree-menu.webp"
               alt="Royal Farmaan Decree Navigation Menu"
               fill
               priority

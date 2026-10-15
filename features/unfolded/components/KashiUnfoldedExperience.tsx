@@ -23,15 +23,15 @@ export function KashiUnfoldedExperience() {
   }, []);
 
   const getPosterCardImage = (poster: Poster) => {
-    if (poster.id === "shaam-e-banaras") return "/images/posters/shaam-e-banaras-card.jpg";
-    if (poster.id === "sarnath") return "/images/posters/sarnath-card.jpg";
-    if (poster.id === "ramnagar") return "/images/posters/ramnagar-card.jpg";
-    if (poster.id === "godowlia") return "/images/posters/godowlia-card.jpg";
-    if (poster.id === "devdari") return "/images/posters/devdari-card.jpg";
-    if (poster.id === "bhu") return "/images/posters/bhu-card.jpg";
-    if (poster.id === "swarved") return "/images/posters/swarved-card.jpg";
-    if (poster.id === "man-mandir") return "/images/posters/man-mandir-card.jpg";
-    if (poster.id === "bharat-mata") return "/images/posters/bharat-mata-card.jpg";
+    if (poster.id === "shaam-e-banaras") return "/images/posters/shaam-e-banaras-card.webp";
+    if (poster.id === "sarnath") return "/images/posters/sarnath-card.webp";
+    if (poster.id === "ramnagar") return "/images/posters/ramnagar-card.webp";
+    if (poster.id === "godowlia") return "/images/posters/godowlia-card.webp";
+    if (poster.id === "devdari") return "/images/posters/devdari-card.webp";
+    if (poster.id === "bhu") return "/images/posters/bhu-card.webp";
+    if (poster.id === "swarved") return "/images/posters/swarved-card.webp";
+    if (poster.id === "man-mandir") return "/images/posters/man-mandir-card.webp";
+    if (poster.id === "bharat-mata") return "/images/posters/bharat-mata-card.webp";
     return poster.image;
   };
 
@@ -53,7 +53,7 @@ export function KashiUnfoldedExperience() {
         >
           {/* Master 16:9 Artwork Image (100% visible, sharp, proportional) */}
           <Image
-            src="/images/landing/kashi-unfolded-board-bg.jpg"
+            src="/images/landing/kashi-unfolded-board-bg.webp"
             alt="Kashi Unfolded Archival Canvas Board"
             fill
             priority
@@ -77,7 +77,7 @@ export function KashiUnfoldedExperience() {
             title="Back to Kashi"
           >
             <Image
-              src="/images/landing/back-to-kashi-button.png"
+              src="/images/landing/back-to-kashi-button.webp"
               alt="Back to Kashi"
               fill
               priority
@@ -112,7 +112,7 @@ export function KashiUnfoldedExperience() {
             }}
           >
             <Image
-              src="/images/posters/shaam-e-banaras-card.jpg"
+              src="/images/posters/shaam-e-banaras-card.webp"
               alt="Shaam-e-Banaras — Where the Ganga glows after dusk"
               fill
               priority
@@ -147,7 +147,7 @@ export function KashiUnfoldedExperience() {
             }}
           >
             <Image
-              src="/images/posters/sarnath-card.jpg"
+              src="/images/posters/sarnath-card.webp"
               alt="Sarnath — Wisdom found its voice"
               fill
               priority
@@ -182,7 +182,7 @@ export function KashiUnfoldedExperience() {
             }}
           >
             <Image
-              src="/images/posters/ramnagar-card.jpg"
+              src="/images/posters/ramnagar-card.webp"
               alt="Ramnagar Fort — History meets its legacy"
               fill
               priority
@@ -217,7 +217,7 @@ export function KashiUnfoldedExperience() {
             }}
           >
             <Image
-              src="/images/posters/godowlia-card.jpg"
+              src="/images/posters/godowlia-card.webp"
               alt="Godowlia Market — A living pulse of Kashi"
               fill
               priority
@@ -252,7 +252,7 @@ export function KashiUnfoldedExperience() {
             }}
           >
             <Image
-              src="/images/posters/devdari-card.jpg"
+              src="/images/posters/devdari-card.webp"
               alt="Devdari Falls — Nature's quiet escape"
               fill
               priority
@@ -287,7 +287,7 @@ export function KashiUnfoldedExperience() {
             }}
           >
             <Image
-              src="/images/posters/bhu-card.jpg"
+              src="/images/posters/bhu-card.webp"
               alt="BHU — Knowledge lives here"
               fill
               priority
@@ -322,7 +322,7 @@ export function KashiUnfoldedExperience() {
             }}
           >
             <Image
-              src="/images/posters/swarved-card.jpg"
+              src="/images/posters/swarved-card.webp"
               alt="Swarved Mahamandir — A modern beacon of Sanatan thought"
               fill
               priority
@@ -357,7 +357,7 @@ export function KashiUnfoldedExperience() {
             }}
           >
             <Image
-              src="/images/posters/man-mandir-card.jpg"
+              src="/images/posters/man-mandir-card.webp"
               alt="Man Mandir Observatory — Where the skies met wisdom"
               fill
               priority
@@ -392,7 +392,7 @@ export function KashiUnfoldedExperience() {
             }}
           >
             <Image
-              src="/images/posters/bharat-mata-card.jpg"
+              src="/images/posters/bharat-mata-card.webp"
               alt="Bharat Mata Temple — A Nation in One Mother"
               fill
               priority
@@ -429,7 +429,7 @@ export function KashiUnfoldedExperience() {
             title="Back to Kashi"
           >
             <Image
-              src="/images/landing/back-to-kashi-button.png"
+              src="/images/landing/back-to-kashi-button.webp"
               alt="Back to Kashi"
               fill
               priority
@@ -471,7 +471,7 @@ export function KashiUnfoldedExperience() {
               className="relative aspect-[1014/512] w-full rounded-[2px] overflow-hidden shadow-sm hover:shadow-md cursor-pointer transition-transform duration-200 hover:scale-[1.01]"
             >
               <Image
-                src="/images/posters/shaam-e-banaras-card.jpg"
+                src="/images/posters/shaam-e-banaras-card.webp"
                 alt="Shaam-e-Banaras — Where the Ganga glows after dusk"
                 fill
                 priority
@@ -488,7 +488,7 @@ export function KashiUnfoldedExperience() {
               className="relative aspect-[1014/512] w-full rounded-[2px] overflow-hidden shadow-sm hover:shadow-md cursor-pointer transition-transform duration-200 hover:scale-[1.01]"
             >
               <Image
-                src="/images/posters/sarnath-card.jpg"
+                src="/images/posters/sarnath-card.webp"
                 alt="Sarnath — Wisdom found its voice"
                 fill
                 priority
@@ -505,7 +505,7 @@ export function KashiUnfoldedExperience() {
               className="relative aspect-[1014/512] w-full rounded-[2px] overflow-hidden shadow-sm hover:shadow-md cursor-pointer transition-transform duration-200 hover:scale-[1.01]"
             >
               <Image
-                src="/images/posters/ramnagar-card.jpg"
+                src="/images/posters/ramnagar-card.webp"
                 alt="Ramnagar Fort — History meets its legacy"
                 fill
                 priority
@@ -522,7 +522,7 @@ export function KashiUnfoldedExperience() {
               className="relative aspect-[1014/512] w-full rounded-[2px] overflow-hidden shadow-sm hover:shadow-md cursor-pointer transition-transform duration-200 hover:scale-[1.01]"
             >
               <Image
-                src="/images/posters/godowlia-card.jpg"
+                src="/images/posters/godowlia-card.webp"
                 alt="Godowlia Market — A living pulse of Kashi"
                 fill
                 priority
@@ -539,7 +539,7 @@ export function KashiUnfoldedExperience() {
               className="relative aspect-[1014/512] w-full rounded-[2px] overflow-hidden shadow-sm hover:shadow-md cursor-pointer transition-transform duration-200 hover:scale-[1.01]"
             >
               <Image
-                src="/images/posters/devdari-card.jpg"
+                src="/images/posters/devdari-card.webp"
                 alt="Devdari Falls — Nature's quiet escape"
                 fill
                 priority
@@ -556,7 +556,7 @@ export function KashiUnfoldedExperience() {
               className="relative aspect-[1014/512] w-full rounded-[2px] overflow-hidden shadow-sm hover:shadow-md cursor-pointer transition-transform duration-200 hover:scale-[1.01]"
             >
               <Image
-                src="/images/posters/bhu-card.jpg"
+                src="/images/posters/bhu-card.webp"
                 alt="BHU — Knowledge lives here"
                 fill
                 priority
@@ -573,7 +573,7 @@ export function KashiUnfoldedExperience() {
               className="relative aspect-[1014/512] w-full rounded-[2px] overflow-hidden shadow-sm hover:shadow-md cursor-pointer transition-transform duration-200 hover:scale-[1.01]"
             >
               <Image
-                src="/images/posters/swarved-card.jpg"
+                src="/images/posters/swarved-card.webp"
                 alt="Swarved Mahamandir — A modern beacon of Sanatan thought"
                 fill
                 priority
@@ -590,7 +590,7 @@ export function KashiUnfoldedExperience() {
               className="relative aspect-[1014/512] w-full rounded-[2px] overflow-hidden shadow-sm hover:shadow-md cursor-pointer transition-transform duration-200 hover:scale-[1.01]"
             >
               <Image
-                src="/images/posters/man-mandir-card.jpg"
+                src="/images/posters/man-mandir-card.webp"
                 alt="Man Mandir Observatory — Where the skies met wisdom"
                 fill
                 priority
@@ -607,7 +607,7 @@ export function KashiUnfoldedExperience() {
               className="relative aspect-[1014/512] w-full rounded-[2px] overflow-hidden shadow-sm hover:shadow-md cursor-pointer transition-transform duration-200 hover:scale-[1.01]"
             >
               <Image
-                src="/images/posters/bharat-mata-card.jpg"
+                src="/images/posters/bharat-mata-card.webp"
                 alt="Bharat Mata Temple — A Nation in One Mother"
                 fill
                 priority
@@ -632,7 +632,7 @@ export function KashiUnfoldedExperience() {
                 title="Back to Kashi"
               >
                 <Image
-                  src="/images/landing/back-to-kashi-button.png"
+                  src="/images/landing/back-to-kashi-button.webp"
                   alt="Back to Kashi"
                   fill
                   quality={100}

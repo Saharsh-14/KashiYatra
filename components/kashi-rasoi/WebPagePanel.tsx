@@ -54,7 +54,7 @@ export function WebPagePanel({
         {/* Background Photo — Clean photographic master asset */}
         <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
           <Image
-            src="/kashi-rasoi/food/kachori-sabzi/background.jpg"
+            src="/kashi-rasoi/food/kachori-sabzi/background.webp"
             alt="Banarasi Kachori Sabji"
             fill
             priority={isCenter}
@@ -156,7 +156,7 @@ export function WebPagePanel({
         {/* Background Photo — Clean photographic master asset */}
         <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
           <Image
-            src="/kashi-rasoi/food/tamatar-chaat/background.jpg"
+            src="/kashi-rasoi/food/tamatar-chaat/background.webp"
             alt="Banarasi Tamatar Chaat"
             fill
             priority={isCenter}
@@ -259,7 +259,7 @@ export function WebPagePanel({
         {/* Background Photo — Clean photographic master asset */}
         <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
           <Image
-            src="/kashi-rasoi/food/banarasi-sweets/background.jpg"
+            src="/kashi-rasoi/food/banarasi-sweets/background.webp"
             alt="Heritage Banarasi Sweets Platter"
             fill
             priority={isCenter}
@@ -291,7 +291,7 @@ export function WebPagePanel({
           {/* Lotus Divider */}
           <div className="w-[145px] sm:w-[165px] md:w-[180px] my-3 sm:my-3.5 drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)]">
             <Image
-              src="/kashi-rasoi/food/banarasi-sweets/lotus-divider.png"
+              src="/kashi-rasoi/food/banarasi-sweets/lotus-divider.webp"
               alt="Lotus divider"
               width={176}
               height={23}
@@ -304,7 +304,7 @@ export function WebPagePanel({
             {/* Temple Spire Line Art */}
             <div className="shrink-0 w-[24px] sm:w-[28px] md:w-[32px]">
               <Image
-                src="/kashi-rasoi/food/banarasi-sweets/temple-spire.png"
+                src="/kashi-rasoi/food/banarasi-sweets/temple-spire.webp"
                 alt="Temple Shikhara"
                 width={35}
                 height={126}
@@ -377,7 +377,7 @@ export function WebPagePanel({
         {/* Background Photo — Clean photographic master asset */}
         <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
           <Image
-            src="/kashi-rasoi/food/golgappe/background.jpg"
+            src="/kashi-rasoi/food/golgappe/background.webp"
             alt="Banarasi Golgappe"
             fill
             priority={isCenter}
@@ -502,7 +502,7 @@ export function WebPagePanel({
         {/* Background Photo — Clean photographic master asset */}
         <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
           <Image
-            src="/kashi-rasoi/food/banarasi-paan/background.jpg"
+            src="/kashi-rasoi/food/banarasi-paan/background.webp"
             alt="Banarasi Paan"
             fill
             priority={isCenter}
@@ -634,7 +634,7 @@ export function WebPagePanel({
         {/* Background Photo — Clean photographic master asset */}
         <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
           <Image
-            src="/kashi-rasoi/food/malaiyo/background.jpg"
+            src="/kashi-rasoi/food/malaiyo/background.webp"
             alt="Banarasi Malaiyo"
             fill
             priority={isCenter}
@@ -761,7 +761,7 @@ export function WebPagePanel({
         {/* Background Photo — Clean photographic master asset */}
         <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
           <Image
-            src="/kashi-rasoi/food/chai-toast/background.jpg"
+            src="/kashi-rasoi/food/chai-toast/background.webp"
             alt="Kulhad Chai & Makhan Toast live photo"
             fill
             priority={isCenter}
@@ -864,7 +864,7 @@ export function WebPagePanel({
         {/* Background Photo — Clean photographic master asset */}
         <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
           <Image
-            src="/kashi-rasoi/food/banarasi-lassi/background.jpg?v=4"
+            src="/kashi-rasoi/food/banarasi-lassi/background.webp?v=4"
             alt="Banarasi Kulhad Lassi"
             fill
             priority={isCenter}
@@ -897,7 +897,7 @@ export function WebPagePanel({
           {/* Middle-Left: Rustic Torn Parchment Price Badge */}
           <div className="relative mt-2.5 sm:mt-3.5 md:mt-4 w-[150px] sm:w-[170px] md:w-[195px] aspect-[188/74] drop-shadow-[0_6px_20px_rgba(0,0,0,0.9)] transform origin-left">
             <Image
-              src="/kashi-rasoi/food/banarasi-lassi/parchment_price_tag.png?v=4"
+              src="/kashi-rasoi/food/banarasi-lassi/parchment_price_tag.webp?v=4"
               alt="Price: ₹40 - ₹80 approx."
               fill
               className="object-contain object-left"
