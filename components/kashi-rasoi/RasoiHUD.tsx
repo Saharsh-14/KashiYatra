@@ -19,7 +19,7 @@ export function RasoiHUD({
       <div className="flex items-center justify-between w-full pointer-events-auto">
         {/* BACK TO KASHI */}
         <Link
-          href={ROUTES.kashi}
+          href={`${ROUTES.kashi}#rasoi`}
           scroll={false}
           onClick={() => markInfiniteDoorCompleted()}
           className="group flex items-center gap-2 font-mono text-xs text-white/50 hover:text-white tracking-widest uppercase transition-colors"

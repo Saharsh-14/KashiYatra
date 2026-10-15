@@ -10,11 +10,21 @@ const LANDING_SCROLL_POS_KEY = "kashi_landing_scroll_pos";
 export function saveLandingScrollPosition(): void {
   if (typeof window === "undefined") return;
 
+  const scrollY = window.scrollY || document.documentElement.scrollTop || 0;
   const lenis = window.__lenis;
-  const currentY =
-    typeof lenis?.scroll === "number" && !isNaN(lenis.scroll)
-      ? lenis.scroll
-      : window.scrollY || document.documentElement.scrollTop || 0;
+  const lenisScroll =
+    typeof lenis?.scroll === "number" && !isNaN(lenis.scroll) ? lenis.scroll : 0;
+
+  let currentY = Math.max(scrollY, lenisScroll);
+
+  if (currentY <= 0) {
+    const rasoiEl = document.getElementById("rasoi");
+    if (rasoiEl) {
+      currentY =
+        rasoiEl.getBoundingClientRect().top +
+        (window.scrollY || document.documentElement.scrollTop || 0);
+    }
+  }
 
   try {
     sessionStorage.setItem(
@@ -36,16 +46,13 @@ export function restoreLandingScrollPosition(): () => void {
   try {
     savedStr = sessionStorage.getItem(LANDING_SCROLL_POS_KEY);
   } catch {
-    return () => {};
+    // ignore
   }
 
-  if (!savedStr) return () => {};
+  const hash = window.location.hash;
+  const isRasoiTarget = hash === "#rasoi" || savedStr !== null;
 
-  const targetY = parseFloat(savedStr);
-  if (isNaN(targetY) || targetY <= 0) {
-    try {
-      sessionStorage.removeItem(LANDING_SCROLL_POS_KEY);
-    } catch {}
+  if (!isRasoiTarget && (!hash || hash.length <= 1)) {
     return () => {};
   }
 
@@ -56,10 +63,45 @@ export function restoreLandingScrollPosition(): () => void {
 
   let cancelled = false;
   let attempts = 0;
-  const maxAttempts = 50;
+  const maxAttempts = 60;
 
   const executeRestore = () => {
     if (cancelled) return;
+
+    let targetY: number | null = null;
+
+    if (savedStr) {
+      const parsed = parseFloat(savedStr);
+      if (!isNaN(parsed) && parsed > 0) {
+        targetY = parsed;
+      }
+    }
+
+    // If targetY is not determined yet, check hash or rasoi element
+    if (targetY === null || targetY <= 0) {
+      const targetId =
+        hash && hash.length > 1
+          ? hash.slice(1)
+          : savedStr !== null
+          ? "rasoi"
+          : null;
+      if (targetId) {
+        const el = document.getElementById(targetId);
+        if (el) {
+          const rect = el.getBoundingClientRect();
+          targetY =
+            rect.top + (window.scrollY || document.documentElement.scrollTop || 0);
+        }
+      }
+    }
+
+    if (targetY === null || targetY <= 0) {
+      attempts++;
+      if (attempts < maxAttempts) {
+        requestAnimationFrame(executeRestore);
+      }
+      return;
+    }
 
     const doc = document.documentElement;
     const body = document.body;
@@ -88,7 +130,7 @@ export function restoreLandingScrollPosition(): () => void {
         lenis.scrollTo(clampedY, { immediate: true });
       }
 
-      // Reinforce position for the next 4 animation frames to counteract any asynchronous layout reflows
+      // Reinforce position for the next 5 animation frames to counteract any asynchronous layout reflows
       let reinforceCount = 0;
       const reinforce = () => {
         if (cancelled) return;
@@ -99,7 +141,7 @@ export function restoreLandingScrollPosition(): () => void {
           lenis.scrollTo(clampedY, { immediate: true });
         }
 
-        if (reinforceCount < 4) {
+        if (reinforceCount < 5) {
           requestAnimationFrame(reinforce);
         } else {
           try {
