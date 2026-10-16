@@ -2,6 +2,8 @@ import type { Metadata, Viewport } from "next";
 import { SkipLink } from "@/components/navigation";
 import { SmoothScrollProvider } from "@/components/providers/SmoothScrollProvider";
 import { SITE_METADATA } from "@/lib/constants";
+import { Analytics } from "@vercel/analytics/next";
+import { AnalyticsTracker } from "@/components/analytics/AnalyticsTracker";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -12,7 +14,7 @@ export const metadata: Metadata = {
   },
   description: SITE_METADATA.description,
   metadataBase: new URL(
-    process.env.NEXT_PUBLIC_SITE_URL ?? "https://kashiyatra.in",
+    process.env.NEXT_PUBLIC_SITE_URL ?? "https://thekashiyatra.in",
   ),
   openGraph: {
     title: SITE_METADATA.title,
@@ -47,7 +49,10 @@ export default function RootLayout({
         {/* Mounted at the root so every chapter inherits the same scroll feel
             (architecture.md §2.3 — the shared experience layer). */}
         <SmoothScrollProvider>{children}</SmoothScrollProvider>
+        <AnalyticsTracker />
+        <Analytics />
       </body>
     </html>
   );
 }
+

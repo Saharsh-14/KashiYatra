@@ -393,3 +393,9 @@ $RECYCLE.BIN/
 .fuse_hidden*
 .directory
 .Trash-*
+
+# ==============================================================================
+# Environment & Analytics Local Stores
+# ==============================================================================
+.env*.local
+data/analytics-store.json
